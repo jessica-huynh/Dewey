@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02762BCB091C66F3B4E9FEE4 /* libPods-Dewey.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B7CC22076C901EF27187683 /* libPods-Dewey.a */; };
 		C816D70424547FC000078BFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C816D70324547FC000078BFE /* AppDelegate.swift */; };
 		C816D70624547FC000078BFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C816D70524547FC000078BFE /* SceneDelegate.swift */; };
 		C816D70824547FC000078BFE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C816D70724547FC000078BFE /* HomeViewController.swift */; };
@@ -15,9 +16,17 @@
 		C816D71024547FC800078BFE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C816D70E24547FC800078BFE /* LaunchScreen.storyboard */; };
 		C816D71A245483EB00078BFE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C816D719245483EB00078BFE /* .gitignore */; };
 		C816D71D2454AD9100078BFE /* BookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C816D71C2454AD9100078BFE /* BookCollectionViewCell.swift */; };
+		C816D7212454D09900078BFE /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C816D7202454D09900078BFE /* StorageManager.swift */; };
+		C816D7232454D12200078BFE /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = C816D7222454D12200078BFE /* Book.swift */; };
+		C816D7272454D6E000078BFE /* Bookshelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = C816D7262454D6E000078BFE /* Bookshelf.swift */; };
+		C816D7292454EE3B00078BFE /* BookshelfTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C816D7282454EE3B00078BFE /* BookshelfTableViewCell.swift */; };
+		C816D72B2454FA6200078BFE /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = C816D72A2454FA6200078BFE /* Podfile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7F423C5A44366DEE14B9A0CA /* Pods-Dewey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dewey.release.xcconfig"; path = "Target Support Files/Pods-Dewey/Pods-Dewey.release.xcconfig"; sourceTree = "<group>"; };
+		8B7CC22076C901EF27187683 /* libPods-Dewey.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Dewey.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A09C0F96138C191358417CF7 /* Pods-Dewey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dewey.debug.xcconfig"; path = "Target Support Files/Pods-Dewey/Pods-Dewey.debug.xcconfig"; sourceTree = "<group>"; };
 		C816D70024547FC000078BFE /* Dewey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dewey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C816D70324547FC000078BFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C816D70524547FC000078BFE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -28,6 +37,11 @@
 		C816D71124547FC800078BFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C816D719245483EB00078BFE /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C816D71C2454AD9100078BFE /* BookCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionViewCell.swift; sourceTree = "<group>"; };
+		C816D7202454D09900078BFE /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		C816D7222454D12200078BFE /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		C816D7262454D6E000078BFE /* Bookshelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookshelf.swift; sourceTree = "<group>"; };
+		C816D7282454EE3B00078BFE /* BookshelfTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookshelfTableViewCell.swift; sourceTree = "<group>"; };
+		C816D72A2454FA6200078BFE /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,18 +49,39 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02762BCB091C66F3B4E9FEE4 /* libPods-Dewey.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C960C27EC08107628B44F7F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A09C0F96138C191358417CF7 /* Pods-Dewey.debug.xcconfig */,
+				7F423C5A44366DEE14B9A0CA /* Pods-Dewey.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		23E9B0417D9064B417BE31E5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8B7CC22076C901EF27187683 /* libPods-Dewey.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C816D6F724547FC000078BFE = {
 			isa = PBXGroup;
 			children = (
 				C816D70224547FC000078BFE /* Dewey */,
 				C816D70124547FC000078BFE /* Products */,
 				C816D719245483EB00078BFE /* .gitignore */,
+				C816D72A2454FA6200078BFE /* Podfile */,
+				0C960C27EC08107628B44F7F /* Pods */,
+				23E9B0417D9064B417BE31E5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +98,8 @@
 			children = (
 				C816D70324547FC000078BFE /* AppDelegate.swift */,
 				C816D70524547FC000078BFE /* SceneDelegate.swift */,
+				C816D71F2454D05800078BFE /* Storage */,
+				C816D71E2454CF0800078BFE /* Models */,
 				C816D7182454811500078BFE /* ViewControllers */,
 				C816D71B2454ACF000078BFE /* Views */,
 				C816D717245480E400078BFE /* Resources */,
@@ -93,8 +130,26 @@
 			isa = PBXGroup;
 			children = (
 				C816D71C2454AD9100078BFE /* BookCollectionViewCell.swift */,
+				C816D7282454EE3B00078BFE /* BookshelfTableViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		C816D71E2454CF0800078BFE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C816D7222454D12200078BFE /* Book.swift */,
+				C816D7262454D6E000078BFE /* Bookshelf.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C816D71F2454D05800078BFE /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				C816D7202454D09900078BFE /* StorageManager.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -104,6 +159,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C816D71424547FC800078BFE /* Build configuration list for PBXNativeTarget "Dewey" */;
 			buildPhases = (
+				2710ADC07A4259E036509AE4 /* [CP] Check Pods Manifest.lock */,
 				C816D6FC24547FC000078BFE /* Sources */,
 				C816D6FD24547FC000078BFE /* Frameworks */,
 				C816D6FE24547FC000078BFE /* Resources */,
@@ -155,6 +211,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C816D72B2454FA6200078BFE /* Podfile in Resources */,
 				C816D71A245483EB00078BFE /* .gitignore in Resources */,
 				C816D71024547FC800078BFE /* LaunchScreen.storyboard in Resources */,
 				C816D70D24547FC800078BFE /* Assets.xcassets in Resources */,
@@ -164,15 +221,44 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2710ADC07A4259E036509AE4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Dewey-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C816D6FC24547FC000078BFE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C816D7272454D6E000078BFE /* Bookshelf.swift in Sources */,
 				C816D70824547FC000078BFE /* HomeViewController.swift in Sources */,
 				C816D71D2454AD9100078BFE /* BookCollectionViewCell.swift in Sources */,
+				C816D7232454D12200078BFE /* Book.swift in Sources */,
+				C816D7212454D09900078BFE /* StorageManager.swift in Sources */,
 				C816D70424547FC000078BFE /* AppDelegate.swift in Sources */,
 				C816D70624547FC000078BFE /* SceneDelegate.swift in Sources */,
+				C816D7292454EE3B00078BFE /* BookshelfTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +400,7 @@
 		};
 		C816D71524547FC800078BFE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A09C0F96138C191358417CF7 /* Pods-Dewey.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -332,6 +419,7 @@
 		};
 		C816D71624547FC800078BFE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F423C5A44366DEE14B9A0CA /* Pods-Dewey.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
