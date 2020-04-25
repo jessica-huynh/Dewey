@@ -11,10 +11,11 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        let backIcon = UIImage(systemName: "arrow.left")
+        UINavigationBar.appearance().backIndicatorImage = backIcon
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backIcon
+        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: 0, vertical: -5), for: .default)
         return true
     }
 
