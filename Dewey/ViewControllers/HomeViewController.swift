@@ -23,7 +23,7 @@ class HomeViewController: UIViewController {
 // MARK: - Table View Data Source
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return storageManager.bookshelves.count
+        return storageManager.bookshelves.count + 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -36,12 +36,17 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
+            return cell
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "bookshelfCell", for: indexPath) as! BookshelfTableViewCell
-        cell.bookshelf = storageManager.bookshelves[indexPath.section]
+        cell.bookshelf = storageManager.bookshelves[indexPath.section - 1]
         return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return storageManager.bookshelves[section].name
+        if section == 0 { return "" }
+        return storageManager.bookshelves[section - 1].name
     }
 }
