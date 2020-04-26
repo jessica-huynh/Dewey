@@ -9,7 +9,23 @@
 import UIKit
 
 class BookCollectionViewCell: UICollectionViewCell {
+    var book: Book!
+    
     @IBOutlet weak var bookCover: UIImageView!
     @IBOutlet weak var bookTitle: UILabel!
     @IBOutlet weak var bookAuthor: UILabel!
+    
+    func configure() {
+        let url = URL(string: book.cover)
+        bookCover.kf.indicatorType = .activity
+        bookCover.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "book-cover-placeholder"),
+            options: [
+                .scaleFactor(UIScreen.main.scale),
+                .cacheOriginalImage
+            ])
+        bookTitle.text = book.title
+        bookAuthor.text = book.author
+    }
 }

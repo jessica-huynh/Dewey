@@ -27,18 +27,8 @@ class BookshelfTableViewCell: UITableViewCell, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let book = bookshelf.books[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bookCollectionCell", for: indexPath) as! BookCollectionViewCell
-        
-        let url = URL(string: book.cover)
-        cell.bookCover.kf.indicatorType = .activity
-        cell.bookCover.kf.setImage(
-            with: url,
-            placeholder: UIImage(named: "book-cover-placeholder"),
-            options: [
-                .scaleFactor(UIScreen.main.scale),
-                .cacheOriginalImage
-            ])
-        cell.bookTitle.text = book.title
-        cell.bookAuthor.text = book.author
+        cell.book = book
+        cell.configure()
         return cell
     }
 }
