@@ -21,6 +21,7 @@
 		C816D7272454D6E000078BFE /* Bookshelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = C816D7262454D6E000078BFE /* Bookshelf.swift */; };
 		C816D7292454EE3B00078BFE /* BookshelfTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C816D7282454EE3B00078BFE /* BookshelfTableViewCell.swift */; };
 		C816D72B2454FA6200078BFE /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = C816D72A2454FA6200078BFE /* Podfile */; };
+		C816D72D2455092800078BFE /* HomeHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C816D72C2455092800078BFE /* HomeHeaderTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		C816D7262454D6E000078BFE /* Bookshelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookshelf.swift; sourceTree = "<group>"; };
 		C816D7282454EE3B00078BFE /* BookshelfTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookshelfTableViewCell.swift; sourceTree = "<group>"; };
 		C816D72A2454FA6200078BFE /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		C816D72C2455092800078BFE /* HomeHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 			children = (
 				C816D71C2454AD9100078BFE /* BookCollectionViewCell.swift */,
 				C816D7282454EE3B00078BFE /* BookshelfTableViewCell.swift */,
+				C816D72C2455092800078BFE /* HomeHeaderTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 			files = (
 				C816D7272454D6E000078BFE /* Bookshelf.swift in Sources */,
 				C816D70824547FC000078BFE /* HomeViewController.swift in Sources */,
+				C816D72D2455092800078BFE /* HomeHeaderTableViewCell.swift in Sources */,
 				C816D71D2454AD9100078BFE /* BookCollectionViewCell.swift in Sources */,
 				C816D7232454D12200078BFE /* Book.swift in Sources */,
 				C816D7212454D09900078BFE /* StorageManager.swift in Sources */,
