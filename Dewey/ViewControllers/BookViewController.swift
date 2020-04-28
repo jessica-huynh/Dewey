@@ -34,7 +34,7 @@ class BookViewController: UIViewController {
         
         visualEffectView = UIVisualEffectView()
         visualEffectView.frame = self.view.frame
-        self.view.addSubview(visualEffectView)
+        view.addSubview(visualEffectView)
         
         setupBookCover()
         setupCard()
@@ -63,17 +63,31 @@ class BookViewController: UIViewController {
                                                       width: view.bounds.width,
                                                       height: cardHeight)
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleCardTap(gesture:)))
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleCardPan(gesture:)))
-        
-        bookDetailsViewController.handleArea.addGestureRecognizer(tapGestureRecognizer)
-        bookDetailsViewController.view.addGestureRecognizer(panGestureRecognizer)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleCardTap(gesture:)))
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(handleCardPan(gesture:)))
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(handleCardSwipe(gesture:)))
+        swipeUp.direction = .up
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleCardSwipe(gesture:)))
+        swipeDown.direction = .down
+
+        bookDetailsViewController.handleArea.addGestureRecognizer(tap)
+        bookDetailsViewController.view.addGestureRecognizer(pan)
+        bookDetailsViewController.view.addGestureRecognizer(swipeUp)
+        bookDetailsViewController.view.addGestureRecognizer(swipeDown)
     }
 
+    // MARK: - Gesture Handlers
     @objc func handleCardTap(gesture: UITapGestureRecognizer) {
         if gesture.state == .ended {
-            animateCard(state: nextState, duration: 0.9)
-            animateBlur(state: nextState, duration: 0.9)
+            toggleBookDetails(state: nextState)
+        }
+    }
+    
+    @objc func handleCardSwipe(gesture: UISwipeGestureRecognizer) {
+        if gesture.direction == .down {
+            toggleBookDetails(state: .collapsed)
+        } else if gesture.direction == .up {
+            toggleBookDetails(state: .expanded)
         }
     }
     
@@ -118,6 +132,12 @@ class BookViewController: UIViewController {
         }
     }
     
+    // MARK: - Helper Functions for Gesture Handlers
+    func toggleBookDetails(state: CardState, duration: TimeInterval = 0.9) {
+        animateCard(state: state, duration: duration)
+        animateBlur(state: state, duration: duration)
+    }
+
     func animateBlur(state: CardState, duration: TimeInterval) {
         let blurAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
             switch state {
