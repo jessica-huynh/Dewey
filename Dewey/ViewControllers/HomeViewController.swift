@@ -18,6 +18,14 @@ class HomeViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
     }
+    
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "BookDetails" {
+            if let bookCollectionCell = sender as? BookCollectionViewCell, let controller = segue.destination as? BookViewController {
+                controller.book = bookCollectionCell.book
+            }
+        }
+    }
 }
 
 // MARK: - Table View Data Source

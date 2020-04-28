@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Kingfisher
 
 class BookshelfTableViewCell: UITableViewCell, UICollectionViewDataSource {
     var bookshelf: Bookshelf!
