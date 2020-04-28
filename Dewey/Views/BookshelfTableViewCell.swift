@@ -9,7 +9,9 @@
 import UIKit
 
 class BookshelfTableViewCell: UITableViewCell, UICollectionViewDataSource {
-    var bookshelf: Bookshelf!
+    var bookshelf: Bookshelf! {
+        didSet { bookCollectionView.reloadData() }
+    }
     
     @IBOutlet weak var bookCollectionView: UICollectionView!
     

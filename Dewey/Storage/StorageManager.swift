@@ -27,5 +27,12 @@ class StorageManager {
         
         let bestsellersShelf = Bookshelf(name: "Bestsellers", books: bestsellers)
         bookshelves.append(bestsellersShelf)
+        
+        var favs: [Book] = []
+        favs.append(book3)
+        favs.append(book4)
+        
+        bookshelves.append(Bookshelf(name: "Want To Read"))
+        bookshelves.append(Bookshelf(name: "Favourites", books: favs))
     }
 }

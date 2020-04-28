@@ -16,8 +16,8 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
-        tableView.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onUpdatedBookshelves(_:)), name: .updatedBookshelves, object: nil)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(resetSearchBarIfNeeded))
         tap.cancelsTouchesInView = false
@@ -42,6 +42,10 @@ class HomeViewController: UIViewController {
             searchBar.resignFirstResponder()
             searchBar.text = ""
         }
+    }
+    
+    @objc func onUpdatedBookshelves(_ notification:Notification) {
+        tableView.reloadData()
     }
 }
 
