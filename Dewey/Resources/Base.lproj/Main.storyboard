@@ -28,7 +28,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <searchBar contentMode="redraw" searchBarStyle="minimal" text="" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="bLL-GP-W60">
-                                                    <rect key="frame" x="20" y="126" width="384" height="44"/>
+                                                    <rect key="frame" x="20" y="126" width="374" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="384" id="9p1-et-9E7"/>
                                                         <constraint firstAttribute="height" constant="44" id="Q7W-Yb-ZUP"/>
@@ -58,7 +58,7 @@ reading today, Jessica?</string>
                                                 <constraint firstItem="bLL-GP-W60" firstAttribute="top" secondItem="vyG-wP-ZVe" secondAttribute="bottom" constant="18" id="3Ys-tW-V3d"/>
                                                 <constraint firstItem="bLL-GP-W60" firstAttribute="leading" secondItem="KLB-Sw-Qg5" secondAttribute="leading" constant="20" id="4s1-IP-axg"/>
                                                 <constraint firstAttribute="bottom" secondItem="bLL-GP-W60" secondAttribute="bottom" constant="12" id="62a-LK-Dfw"/>
-                                                <constraint firstAttribute="trailing" secondItem="bLL-GP-W60" secondAttribute="trailing" constant="10" id="hij-m9-gKX"/>
+                                                <constraint firstAttribute="trailing" secondItem="bLL-GP-W60" secondAttribute="trailing" constant="20" id="hij-m9-gKX"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="vyG-wP-ZVe" secondAttribute="trailing" constant="3" id="r5g-Jv-hl9"/>
                                                 <constraint firstItem="vyG-wP-ZVe" firstAttribute="top" secondItem="KLB-Sw-Qg5" secondAttribute="topMargin" constant="20" id="xPE-Nj-rom"/>
                                                 <constraint firstItem="vyG-wP-ZVe" firstAttribute="leading" secondItem="KLB-Sw-Qg5" secondAttribute="leadingMargin" constant="5" id="zmM-e4-rPo"/>
@@ -110,17 +110,17 @@ reading today, Jessica?</string>
                                                                             <constraint firstAttribute="height" constant="17" id="Pur-y5-hWm"/>
                                                                             <constraint firstAttribute="width" constant="134" id="eVx-vD-9iK"/>
                                                                         </constraints>
-                                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;author&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5o-sC-nd4">
-                                                                        <rect key="frame" x="8" y="213" width="134" height="15"/>
+                                                                        <rect key="frame" x="8" y="213" width="134" height="17"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="15" id="RxE-L0-aJe"/>
+                                                                            <constraint firstAttribute="height" constant="17" id="RxE-L0-aJe"/>
                                                                             <constraint firstAttribute="width" constant="134" id="tLp-lP-gKm"/>
                                                                         </constraints>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
@@ -131,7 +131,7 @@ reading today, Jessica?</string>
                                                                     <constraint firstItem="55a-V4-Fh0" firstAttribute="leading" secondItem="4c1-Xj-VPt" secondAttribute="leading" constant="8" id="9ss-jm-5J5"/>
                                                                     <constraint firstItem="VVo-zt-tMm" firstAttribute="leading" secondItem="4c1-Xj-VPt" secondAttribute="leading" constant="8" id="DCV-9R-gd7"/>
                                                                     <constraint firstItem="F5o-sC-nd4" firstAttribute="leading" secondItem="4c1-Xj-VPt" secondAttribute="leading" constant="8" id="LIa-0x-wDh"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="F5o-sC-nd4" secondAttribute="bottom" constant="10" id="Mck-h4-oal"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="F5o-sC-nd4" secondAttribute="bottom" constant="8" id="Mck-h4-oal"/>
                                                                     <constraint firstAttribute="trailing" secondItem="F5o-sC-nd4" secondAttribute="trailing" constant="8" id="g1d-Rl-2NB"/>
                                                                     <constraint firstItem="VVo-zt-tMm" firstAttribute="top" secondItem="55a-V4-Fh0" secondAttribute="bottom" constant="8" id="mhY-JW-KbY"/>
                                                                     <constraint firstItem="55a-V4-Fh0" firstAttribute="top" secondItem="4c1-Xj-VPt" secondAttribute="top" id="ywI-fK-94H"/>
@@ -142,6 +142,7 @@ reading today, Jessica?</string>
                                                                 <outlet property="bookAuthor" destination="F5o-sC-nd4" id="a6Q-P7-piq"/>
                                                                 <outlet property="bookCover" destination="55a-V4-Fh0" id="j1O-7w-ZSD"/>
                                                                 <outlet property="bookTitle" destination="VVo-zt-tMm" id="Odb-zB-84x"/>
+                                                                <segue destination="zlc-RO-76g" kind="show" identifier="BookDetails" id="Uif-kp-b2M"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
@@ -178,6 +179,7 @@ reading today, Jessica?</string>
                                 <segue destination="TKF-qN-Gt2" kind="show" id="YR3-Vq-kmp"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="bookmark" catalog="system" id="OiN-sU-o7o"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="2xR-yL-nZv" id="SpS-7T-pfu"/>
@@ -186,6 +188,33 @@ reading today, Jessica?</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9vN-a3-NpE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="517.39130434782612" y="-142.63392857142856"/>
+        </scene>
+        <!--Book View Controller-->
+        <scene sceneID="zMg-aU-abb">
+            <objects>
+                <viewController id="zlc-RO-76g" customClass="BookViewController" customModule="Dewey" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NBV-0y-pRU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sKu-lH-KT8">
+                                <rect key="frame" x="53" y="20" width="309" height="462"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.91764705879999997" green="0.90980392160000001" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <viewLayoutGuide key="safeArea" id="qfs-7U-XZA"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="RFv-Yw-NXf">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="ellipsis" catalog="system" id="VSl-95-MmW"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="bookCover" destination="sKu-lH-KT8" id="6xE-ye-KK8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ywI-Sb-83u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="515.94202898550725" y="562.5"/>
         </scene>
         <!--Bookshelves-->
         <scene sceneID="Nsd-BH-Z5p">
@@ -250,6 +279,8 @@ reading today, Jessica?</string>
     </scenes>
     <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
+        <image name="bookmark" catalog="system" width="112" height="128"/>
+        <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="text.alignleft" catalog="system" width="128" height="100"/>
     </resources>
 </document>

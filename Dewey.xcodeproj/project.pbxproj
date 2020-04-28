@@ -22,6 +22,9 @@
 		C816D7292454EE3B00078BFE /* BookshelfTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C816D7282454EE3B00078BFE /* BookshelfTableViewCell.swift */; };
 		C816D72B2454FA6200078BFE /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = C816D72A2454FA6200078BFE /* Podfile */; };
 		C816D72D2455092800078BFE /* HomeHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C816D72C2455092800078BFE /* HomeHeaderTableViewCell.swift */; };
+		C893DB6A24560912006CE0BB /* BookDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C893DB6924560912006CE0BB /* BookDetailsViewController.swift */; };
+		C8C4AC7D24572C620089F29E /* BookDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8C4AC7C24572C620089F29E /* BookDetailsView.xib */; };
+		C8FBBE1824564F8E00CC1B17 /* BookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FBBE1724564F8E00CC1B17 /* BookViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,9 @@
 		C816D7282454EE3B00078BFE /* BookshelfTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookshelfTableViewCell.swift; sourceTree = "<group>"; };
 		C816D72A2454FA6200078BFE /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C816D72C2455092800078BFE /* HomeHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		C893DB6924560912006CE0BB /* BookDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsViewController.swift; sourceTree = "<group>"; };
+		C8C4AC7C24572C620089F29E /* BookDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookDetailsView.xib; sourceTree = "<group>"; };
+		C8FBBE1724564F8E00CC1B17 /* BookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +122,7 @@
 				C816D70924547FC000078BFE /* Main.storyboard */,
 				C816D70C24547FC800078BFE /* Assets.xcassets */,
 				C816D70E24547FC800078BFE /* LaunchScreen.storyboard */,
+				C8C4AC79245723610089F29E /* Nibs */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -124,6 +131,8 @@
 			isa = PBXGroup;
 			children = (
 				C816D70724547FC000078BFE /* HomeViewController.swift */,
+				C8FBBE1724564F8E00CC1B17 /* BookViewController.swift */,
+				C893DB6924560912006CE0BB /* BookDetailsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -153,6 +162,14 @@
 				C816D7202454D09900078BFE /* StorageManager.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		C8C4AC79245723610089F29E /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				C8C4AC7C24572C620089F29E /* BookDetailsView.xib */,
+			);
+			path = Nibs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,6 +236,7 @@
 				C816D71024547FC800078BFE /* LaunchScreen.storyboard in Resources */,
 				C816D70D24547FC800078BFE /* Assets.xcassets in Resources */,
 				C816D70B24547FC000078BFE /* Main.storyboard in Resources */,
+				C8C4AC7D24572C620089F29E /* BookDetailsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +274,8 @@
 			files = (
 				C816D7272454D6E000078BFE /* Bookshelf.swift in Sources */,
 				C816D70824547FC000078BFE /* HomeViewController.swift in Sources */,
+				C893DB6A24560912006CE0BB /* BookDetailsViewController.swift in Sources */,
+				C8FBBE1824564F8E00CC1B17 /* BookViewController.swift in Sources */,
 				C816D72D2455092800078BFE /* HomeHeaderTableViewCell.swift in Sources */,
 				C816D71D2454AD9100078BFE /* BookCollectionViewCell.swift in Sources */,
 				C816D7232454D12200078BFE /* Book.swift in Sources */,
