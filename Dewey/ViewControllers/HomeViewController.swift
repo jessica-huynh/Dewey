@@ -10,6 +10,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
     let storageManager = StorageManager.instance
+    var searchBar: UISearchBar!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -17,6 +18,10 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(resetSearchBarIfNeeded))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
     
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -24,6 +29,18 @@ class HomeViewController: UIViewController {
             if let bookCollectionCell = sender as? BookCollectionViewCell, let controller = segue.destination as? BookViewController {
                 controller.book = bookCollectionCell.book
             }
+        } else if segue.identifier == "SearchResults" {
+            if let controller = segue.destination as? SearchResultsViewController {
+                controller.searchQuery = searchBar.text
+            }
+        }
+        resetSearchBarIfNeeded()
+    }
+    
+    @objc func resetSearchBarIfNeeded() {
+        if searchBar.isFirstResponder {
+            searchBar.resignFirstResponder()
+            searchBar.text = ""
         }
     }
 }
@@ -45,10 +62,12 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "HeaderCell", for: indexPath) as! HomeHeaderTableViewCell
+            cell.searchBarDelegate = self
+            searchBar = cell.searchBar
             return cell
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "bookshelfCell", for: indexPath) as! BookshelfTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BookshelfCell", for: indexPath) as! BookshelfTableViewCell
         cell.bookshelf = storageManager.bookshelves[indexPath.section - 1]
         return cell
     }
@@ -56,5 +75,13 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 { return "" }
         return storageManager.bookshelves[section - 1].name
+    }
+}
+
+// MARK: - Search Bar Delegate
+extension HomeViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        performSegue(withIdentifier: "SearchResults", sender: self)
+        resetSearchBarIfNeeded()
     }
 }
