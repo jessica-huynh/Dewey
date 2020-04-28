@@ -13,11 +13,10 @@ class BookViewController: UIViewController {
     var bookDetailsViewController: BookDetailsViewController!
     
     var cardHeight: CGFloat!
-    let cardTopPadding: CGFloat = 70
+    let cardTopPadding: CGFloat = 40
     let cardStretchSection: CGFloat = 50
     let cardMinVisibleHeight: CGFloat = 300
     var cardVisible = false
-    var visualEffectView: UIVisualEffectView!
     var panAnimationQueue: [UIViewPropertyAnimator] = []
     var nextState: CardState {
         return cardVisible ? .collapsed : .expanded
@@ -31,12 +30,11 @@ class BookViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        visualEffectView = UIVisualEffectView()
-        visualEffectView.frame = self.view.frame
-        view.addSubview(visualEffectView)
-        
         setupBookCover()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         setupCard()
     }
     
@@ -53,7 +51,7 @@ class BookViewController: UIViewController {
     }
     
     func setupCard() {
-        cardHeight = self.view.bounds.height - cardTopPadding + cardStretchSection
+        cardHeight = view.bounds.height - cardTopPadding + cardStretchSection
         bookDetailsViewController = BookDetailsViewController(nibName:"BookDetailsView", bundle:nil)
         addChild(bookDetailsViewController)
         view.addSubview(bookDetailsViewController.view)
@@ -66,8 +64,8 @@ class BookViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleCardTap(gesture:)))
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handleCardPan(gesture:)))
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(handleCardSwipe(gesture:)))
-        swipeUp.direction = .up
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleCardSwipe(gesture:)))
+        swipeUp.direction = .up
         swipeDown.direction = .down
 
         bookDetailsViewController.handleArea.addGestureRecognizer(tap)
@@ -97,62 +95,66 @@ class BookViewController: UIViewController {
         let translation = gesture.translation(in: view)
         let newPosition = gestureView.frame.origin.y + translation.y
         
-        // Check if the top of the frame doesn't go past an arbitrary area on the screen
+        // Make sure frame doesn't go past an arbitrary area on the screen
         if newPosition > 30 && newPosition < (view.frame.height - 200) {
             gestureView.frame.origin.y = newPosition
         }
         
         gesture.setTranslation(.zero, in: view)
         
+        let inExpandArea: Bool = gestureView.frame.origin.y < (view.frame.height/2 - 20)
         switch gesture.state {
         case .began:
-            startPanBlur(state: nextState, duration: 0.9)
+            if !panAnimationQueue.isEmpty {
+                for animation in panAnimationQueue {
+                    animation.stopAnimation(true)
+                }
+                panAnimationQueue.removeAll()
+                startPanAnimation(state: inExpandArea ? .collapsed : .expanded)
+                cardVisible = inExpandArea ? true : false
+            } else {
+                startPanAnimation(state: nextState)
+            }
         case .changed:
             let panZone = view.frame.height - cardMinVisibleHeight - cardTopPadding
             let panPosition = newPosition - cardTopPadding // position relative to the pan zone
             let fractionCompleted = (cardVisible ? panPosition : panZone - panPosition ) / panZone
-            updatePanBlur(fractionCompleted: fractionCompleted)
+            updatePanAnimation(fractionCompleted: fractionCompleted)
         case .ended:
-            let inExpandArea: Bool = gestureView.frame.origin.y < (view.bounds.height/2 - 30)
             if (inExpandArea && cardVisible) || (!inExpandArea && !cardVisible) {
                 for animation in panAnimationQueue {
-                    // Reverse blur animation if there will be no changes in card state
+                    // Reverse pan animation if there will be no changes in card state
                     animation.isReversed = true
                 }
             }
-            continuePanTransition()
-            
-            if inExpandArea {
-                animateCard(state: .expanded, duration: 0.9)
-            } else {
-                animateCard(state: .collapsed, duration: 0.9)
-            }
+            continuePanAnimation()
+            animateCard(state: inExpandArea ? .expanded : .collapsed)
         default:
             break
         }
     }
     
     // MARK: - Helper Functions for Gesture Handlers
-    func toggleBookDetails(state: CardState, duration: TimeInterval = 0.9) {
+    func toggleBookDetails(state: CardState, duration: TimeInterval = 0.5) {
         animateCard(state: state, duration: duration)
-        animateBlur(state: state, duration: duration)
+        animateBookScale(state: state, duration: duration)
     }
 
-    func animateBlur(state: CardState, duration: TimeInterval) {
-        let blurAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
+    func animateBookScale(state: CardState, duration: TimeInterval) {
+        let bookScaleAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
             switch state {
             case .expanded:
-                self.visualEffectView.effect = UIBlurEffect(style: .regular)
+                self.bookCover.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
             case .collapsed:
-                self.visualEffectView.effect = nil
+                self.bookCover.transform = .identity
             }
         }
         
-        blurAnimator.startAnimation()
-        panAnimationQueue.append(blurAnimator)
+        bookScaleAnimator.startAnimation()
+        panAnimationQueue.append(bookScaleAnimator)
     }
     
-    func animateCard(state: CardState, duration: TimeInterval) {
+    func animateCard(state: CardState, duration: TimeInterval = 0.5) {
         let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
             switch state {
             case .expanded:
@@ -169,23 +171,24 @@ class BookViewController: UIViewController {
         }
         
         frameAnimator.startAnimation()
+        panAnimationQueue.append(frameAnimator)
     }
     
-    func startPanBlur(state: CardState, duration: TimeInterval) {
-        animateBlur(state: state, duration: duration)
+    func startPanAnimation(state: CardState, duration: TimeInterval = 0.5) {
+        animateBookScale(state: state, duration: duration)
         
         for animation in panAnimationQueue {
             animation.pauseAnimation()
         }
     }
     
-    func updatePanBlur(fractionCompleted: CGFloat) {
+    func updatePanAnimation(fractionCompleted: CGFloat) {
         for animation in panAnimationQueue {
             animation.fractionComplete = fractionCompleted
         }
     }
     
-    func continuePanTransition() {
+    func continuePanAnimation() {
         for animation in panAnimationQueue {
             animation.continueAnimation(withTimingParameters: nil, durationFactor: 0)
         }
