@@ -52,7 +52,7 @@ class BookViewController: UIViewController {
     
     func setupCard() {
         cardHeight = view.bounds.height - cardTopPadding + cardStretchSection
-        bookDetailsViewController = BookDetailsViewController(nibName:"BookDetailsView", bundle:nil)
+        bookDetailsViewController = BookDetailsViewController(nibName:"BookDetailsViewController", bundle:nil)
         bookDetailsViewController.book = book
         addChild(bookDetailsViewController)
         view.addSubview(bookDetailsViewController.view)
