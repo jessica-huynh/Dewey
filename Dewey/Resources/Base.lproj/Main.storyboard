@@ -108,7 +108,6 @@ reading today, Jessica?</string>
                                                                         <rect key="frame" x="8" y="195" width="134" height="17"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="17" id="Pur-y5-hWm"/>
-                                                                            <constraint firstAttribute="width" constant="134" id="eVx-vD-9iK"/>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                                         <nil key="textColor"/>
@@ -118,7 +117,6 @@ reading today, Jessica?</string>
                                                                         <rect key="frame" x="8" y="213" width="134" height="17"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="17" id="RxE-L0-aJe"/>
-                                                                            <constraint firstAttribute="width" constant="134" id="tLp-lP-gKm"/>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -131,6 +129,7 @@ reading today, Jessica?</string>
                                                                     <constraint firstItem="55a-V4-Fh0" firstAttribute="leading" secondItem="4c1-Xj-VPt" secondAttribute="leading" constant="8" id="9ss-jm-5J5"/>
                                                                     <constraint firstItem="VVo-zt-tMm" firstAttribute="leading" secondItem="4c1-Xj-VPt" secondAttribute="leading" constant="8" id="DCV-9R-gd7"/>
                                                                     <constraint firstItem="F5o-sC-nd4" firstAttribute="leading" secondItem="4c1-Xj-VPt" secondAttribute="leading" constant="8" id="LIa-0x-wDh"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="VVo-zt-tMm" secondAttribute="trailing" constant="8" id="M0n-Zz-2m3"/>
                                                                     <constraint firstAttribute="bottom" secondItem="F5o-sC-nd4" secondAttribute="bottom" constant="8" id="Mck-h4-oal"/>
                                                                     <constraint firstAttribute="trailing" secondItem="F5o-sC-nd4" secondAttribute="trailing" constant="8" id="g1d-Rl-2NB"/>
                                                                     <constraint firstItem="VVo-zt-tMm" firstAttribute="top" secondItem="55a-V4-Fh0" secondAttribute="bottom" constant="8" id="mhY-JW-KbY"/>
@@ -202,7 +201,7 @@ reading today, Jessica?</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gUi-gE-Cjh">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gUi-gE-Cjh">
                                 <rect key="frame" x="0.0" y="71" width="414" height="737"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
@@ -262,6 +261,61 @@ reading today, Jessica?</string>
             </objects>
             <point key="canvasLocation" x="515.94202898550725" y="562.5"/>
         </scene>
+        <!--Bookshelf Details View Controller-->
+        <scene sceneID="L9W-CE-UEL">
+            <objects>
+                <viewController id="mbj-SA-6Oj" customClass="BookshelfDetailsViewController" customModule="Dewey" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0xS-c5-vvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jaB-86-YIr">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="mbj-SA-6Oj" id="MJK-i2-4kg"/>
+                                    <outlet property="delegate" destination="mbj-SA-6Oj" id="ZPw-Ph-kIK"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.91764705879999997" green="0.90980392160000001" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="jaB-86-YIr" firstAttribute="leading" secondItem="8nB-Ak-mEj" secondAttribute="leading" id="hPu-7m-V6A"/>
+                            <constraint firstItem="jaB-86-YIr" firstAttribute="top" secondItem="8nB-Ak-mEj" secondAttribute="top" id="oEb-9w-6th"/>
+                            <constraint firstItem="jaB-86-YIr" firstAttribute="trailing" secondItem="8nB-Ak-mEj" secondAttribute="trailing" id="rkL-nw-wkT"/>
+                            <constraint firstAttribute="bottom" secondItem="jaB-86-YIr" secondAttribute="bottom" id="xiS-h1-T5N"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8nB-Ak-mEj"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="HWx-7l-L3a">
+                        <nil key="title"/>
+                        <barButtonItem key="backBarButtonItem" title=" " id="F8v-Z3-Umm"/>
+                        <textField key="titleView" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="&lt;bookshelf name&gt;" placeholder="Bookshelf Name" textAlignment="center" minimumFontSize="17" id="NgV-kU-143">
+                            <rect key="frame" x="130.5" y="5" width="153" height="34"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                            <connections>
+                                <outlet property="delegate" destination="mbj-SA-6Oj" id="Rd7-6E-ixA"/>
+                            </connections>
+                        </textField>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="0yf-uv-Ewz">
+                            <connections>
+                                <action selector="editTapped:" destination="mbj-SA-6Oj" id="5i0-e1-DCh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="editButton" destination="0yf-uv-Ewz" id="5G2-Ae-fQb"/>
+                        <outlet property="navBarTitle" destination="NgV-kU-143" id="5v8-E2-0ak"/>
+                        <outlet property="tableView" destination="jaB-86-YIr" id="gO6-gD-Mnb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bw6-OQ-fa1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1269.5652173913045" y="562.5"/>
+        </scene>
         <!--Bookshelves-->
         <scene sceneID="Nsd-BH-Z5p">
             <objects>
@@ -295,23 +349,34 @@ reading today, Jessica?</string>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <segue destination="mbj-SA-6Oj" kind="show" identifier="BookshelfDetails" id="ojU-PC-mNJ"/>
+                                </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddBookshelfCell" id="Njd-Kp-6MV">
-                                <rect key="frame" x="0.0" y="110.5" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddBookshelfCell" rowHeight="55" id="Njd-Kp-6MV">
+                                <rect key="frame" x="0.0" y="110.5" width="414" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Njd-Kp-6MV" id="BDy-MH-d0E">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yDZ-C4-m7q">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yDZ-C4-m7q">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="55.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="55.5" id="FrO-XO-eDq"/>
+                                            </constraints>
                                             <state key="normal" title="Add Bookshelf +"/>
                                             <connections>
                                                 <segue destination="fCU-NU-Q5k" kind="presentation" identifier="AddBookshelf" id="Ial-Up-Y57"/>
                                             </connections>
                                         </button>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="yDZ-C4-m7q" firstAttribute="leading" secondItem="BDy-MH-d0E" secondAttribute="leading" id="4tu-kn-HlD"/>
+                                        <constraint firstAttribute="bottom" secondItem="yDZ-C4-m7q" secondAttribute="bottom" constant="-0.5" id="HmH-G0-wKX"/>
+                                        <constraint firstAttribute="trailing" secondItem="yDZ-C4-m7q" secondAttribute="trailing" id="Jav-HW-wRI"/>
+                                        <constraint firstItem="yDZ-C4-m7q" firstAttribute="top" secondItem="BDy-MH-d0E" secondAttribute="top" id="VSF-Hw-WFr"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableViewCell>
@@ -322,6 +387,7 @@ reading today, Jessica?</string>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Bookshelves" id="5ZV-Ai-6D1">
+                        <barButtonItem key="backBarButtonItem" title=" " id="mMo-Ny-1tj"/>
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="cKb-2s-fiM">
                             <connections>
                                 <action selector="editTapped:" destination="TKF-qN-Gt2" id="T0O-t9-8at"/>
@@ -405,6 +471,7 @@ reading today, Jessica?</string>
                             <constraint firstItem="bCq-cw-xVg" firstAttribute="top" secondItem="uNF-V0-dc9" secondAttribute="top" id="b84-S1-N8C"/>
                             <constraint firstItem="uNF-V0-dc9" firstAttribute="trailing" secondItem="F7a-FT-9Xk" secondAttribute="trailing" constant="35" id="bSE-La-C9I"/>
                             <constraint firstItem="fBc-br-2kV" firstAttribute="leading" secondItem="uNF-V0-dc9" secondAttribute="leading" constant="34" id="kaR-T3-WGT"/>
+                            <constraint firstItem="uNF-V0-dc9" firstAttribute="trailing" secondItem="fBc-br-2kV" secondAttribute="trailing" constant="128.5" id="mvn-6h-20Z"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uNF-V0-dc9"/>
                     </view>

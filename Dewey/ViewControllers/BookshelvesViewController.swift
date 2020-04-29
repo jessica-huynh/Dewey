@@ -17,6 +17,8 @@ class BookshelvesViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onUpdatedBookshelves(_:)), name: .updatedBookshelves, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -27,9 +29,13 @@ class BookshelvesViewController: UITableViewController {
         }
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     @IBAction func editTapped(_ sender: Any) {
         didEditBookshelves = true
-        tableView.isEditing = !tableView.isEditing
+        tableView.setEditing(!tableView.isEditing, animated: true)
         inEditMode = tableView.isEditing
         editButton.title = tableView.isEditing ? "Done" : "Edit"
     
@@ -43,7 +49,19 @@ class BookshelvesViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddBookshelf", let controller = segue.destination as? AddBookshelfViewController {
             controller.delegate = self
+            return
         }
+        
+        if segue.identifier == "BookshelfDetails", let controller = segue.destination as? BookshelfDetailsViewController {
+            if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
+                controller.bookshelf = storageManager.bookshelves[indexPath.row]
+                controller.bookShelfIndex = indexPath.row
+            }
+        }
+    }
+    
+    @objc func onUpdatedBookshelves(_ notification:Notification) {
+        tableView.reloadData()
     }
     
     // MARK: - Table View Data Source
@@ -56,9 +74,8 @@ class BookshelvesViewController: UITableViewController {
         return storageManager.bookshelves.count
     }
     
-    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath)
-        -> IndexPath? {
-        return nil
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
