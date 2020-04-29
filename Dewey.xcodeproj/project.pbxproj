@@ -28,6 +28,7 @@
 		C8CEF9C32458AF7C008182F0 /* BookDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CEF9C22458AF7C008182F0 /* BookDetailsTableViewCell.swift */; };
 		C8CEF9C52458B463008182F0 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CEF9C42458B463008182F0 /* SearchResultsViewController.swift */; };
 		C8CEF9C72458E57A008182F0 /* BookshelvesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CEF9C62458E57A008182F0 /* BookshelvesViewController.swift */; };
+		C8CEF9C924590E07008182F0 /* AddBookshelfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CEF9C824590E07008182F0 /* AddBookshelfViewController.swift */; };
 		C8FBBE1824564F8E00CC1B17 /* BookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FBBE1724564F8E00CC1B17 /* BookViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		C8CEF9C22458AF7C008182F0 /* BookDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		C8CEF9C42458B463008182F0 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		C8CEF9C62458E57A008182F0 /* BookshelvesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookshelvesViewController.swift; sourceTree = "<group>"; };
+		C8CEF9C824590E07008182F0 /* AddBookshelfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookshelfViewController.swift; sourceTree = "<group>"; };
 		C8FBBE1724564F8E00CC1B17 /* BookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,6 +145,7 @@
 				C893DB6924560912006CE0BB /* BookDetailsViewController.swift */,
 				C8CEF9C42458B463008182F0 /* SearchResultsViewController.swift */,
 				C8CEF9C62458E57A008182F0 /* BookshelvesViewController.swift */,
+				C8CEF9C824590E07008182F0 /* AddBookshelfViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				C816D71D2454AD9100078BFE /* BookCollectionViewCell.swift in Sources */,
 				C816D7232454D12200078BFE /* Book.swift in Sources */,
 				C816D7212454D09900078BFE /* StorageManager.swift in Sources */,
+				C8CEF9C924590E07008182F0 /* AddBookshelfViewController.swift in Sources */,
 				C816D70424547FC000078BFE /* AppDelegate.swift in Sources */,
 				C816D70624547FC000078BFE /* SceneDelegate.swift in Sources */,
 				C816D7292454EE3B00078BFE /* BookshelfTableViewCell.swift in Sources */,

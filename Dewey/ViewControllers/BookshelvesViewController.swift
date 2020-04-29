@@ -27,19 +27,22 @@ class BookshelvesViewController: UITableViewController {
         }
     }
     
-    @IBAction func addBookshelf(_ sender: Any) {
-    }
-    
     @IBAction func editTapped(_ sender: Any) {
         didEditBookshelves = true
         tableView.isEditing = !tableView.isEditing
-        inEditMode = tableView.isEditing ? true : false
+        inEditMode = tableView.isEditing
         editButton.title = tableView.isEditing ? "Done" : "Edit"
     
         if inEditMode {
             tableView.deleteRows(at: [IndexPath(row: 0, section: 1)], with: .fade)
         } else {
             tableView.insertRows(at: [IndexPath(row: 0, section: 1)], with: .fade)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "AddBookshelf", let controller = segue.destination as? AddBookshelfViewController {
+            controller.delegate = self
         }
     }
     
@@ -85,6 +88,15 @@ class BookshelvesViewController: UITableViewController {
         storageManager.bookshelves.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .fade)
         didEditBookshelves = true
+    }
+}
+
+// MARK: - Add Bookshelf Delegate
+extension BookshelvesViewController: AddBookshelfViewControllerDelegate {
+    func addBookshelvesViewController(_ controller: AddBookshelfViewController, didAddBookshelfWith name: String) {
+        storageManager.bookshelves.append(Bookshelf(name: name))
+        tableView.reloadData()
+        NotificationCenter.default.post(name: .updatedBookshelves, object: self)
     }
 }
 
