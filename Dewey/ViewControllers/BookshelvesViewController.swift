@@ -24,7 +24,7 @@ class BookshelvesViewController: UITableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        if self.isMovingFromParent && didEditBookshelves {
+        if didEditBookshelves {
             NotificationCenter.default.post(name: .updatedBookshelves, object: self)
         }
     }
@@ -54,8 +54,7 @@ class BookshelvesViewController: UITableViewController {
         
         if segue.identifier == "BookshelfDetails", let controller = segue.destination as? BookshelfDetailsViewController {
             if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
-                controller.bookshelf = storageManager.bookshelves[indexPath.row]
-                controller.bookShelfIndex = indexPath.row
+                controller.bookshelfIndex = indexPath.row
             }
         }
     }
