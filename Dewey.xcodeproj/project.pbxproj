@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		02762BCB091C66F3B4E9FEE4 /* libPods-Dewey.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B7CC22076C901EF27187683 /* libPods-Dewey.a */; };
 		C80222BC2459F1EB00CD3842 /* BookshelfDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80222BB2459F1EB00CD3842 /* BookshelfDetailsViewController.swift */; };
+		C80222BE245A1F0F00CD3842 /* NoSelectTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80222BD245A1F0F00CD3842 /* NoSelectTextField.swift */; };
 		C816D70424547FC000078BFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C816D70324547FC000078BFE /* AppDelegate.swift */; };
 		C816D70624547FC000078BFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C816D70524547FC000078BFE /* SceneDelegate.swift */; };
 		C816D70824547FC000078BFE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C816D70724547FC000078BFE /* HomeViewController.swift */; };
@@ -38,6 +39,7 @@
 		8B7CC22076C901EF27187683 /* libPods-Dewey.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Dewey.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A09C0F96138C191358417CF7 /* Pods-Dewey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dewey.debug.xcconfig"; path = "Target Support Files/Pods-Dewey/Pods-Dewey.debug.xcconfig"; sourceTree = "<group>"; };
 		C80222BB2459F1EB00CD3842 /* BookshelfDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookshelfDetailsViewController.swift; sourceTree = "<group>"; };
+		C80222BD245A1F0F00CD3842 /* NoSelectTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoSelectTextField.swift; sourceTree = "<group>"; };
 		C816D70024547FC000078BFE /* Dewey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dewey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C816D70324547FC000078BFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C816D70524547FC000078BFE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				C816D7282454EE3B00078BFE /* BookshelfTableViewCell.swift */,
 				C816D72C2455092800078BFE /* HomeHeaderTableViewCell.swift */,
 				C8CEF9C22458AF7C008182F0 /* BookDetailsTableViewCell.swift */,
+				C80222BD245A1F0F00CD3842 /* NoSelectTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 			files = (
 				C816D7272454D6E000078BFE /* Bookshelf.swift in Sources */,
 				C80222BC2459F1EB00CD3842 /* BookshelfDetailsViewController.swift in Sources */,
+				C80222BE245A1F0F00CD3842 /* NoSelectTextField.swift in Sources */,
 				C8CEF9C52458B463008182F0 /* SearchResultsViewController.swift in Sources */,
 				C8CEF9C32458AF7C008182F0 /* BookDetailsTableViewCell.swift in Sources */,
 				C816D70824547FC000078BFE /* HomeViewController.swift in Sources */,

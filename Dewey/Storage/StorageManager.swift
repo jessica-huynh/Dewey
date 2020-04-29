@@ -20,17 +20,17 @@ class StorageManager {
         let book4 = Book(isbn: "1250301696", title: "The Silent Patient", author: "Alex Michaelides", description: "Theo Faber looks into the mystery of a famous painter who stops speaking after shooting her husband.", cover: "https://s1.nyt.com/du/books/images/9781250301697.jpg")
         
         var bestsellers: [Book] = []
-        bestsellers.append(book1)
-        bestsellers.append(book2)
-        bestsellers.append(book3)
-        bestsellers.append(book4)
+        bestsellers.append(book1.with(dateAddedToShelf: Date()))
+        bestsellers.append(book2.with(dateAddedToShelf: Date()))
+        bestsellers.append(book3.with(dateAddedToShelf: Date()))
+        bestsellers.append(book4.with(dateAddedToShelf: Date()))
         
         let bestsellersShelf = Bookshelf(name: "Bestsellers", books: bestsellers)
         bookshelves.append(bestsellersShelf)
         
         var favs: [Book] = []
-        favs.append(book3)
-        favs.append(book4)
+        favs.append(book3.with(dateAddedToShelf: Date()))
+        favs.append(book4.with(dateAddedToShelf: Date()))
         
         bookshelves.append(Bookshelf(name: "Want To Read"))
         bookshelves.append(Bookshelf(name: "Favourites", books: favs))

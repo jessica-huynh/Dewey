@@ -270,18 +270,51 @@ reading today, Jessica?</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jaB-86-YIr">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="39" width="414" height="769"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="mbj-SA-6Oj" id="MJK-i2-4kg"/>
                                     <outlet property="delegate" destination="mbj-SA-6Oj" id="ZPw-Ph-kIK"/>
                                 </connections>
                             </tableView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="RECENT" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L3c-LH-n7b" customClass="NoSelectTextField" customModule="Dewey" customModuleProvider="target">
+                                <rect key="frame" x="76" y="12" width="63" height="19"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="63" id="6WD-Pm-JL7"/>
+                                    <constraint firstAttribute="height" constant="19" id="yO7-Ry-aTx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SORT BY " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ttl-QB-8M3">
+                                <rect key="frame" x="20" y="14" width="55" height="14.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14.5" id="i2U-oL-ncA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.down" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="N7O-x9-zYn">
+                                <rect key="frame" x="141" y="19" width="15.5" height="5"/>
+                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15.5" id="9zk-NF-RlV"/>
+                                    <constraint firstAttribute="height" constant="14.5" id="W4u-uw-usa"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.91764705879999997" green="0.90980392160000001" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="L3c-LH-n7b" firstAttribute="top" secondItem="8nB-Ak-mEj" secondAttribute="top" constant="12" id="0A1-hB-8Hl"/>
+                            <constraint firstItem="N7O-x9-zYn" firstAttribute="leading" secondItem="L3c-LH-n7b" secondAttribute="trailing" constant="2" id="4Xb-gq-auo"/>
+                            <constraint firstItem="L3c-LH-n7b" firstAttribute="leading" secondItem="Ttl-QB-8M3" secondAttribute="trailing" constant="1" id="5yR-4b-Hjz"/>
+                            <constraint firstItem="Ttl-QB-8M3" firstAttribute="leading" secondItem="8nB-Ak-mEj" secondAttribute="leading" constant="20" id="JaS-qF-guG"/>
+                            <constraint firstItem="N7O-x9-zYn" firstAttribute="top" secondItem="8nB-Ak-mEj" secondAttribute="top" constant="14" id="PbQ-VD-1Qs"/>
+                            <constraint firstItem="Ttl-QB-8M3" firstAttribute="top" secondItem="8nB-Ak-mEj" secondAttribute="top" constant="14" id="Qur-9z-HPT"/>
+                            <constraint firstItem="jaB-86-YIr" firstAttribute="top" secondItem="L3c-LH-n7b" secondAttribute="bottom" constant="8" id="TS6-l2-P3L"/>
                             <constraint firstItem="jaB-86-YIr" firstAttribute="leading" secondItem="8nB-Ak-mEj" secondAttribute="leading" id="hPu-7m-V6A"/>
-                            <constraint firstItem="jaB-86-YIr" firstAttribute="top" secondItem="8nB-Ak-mEj" secondAttribute="top" id="oEb-9w-6th"/>
                             <constraint firstItem="jaB-86-YIr" firstAttribute="trailing" secondItem="8nB-Ak-mEj" secondAttribute="trailing" id="rkL-nw-wkT"/>
                             <constraint firstAttribute="bottom" secondItem="jaB-86-YIr" secondAttribute="bottom" id="xiS-h1-T5N"/>
                         </constraints>
@@ -309,6 +342,8 @@ reading today, Jessica?</string>
                     <connections>
                         <outlet property="editButton" destination="0yf-uv-Ewz" id="5G2-Ae-fQb"/>
                         <outlet property="navBarTitle" destination="NgV-kU-143" id="5v8-E2-0ak"/>
+                        <outlet property="sortDropdownIcon" destination="N7O-x9-zYn" id="u9H-zw-tMu"/>
+                        <outlet property="sortTextField" destination="L3c-LH-n7b" id="VJ0-84-04B"/>
                         <outlet property="tableView" destination="jaB-86-YIr" id="gO6-gD-Mnb"/>
                     </connections>
                 </viewController>
@@ -507,6 +542,7 @@ reading today, Jessica?</string>
     <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <image name="bookmark" catalog="system" width="112" height="128"/>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="text.alignleft" catalog="system" width="128" height="100"/>
     </resources>
