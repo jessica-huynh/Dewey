@@ -10,6 +10,8 @@ import UIKit
 
 class BookshelvesViewController: UITableViewController {
     let storageManager = StorageManager.instance
+    var didEditBookshelves = false
+    var inEditMode = false
     
     @IBOutlet weak var editButton: UIBarButtonItem!
     
@@ -17,26 +19,37 @@ class BookshelvesViewController: UITableViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if self.isMovingFromParent && didEditBookshelves {
+            NotificationCenter.default.post(name: .updatedBookshelves, object: self)
+        }
+    }
+    
     @IBAction func addBookshelf(_ sender: Any) {
     }
     
     @IBAction func editTapped(_ sender: Any) {
+        didEditBookshelves = true
         tableView.isEditing = !tableView.isEditing
+        inEditMode = tableView.isEditing ? true : false
         editButton.title = tableView.isEditing ? "Done" : "Edit"
-        tableView.reloadData()
-
-        if !tableView.isEditing {
-            NotificationCenter.default.post(name: .updatedBookshelves, object: self)
+    
+        if inEditMode {
+            tableView.deleteRows(at: [IndexPath(row: 0, section: 1)], with: .fade)
+        } else {
+            tableView.insertRows(at: [IndexPath(row: 0, section: 1)], with: .fade)
         }
     }
     
     // MARK: - Table View Data Source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return tableView.isEditing ? 1 : 2
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 1 { return 1 }
+        if section == 1 { return inEditMode ? 0 : 1 }
         return storageManager.bookshelves.count
     }
     
@@ -62,7 +75,17 @@ class BookshelvesViewController: UITableViewController {
         storageManager.bookshelves.remove(at: sourceIndexPath.row)
         storageManager.bookshelves.insert(movedBookshelf, at: destinationIndexPath.row)
     }
-
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.section == 1 { return false }
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        storageManager.bookshelves.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        didEditBookshelves = true
+    }
 }
 
 // MARK: - Notification Names
