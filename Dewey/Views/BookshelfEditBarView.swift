@@ -11,6 +11,19 @@ import UIKit
 class BookshelfEditBarView: UIView {
     var delegate: BookshelfEditBarViewDelegate?
     
+    enum SelectMode {
+        case selectAll, deselectAll
+        
+        var systemImage: UIImage {
+            switch self {
+            case .selectAll:
+                return UIImage(systemName: "checkmark.circle")!
+            case .deselectAll:
+                return UIImage(systemName: "x.circle")!
+            }
+        }
+    }
+    
     @IBOutlet var view: UIView!
     @IBOutlet weak var selectAllButton: UIButton!
     
@@ -47,6 +60,10 @@ class BookshelfEditBarView: UIView {
     
     @IBAction func deleteBooksTapped(_ sender: UIButton) {
         delegate?.bookshelfEditBarView(self, didTapDelete: sender)
+    }
+    
+    func switchSelectAllButton(to mode: SelectMode) {
+        selectAllButton.setBackgroundImage(mode.systemImage, for: .normal)
     }
 }
 

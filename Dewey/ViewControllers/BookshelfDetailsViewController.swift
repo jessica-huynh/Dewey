@@ -13,7 +13,13 @@ class BookshelfDetailsViewController: UIViewController, UITextFieldDelegate {
     var bookshelfIndex: Int!
     var didEditBookshelf = false
     var didSort = false
-    var allRowsSelected = false
+    var allRowsSelected = false {
+        didSet {
+            if oldValue != allRowsSelected {
+                editBar.switchSelectAllButton(to: allRowsSelected ? .deselectAll : .selectAll)
+            }
+        }
+    }
     
     lazy var editBar: BookshelfEditBarView  = {
         var editBar = BookshelfEditBarView(frame: CGRect(x: view.center.x - editBarWidth/2, y: view.bounds.height - editBarHeight - editBarBottomPadding, width: editBarWidth, height: editBarHeight))
@@ -155,6 +161,7 @@ class BookshelfDetailsViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Edit Bar Helpers
     func showEditBar() {
+        allRowsSelected = false
         UIView.animate(withDuration: 0.5) {
             self.editBar.alpha = 1
             self.editBar.isHidden = false
@@ -166,10 +173,15 @@ class BookshelfDetailsViewController: UIViewController, UITextFieldDelegate {
                        animations: { self.editBar.alpha = 0 },
                        completion: { _ in self.editBar.isHidden = true })
     }
+    
+    func updateAllRowsSelected() {
+        let totalBooks = storageManager.bookshelves[bookshelfIndex].books.count
+        allRowsSelected = tableView.indexPathsForSelectedRows?.count == totalBooks
+    }
 }
 
+// MARK: - Table View Delegate
 extension BookshelfDetailsViewController: UITableViewDataSource, UITableViewDelegate {
-    // MARK: - Table View Delegate
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -178,8 +190,17 @@ extension BookshelfDetailsViewController: UITableViewDataSource, UITableViewDele
         return storageManager.bookshelves[bookshelfIndex].books.count
     }
     
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if tableView.isEditing {
+            updateAllRowsSelected()
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView.isEditing { return }
+        if tableView.isEditing {
+            updateAllRowsSelected()
+            return
+        }
         
         let bookViewController = self.storyboard?.instantiateViewController(withIdentifier: "BookViewController") as! BookViewController
         bookViewController.book = storageManager.bookshelves[bookshelfIndex].books[indexPath.row]
@@ -226,9 +247,9 @@ extension BookshelfDetailsViewController: UIPickerViewDelegate, UIPickerViewData
 // MARK: - Edit Bar Delegate
 extension BookshelfDetailsViewController: BookshelfEditBarViewDelegate {
     func bookshelfEditBarView(_ view: BookshelfEditBarView, didTapSelectAll _: UIButton) {
-        for row in 0..<tableView.numberOfRows(inSection: 0) {
-            tableView.selectRow(at: IndexPath(row: row, section: 0), animated: false, scrollPosition: .none)
-        }
+        if allRowsSelected { tableView.deselectAllRows() }
+        else { tableView.selectAllRows() }
+        allRowsSelected = !allRowsSelected
     }
     
     func bookshelfEditBarView(_ view: BookshelfEditBarView, didTapMove _: UIButton) {
