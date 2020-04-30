@@ -12,6 +12,7 @@ class BookshelfEditBarView: UIView {
     var delegate: BookshelfEditBarViewDelegate?
     
     @IBOutlet var view: UIView!
+    @IBOutlet weak var selectAllButton: UIButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,6 +40,11 @@ class BookshelfEditBarView: UIView {
         delegate?.bookshelfEditBarView(self, didTapMove: sender)
     }
     
+    
+    @IBAction func addBooksTapped(_ sender: UIButton) {
+        delegate?.bookshelfEditBarView(self, didTapAdd: sender)
+    }
+    
     @IBAction func deleteBooksTapped(_ sender: UIButton) {
         delegate?.bookshelfEditBarView(self, didTapDelete: sender)
     }
@@ -47,5 +53,6 @@ class BookshelfEditBarView: UIView {
 protocol BookshelfEditBarViewDelegate: class {
     func bookshelfEditBarView(_ view: BookshelfEditBarView, didTapSelectAll button: UIButton)
     func bookshelfEditBarView(_ view: BookshelfEditBarView, didTapMove button: UIButton)
+    func bookshelfEditBarView(_ view: BookshelfEditBarView, didTapAdd button: UIButton)
     func bookshelfEditBarView(_ view: BookshelfEditBarView, didTapDelete button: UIButton)
 }

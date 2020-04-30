@@ -15,9 +15,17 @@ class BookshelfDetailsViewController: UIViewController, UITextFieldDelegate {
     var didSort = false
     var allRowsSelected = false
     
-    var editBar: BookshelfEditBarView?
+    lazy var editBar: BookshelfEditBarView  = {
+        var editBar = BookshelfEditBarView(frame: CGRect(x: view.center.x - editBarWidth/2, y: view.bounds.height - editBarHeight - editBarBottomPadding, width: editBarWidth, height: editBarHeight))
+        editBar.delegate = self
+        editBar.alpha = 0
+        view.addSubview(editBar)
+        return editBar
+    }()
+    
     let editBarHeight: CGFloat = 48
-    let editBarWidth: CGFloat = 226
+    let editBarWidth: CGFloat = 228
+    let editBarBottomPadding: CGFloat = 50
     
     let picker: UIPickerView = UIPickerView()
     enum PickerOptions: String, CaseIterable {
@@ -145,29 +153,18 @@ class BookshelfDetailsViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // MARK: - Edit Bar Helpers
     func showEditBar() {
-        if editBar != nil {
-            UIView.animate(withDuration: 0.5) {
-                self.editBar!.alpha = 1
-                self.editBar!.isHidden = false
-            }
-            return
-        }
-        
-        editBar = BookshelfEditBarView(frame: CGRect(x: view.center.x - editBarWidth/2, y: view.bounds.height - editBarHeight - 50, width: editBarWidth, height: editBarHeight))
-        editBar!.delegate = self
-        editBar!.alpha = 0
-        view.addSubview(editBar!)
-        
         UIView.animate(withDuration: 0.5) {
-            self.editBar!.alpha = 1
+            self.editBar.alpha = 1
+            self.editBar.isHidden = false
         }
     }
     
     func hideEditBar() {
         UIView.animate(withDuration: 0.5,
-                       animations: { self.editBar?.alpha = 0 },
-                       completion: { _ in self.editBar?.isHidden = true })
+                       animations: { self.editBar.alpha = 0 },
+                       completion: { _ in self.editBar.isHidden = true })
     }
 }
 
@@ -235,6 +232,9 @@ extension BookshelfDetailsViewController: BookshelfEditBarViewDelegate {
     }
     
     func bookshelfEditBarView(_ view: BookshelfEditBarView, didTapMove _: UIButton) {
+    }
+    
+    func bookshelfEditBarView(_ view: BookshelfEditBarView, didTapAdd _: UIButton) {
     }
     
     func bookshelfEditBarView(_ view: BookshelfEditBarView, didTapDelete _: UIButton) {
