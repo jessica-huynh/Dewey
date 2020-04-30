@@ -9,6 +9,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BookshelfEditBarView" customModule="Dewey" customModuleProvider="target">
             <connections>
+                <outlet property="addButton" destination="W7w-sp-WQ7" id="u0o-vw-JDy"/>
+                <outlet property="deleteButton" destination="0xF-UC-rfZ" id="q9Q-se-VCX"/>
+                <outlet property="moveButton" destination="cgO-5H-Lij" id="fgC-BM-enc"/>
                 <outlet property="selectAllButton" destination="jld-Is-QbJ" id="F3E-gO-PV6"/>
                 <outlet property="view" destination="iN0-l3-epB" id="xMu-y6-lrE"/>
             </connections>
@@ -19,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cgO-5H-Lij">
-                    <rect key="frame" x="77" y="13.5" width="22" height="22"/>
+                    <rect key="frame" x="77" y="14" width="22" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="22" id="bjd-zj-onG"/>
                         <constraint firstAttribute="height" constant="20.5" id="jd6-qa-9hr"/>

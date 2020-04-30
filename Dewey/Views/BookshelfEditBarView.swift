@@ -26,6 +26,9 @@ class BookshelfEditBarView: UIView {
     
     @IBOutlet var view: UIView!
     @IBOutlet weak var selectAllButton: UIButton!
+    @IBOutlet weak var moveButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -60,6 +63,18 @@ class BookshelfEditBarView: UIView {
     
     @IBAction func deleteBooksTapped(_ sender: UIButton) {
         delegate?.bookshelfEditBarView(self, didTapDelete: sender)
+    }
+    
+    func enableActions() {
+        moveButton.isEnabled = true
+        addButton.isEnabled = true
+        deleteButton.isEnabled = true
+    }
+    
+    func disableActions() {
+        moveButton.isEnabled = false
+        addButton.isEnabled = false
+        deleteButton.isEnabled = false
     }
     
     func switchSelectAllButton(to mode: SelectMode) {

@@ -8,11 +8,20 @@
 
 import UIKit
 
-class BookshelfDetailsViewController: UIViewController, UITextFieldDelegate {
+class BookshelfDetailsViewController: UIViewController {
     var storageManager = StorageManager.instance
     var bookshelfIndex: Int!
     var didEditBookshelf = false
     var didSort = false
+    
+    var atLeastOneRowSelected = false {
+        didSet {
+            if oldValue != atLeastOneRowSelected {
+                if atLeastOneRowSelected { editBar.enableActions() }
+                else { editBar.disableActions() }
+            }
+        }
+    }
     var allRowsSelected = false {
         didSet {
             if oldValue != allRowsSelected {
@@ -22,8 +31,12 @@ class BookshelfDetailsViewController: UIViewController, UITextFieldDelegate {
     }
     
     lazy var editBar: BookshelfEditBarView  = {
-        var editBar = BookshelfEditBarView(frame: CGRect(x: view.center.x - editBarWidth/2, y: view.bounds.height - editBarHeight - editBarBottomPadding, width: editBarWidth, height: editBarHeight))
+        var editBar = BookshelfEditBarView(frame: CGRect(x: view.center.x - editBarWidth/2,
+                                                         y: view.bounds.height - editBarHeight - editBarBottomPadding,
+                                                         width: editBarWidth,
+                                                         height: editBarHeight))
         editBar.delegate = self
+        editBar.disableActions()
         editBar.alpha = 0
         view.addSubview(editBar)
         return editBar
@@ -56,10 +69,6 @@ class BookshelfDetailsViewController: UIViewController, UITextFieldDelegate {
         navBarTitle.text = storageManager.bookshelves[bookshelfIndex].name
         
         setupPicker()
-        createToolbar()
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleSortDropDownTap(gesture:)))
-        sortDropdownIcon.addGestureRecognizer(tap)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -90,93 +99,19 @@ class BookshelfDetailsViewController: UIViewController, UITextFieldDelegate {
         }
         
         sortTextField.isEnabled = !tableView.isEditing
-        sortTextField.textColor = sortTextField.isEnabled ? UIColor.black : UIColor.darkGray
+        sortTextField.textColor = sortTextField.isEnabled ? UIColor.black : UIColor.gray
         sortDropdownIcon.isUserInteractionEnabled = sortTextField.isEnabled
         
-        if tableView.isEditing {
-            showEditBar()
-        } else {
-            hideEditBar()
-        }
+        if tableView.isEditing { showEditBar() }
+        else { hideEditBar() }
     }
     
-    @objc func handleSortDropDownTap(gesture: UITapGestureRecognizer) {
-        sortTextField.becomeFirstResponder()
-    }
-    
-    // MARK: - Text field delegate
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        navBarTitle.resignFirstResponder()
-        return true
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let oldText = textField.text!
-        let stringRange = Range(range, in: oldText)!
-        let newText = oldText.replacingCharacters(in: stringRange, with: string)
-        editButton.isEnabled = !newText.isEmpty
-        return true
-    }
-    
-    // MARK: - Sort Picker Setup
-    func setupPicker() {
-        picker.delegate = self
-        picker.backgroundColor = .white
-        sortTextField.inputView = picker
-    }
-    
-    func createToolbar() {
-        let toolBar = UIToolbar()
-        toolBar.sizeToFit()
-        toolBar.barTintColor = .white
+    func updateRowSelectionStatus() {
+        let numberOfSelectedRows = tableView.indexPathsForSelectedRows?.count ?? 0
+        atLeastOneRowSelected = numberOfSelectedRows > 0
         
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(self.finishedPicking))
-        
-        toolBar.setItems([flexibleSpace, doneButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-        
-        sortTextField.inputAccessoryView = toolBar
-    }
-    
-    @objc func finishedPicking() {
-        view.endEditing(true)
-        
-        if sortOptionPicked != previousSortOptionPicked {
-            didSort = true
-            previousSortOptionPicked = sortOptionPicked
-            
-            switch sortOptionPicked {
-            case .recent:
-                storageManager.bookshelves[bookshelfIndex].books.sort(by: { $0.dateAddedToShelf! > $1.dateAddedToShelf! })
-            case .title:
-                storageManager.bookshelves[bookshelfIndex].books.sort(by: { $0.title < $1.title })
-            case .author:
-                storageManager.bookshelves[bookshelfIndex].books.sort(by: { $0.author < $1.author })
-            }
-            
-            tableView.reloadData()
-        }
-    }
-    
-    // MARK: - Edit Bar Helpers
-    func showEditBar() {
-        allRowsSelected = false
-        UIView.animate(withDuration: 0.5) {
-            self.editBar.alpha = 1
-            self.editBar.isHidden = false
-        }
-    }
-    
-    func hideEditBar() {
-        UIView.animate(withDuration: 0.5,
-                       animations: { self.editBar.alpha = 0 },
-                       completion: { _ in self.editBar.isHidden = true })
-    }
-    
-    func updateAllRowsSelected() {
         let totalBooks = storageManager.bookshelves[bookshelfIndex].books.count
-        allRowsSelected = tableView.indexPathsForSelectedRows?.count == totalBooks
+        allRowsSelected = numberOfSelectedRows == totalBooks
     }
 }
 
@@ -191,14 +126,12 @@ extension BookshelfDetailsViewController: UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if tableView.isEditing {
-            updateAllRowsSelected()
-        }
+        if tableView.isEditing { updateRowSelectionStatus() }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.isEditing {
-            updateAllRowsSelected()
+            updateRowSelectionStatus()
             return
         }
         
@@ -218,46 +151,5 @@ extension BookshelfDetailsViewController: UITableViewDataSource, UITableViewDele
         storageManager.bookshelves[bookshelfIndex].books.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .fade)
         didEditBookshelf = true
-    }
-}
-
-// MARK: - Picker View Delegate
-extension BookshelfDetailsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return PickerOptions.allCases.count
-    }
-    
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return PickerOptions.allCases[row].rawValue.capitalized
-    }
-    
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        sortTextField.text = PickerOptions.allCases[row].rawValue.uppercased()
-        sortOptionPicked = PickerOptions.allCases[row]
-    }
-}
-
-// MARK: - Edit Bar Delegate
-extension BookshelfDetailsViewController: BookshelfEditBarViewDelegate {
-    func bookshelfEditBarView(_ view: BookshelfEditBarView, didTapSelectAll _: UIButton) {
-        if allRowsSelected { tableView.deselectAllRows() }
-        else { tableView.selectAllRows() }
-        allRowsSelected = !allRowsSelected
-    }
-    
-    func bookshelfEditBarView(_ view: BookshelfEditBarView, didTapMove _: UIButton) {
-    }
-    
-    func bookshelfEditBarView(_ view: BookshelfEditBarView, didTapAdd _: UIButton) {
-    }
-    
-    func bookshelfEditBarView(_ view: BookshelfEditBarView, didTapDelete _: UIButton) {
     }
 }
