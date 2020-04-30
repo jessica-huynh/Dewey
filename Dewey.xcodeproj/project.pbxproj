@@ -27,6 +27,8 @@
 		C8221C1A245A46DA00FE5605 /* BookshelfEditBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8221C19245A46DA00FE5605 /* BookshelfEditBarView.xib */; };
 		C85920D7245B3CE20033DBD2 /* BookshelfDetailsViewController+SortByPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85920D6245B3CE20033DBD2 /* BookshelfDetailsViewController+SortByPicker.swift */; };
 		C85920D9245B3D130033DBD2 /* BookshelfDetailsViewController+Edit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85920D8245B3D130033DBD2 /* BookshelfDetailsViewController+Edit.swift */; };
+		C85920DB245B45F30033DBD2 /* BookshelfOptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C85920DA245B45F30033DBD2 /* BookshelfOptionsViewController.xib */; };
+		C85920DD245B47770033DBD2 /* BookshelfOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85920DC245B47770033DBD2 /* BookshelfOptionsViewController.swift */; };
 		C85ADE7C245A4D39003CF581 /* BookshelfEditBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85ADE7B245A4D39003CF581 /* BookshelfEditBarView.swift */; };
 		C893DB6A24560912006CE0BB /* BookDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C893DB6924560912006CE0BB /* BookDetailsViewController.swift */; };
 		C8AEDA4F245B200C005B2DFE /* UITableView+SelectAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AEDA4E245B200C005B2DFE /* UITableView+SelectAll.swift */; };
@@ -64,6 +66,8 @@
 		C8221C19245A46DA00FE5605 /* BookshelfEditBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookshelfEditBarView.xib; sourceTree = "<group>"; };
 		C85920D6245B3CE20033DBD2 /* BookshelfDetailsViewController+SortByPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookshelfDetailsViewController+SortByPicker.swift"; sourceTree = "<group>"; };
 		C85920D8245B3D130033DBD2 /* BookshelfDetailsViewController+Edit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookshelfDetailsViewController+Edit.swift"; sourceTree = "<group>"; };
+		C85920DA245B45F30033DBD2 /* BookshelfOptionsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookshelfOptionsViewController.xib; sourceTree = "<group>"; };
+		C85920DC245B47770033DBD2 /* BookshelfOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookshelfOptionsViewController.swift; sourceTree = "<group>"; };
 		C85ADE7B245A4D39003CF581 /* BookshelfEditBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookshelfEditBarView.swift; sourceTree = "<group>"; };
 		C893DB6924560912006CE0BB /* BookDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsViewController.swift; sourceTree = "<group>"; };
 		C8AEDA4E245B200C005B2DFE /* UITableView+SelectAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+SelectAll.swift"; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 				C80222BB2459F1EB00CD3842 /* BookshelfDetailsViewController.swift */,
 				C85920D6245B3CE20033DBD2 /* BookshelfDetailsViewController+SortByPicker.swift */,
 				C85920D8245B3D130033DBD2 /* BookshelfDetailsViewController+Edit.swift */,
+				C85920DC245B47770033DBD2 /* BookshelfOptionsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 				C8C4AC7C24572C620089F29E /* BookDetailsViewController.xib */,
 				C8CEF9C02458A815008182F0 /* BookDetailsTableViewCell.xib */,
 				C8221C19245A46DA00FE5605 /* BookshelfEditBarView.xib */,
+				C85920DA245B45F30033DBD2 /* BookshelfOptionsViewController.xib */,
 			);
 			path = Nibs;
 			sourceTree = "<group>";
@@ -280,6 +286,7 @@
 				C816D71A245483EB00078BFE /* .gitignore in Resources */,
 				C816D71024547FC800078BFE /* LaunchScreen.storyboard in Resources */,
 				C8221C1A245A46DA00FE5605 /* BookshelfEditBarView.xib in Resources */,
+				C85920DB245B45F30033DBD2 /* BookshelfOptionsViewController.xib in Resources */,
 				C816D70D24547FC800078BFE /* Assets.xcassets in Resources */,
 				C816D70B24547FC000078BFE /* Main.storyboard in Resources */,
 				C8C4AC7D24572C620089F29E /* BookDetailsViewController.xib in Resources */,
@@ -333,6 +340,7 @@
 				C8FBBE1824564F8E00CC1B17 /* BookViewController.swift in Sources */,
 				C816D72D2455092800078BFE /* HomeHeaderTableViewCell.swift in Sources */,
 				C816D71D2454AD9100078BFE /* BookCollectionViewCell.swift in Sources */,
+				C85920DD245B47770033DBD2 /* BookshelfOptionsViewController.swift in Sources */,
 				C816D7232454D12200078BFE /* Book.swift in Sources */,
 				C816D7212454D09900078BFE /* StorageManager.swift in Sources */,
 				C8CEF9C924590E07008182F0 /* AddBookshelfViewController.swift in Sources */,

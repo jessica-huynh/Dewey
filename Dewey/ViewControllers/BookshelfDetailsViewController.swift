@@ -13,7 +13,16 @@ class BookshelfDetailsViewController: UIViewController {
     var bookshelfIndex: Int!
     var didEditBookshelf = false
     var didSort = false
+    var isMovingBooks = false
     
+    var noBooks = false {
+        didSet {
+            if oldValue != noBooks {
+                if noBooks { editBar.disableSelectAllButton() }
+                else { editBar.enableSelectAllButton() }
+            }
+        }
+    }
     var atLeastOneRowSelected = false {
         didSet {
             if oldValue != atLeastOneRowSelected {
@@ -106,12 +115,19 @@ class BookshelfDetailsViewController: UIViewController {
         else { hideEditBar() }
     }
     
-    func updateRowSelectionStatus() {
-        let numberOfSelectedRows = tableView.indexPathsForSelectedRows?.count ?? 0
-        atLeastOneRowSelected = numberOfSelectedRows > 0
-        
-        let totalBooks = storageManager.bookshelves[bookshelfIndex].books.count
-        allRowsSelected = numberOfSelectedRows == totalBooks
+    func deleteBooksAt(indexPaths: [IndexPath]) {
+        if allRowsSelected {
+            storageManager.bookshelves[bookshelfIndex].removeAllBooks()
+            tableView.reloadData()
+            editBar.switchSelectAllButton(to: .selectAll)
+        } else {
+            let indexPaths = indexPaths.sorted(by: { $0.row > $1.row })
+            for indexPath in indexPaths {
+                storageManager.bookshelves[bookshelfIndex].removeBook(at: indexPath.row)
+            }
+            tableView.deleteRows(at: indexPaths, with: .fade)
+        }
+        updateEditBarButtons()
     }
 }
 
@@ -126,12 +142,12 @@ extension BookshelfDetailsViewController: UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if tableView.isEditing { updateRowSelectionStatus() }
+        if tableView.isEditing { updateEditBarButtons() }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.isEditing {
-            updateRowSelectionStatus()
+            updateEditBarButtons()
             return
         }
         

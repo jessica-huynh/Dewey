@@ -77,6 +77,14 @@ class BookshelfEditBarView: UIView {
         deleteButton.isEnabled = false
     }
     
+    func enableSelectAllButton() {
+        selectAllButton.isEnabled = true
+    }
+    
+    func disableSelectAllButton() {
+        selectAllButton.isEnabled = false
+    }
+    
     func switchSelectAllButton(to mode: SelectMode) {
         selectAllButton.setBackgroundImage(mode.systemImage, for: .normal)
     }
