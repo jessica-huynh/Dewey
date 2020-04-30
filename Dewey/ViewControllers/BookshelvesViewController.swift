@@ -40,13 +40,12 @@ class BookshelvesViewController: UITableViewController {
     
     @IBAction func deleteAllTapped(_ sender: Any) {
         let alert = UIAlertController(title: "Delete All Bookshelves",
-                                      message: "Are you sure you want to proceed? This will remove all bookshelves and any books associated with them.",
+                                      message: "Are you sure you want to proceed? This will remove all bookshelves and the books inside them.",
                                       preferredStyle: .alert)
         let deleteAction = UIAlertAction(title: "Yes", style: .default) {
             _ in
             self.storageManager.bookshelves = []
             self.toggleEditMode()
-            self.dismiss(animated: true, completion: nil)
         }
         
         alert.addAction(deleteAction)
