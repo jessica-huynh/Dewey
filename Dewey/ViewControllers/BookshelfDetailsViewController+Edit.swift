@@ -29,7 +29,7 @@ extension BookshelfDetailsViewController: BookshelfEditBarViewDelegate {
     func presentBookshelfOptionsViewController() {
         let viewController = BookshelfOptionsViewController(nibName: "BookshelfOptionsViewController", bundle: nil)
         viewController.delegate = self
-        viewController.bookshelfIndex = bookshelfIndex
+        viewController.bookshelfIndexToDisable = bookshelfIndex
         present(viewController, animated: true, completion: nil)
     }
     
