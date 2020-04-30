@@ -13,6 +13,11 @@ class BookshelfDetailsViewController: UIViewController, UITextFieldDelegate {
     var bookshelfIndex: Int!
     var didEditBookshelf = false
     var didSort = false
+    var allRowsSelected = false
+    
+    var editBar: BookshelfEditBarView?
+    let editBarHeight: CGFloat = 48
+    let editBarWidth: CGFloat = 226
     
     let picker: UIPickerView = UIPickerView()
     enum PickerOptions: String, CaseIterable {
@@ -73,6 +78,12 @@ class BookshelfDetailsViewController: UIViewController, UITextFieldDelegate {
         sortTextField.isEnabled = !tableView.isEditing
         sortTextField.textColor = sortTextField.isEnabled ? UIColor.black : UIColor.darkGray
         sortDropdownIcon.isUserInteractionEnabled = sortTextField.isEnabled
+        
+        if tableView.isEditing {
+            showEditBar()
+        } else {
+            hideEditBar()
+        }
     }
     
     @objc func handleSortDropDownTap(gesture: UITapGestureRecognizer) {
@@ -133,6 +144,31 @@ class BookshelfDetailsViewController: UIViewController, UITextFieldDelegate {
             tableView.reloadData()
         }
     }
+    
+    func showEditBar() {
+        if editBar != nil {
+            UIView.animate(withDuration: 0.5) {
+                self.editBar!.alpha = 1
+                self.editBar!.isHidden = false
+            }
+            return
+        }
+        
+        editBar = BookshelfEditBarView(frame: CGRect(x: view.center.x - editBarWidth/2, y: view.bounds.height - editBarHeight - 50, width: editBarWidth, height: editBarHeight))
+        editBar!.delegate = self
+        editBar!.alpha = 0
+        view.addSubview(editBar!)
+        
+        UIView.animate(withDuration: 0.5) {
+            self.editBar!.alpha = 1
+        }
+    }
+    
+    func hideEditBar() {
+        UIView.animate(withDuration: 0.5,
+                       animations: { self.editBar?.alpha = 0 },
+                       completion: { _ in self.editBar?.isHidden = true })
+    }
 }
 
 extension BookshelfDetailsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -187,5 +223,20 @@ extension BookshelfDetailsViewController: UIPickerViewDelegate, UIPickerViewData
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         sortTextField.text = PickerOptions.allCases[row].rawValue.uppercased()
         sortOptionPicked = PickerOptions.allCases[row]
+    }
+}
+
+// MARK: - Edit Bar Delegate
+extension BookshelfDetailsViewController: BookshelfEditBarViewDelegate {
+    func bookshelfEditBarView(_ view: BookshelfEditBarView, didTapSelectAll _: UIButton) {
+        for row in 0..<tableView.numberOfRows(inSection: 0) {
+            tableView.selectRow(at: IndexPath(row: row, section: 0), animated: false, scrollPosition: .none)
+        }
+    }
+    
+    func bookshelfEditBarView(_ view: BookshelfEditBarView, didTapMove _: UIButton) {
+    }
+    
+    func bookshelfEditBarView(_ view: BookshelfEditBarView, didTapDelete _: UIButton) {
     }
 }

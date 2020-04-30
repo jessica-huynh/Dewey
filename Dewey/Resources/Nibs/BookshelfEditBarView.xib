@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BookshelfEditBarView" customModule="Dewey" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="iN0-l3-epB" id="xMu-y6-lrE"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="226" height="48"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cgO-5H-Lij">
+                    <rect key="frame" x="101" y="14" width="22" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="22" id="bjd-zj-onG"/>
+                        <constraint firstAttribute="height" constant="20.5" id="jd6-qa-9hr"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="arrow.right.arrow.left" catalog="system"/>
+                    <connections>
+                        <action selector="moveBooksTapped:" destination="-1" eventType="touchUpInside" id="kWq-cI-CRy"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jld-Is-QbJ">
+                    <rect key="frame" x="16" y="11.5" width="28" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="28" id="9P1-WV-Q64"/>
+                        <constraint firstAttribute="height" constant="26" id="OiD-Qz-0tJ"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="checkmark.circle" catalog="system"/>
+                    <connections>
+                        <action selector="selectAllTapped:" destination="-1" eventType="touchUpInside" id="2hp-gE-jUc"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0xF-UC-rfZ">
+                    <rect key="frame" x="188" y="13" width="19.5" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21.5" id="TWA-2c-qOV"/>
+                        <constraint firstAttribute="width" constant="19.5" id="rWy-EL-dH9"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="trash" catalog="system"/>
+                    <connections>
+                        <action selector="deleteBooksTapped:" destination="-1" eventType="touchUpInside" id="zcT-zT-mdy"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="jld-Is-QbJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="11" id="5sa-Wc-9Rk"/>
+                <constraint firstItem="cgO-5H-Lij" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="14.5" id="SpK-aW-6fx"/>
+                <constraint firstItem="jld-Is-QbJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="XTd-es-6fU"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="jld-Is-QbJ" secondAttribute="bottom" constant="11" id="Yui-m7-i1t"/>
+                <constraint firstItem="0xF-UC-rfZ" firstAttribute="leading" secondItem="cgO-5H-Lij" secondAttribute="trailing" constant="65" id="YxY-TW-yfa"/>
+                <constraint firstItem="0xF-UC-rfZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="14" id="dHs-wU-m9N"/>
+                <constraint firstAttribute="trailing" secondItem="0xF-UC-rfZ" secondAttribute="trailing" constant="18.5" id="fOm-4y-eit"/>
+                <constraint firstItem="cgO-5H-Lij" firstAttribute="leading" secondItem="jld-Is-QbJ" secondAttribute="trailing" constant="57" id="mV1-xZ-VgN"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="0xF-UC-rfZ" secondAttribute="bottom" constant="12.5" id="nyx-6H-1n5"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="cgO-5H-Lij" secondAttribute="bottom" constant="13" id="rZY-kh-lDa"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-27.536231884057973" y="34.151785714285715"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="arrow.right.arrow.left" catalog="system" width="119" height="128"/>
+        <image name="checkmark.circle" catalog="system" width="128" height="121"/>
+        <image name="trash" catalog="system" width="121" height="128"/>
+    </resources>
+</document>
