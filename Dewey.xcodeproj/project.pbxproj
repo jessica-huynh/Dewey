@@ -27,6 +27,7 @@
 		C8221C1A245A46DA00FE5605 /* BookshelfEditBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8221C19245A46DA00FE5605 /* BookshelfEditBarView.xib */; };
 		C85ADE7C245A4D39003CF581 /* BookshelfEditBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85ADE7B245A4D39003CF581 /* BookshelfEditBarView.swift */; };
 		C893DB6A24560912006CE0BB /* BookDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C893DB6924560912006CE0BB /* BookDetailsViewController.swift */; };
+		C8AEDA4F245B200C005B2DFE /* UITableView+SelectAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AEDA4E245B200C005B2DFE /* UITableView+SelectAll.swift */; };
 		C8C4AC7D24572C620089F29E /* BookDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8C4AC7C24572C620089F29E /* BookDetailsViewController.xib */; };
 		C8CEF9C12458A815008182F0 /* BookDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8CEF9C02458A815008182F0 /* BookDetailsTableViewCell.xib */; };
 		C8CEF9C32458AF7C008182F0 /* BookDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CEF9C22458AF7C008182F0 /* BookDetailsTableViewCell.swift */; };
@@ -61,6 +62,7 @@
 		C8221C19245A46DA00FE5605 /* BookshelfEditBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookshelfEditBarView.xib; sourceTree = "<group>"; };
 		C85ADE7B245A4D39003CF581 /* BookshelfEditBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookshelfEditBarView.swift; sourceTree = "<group>"; };
 		C893DB6924560912006CE0BB /* BookDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsViewController.swift; sourceTree = "<group>"; };
+		C8AEDA4E245B200C005B2DFE /* UITableView+SelectAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+SelectAll.swift"; sourceTree = "<group>"; };
 		C8C4AC7C24572C620089F29E /* BookDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookDetailsViewController.xib; sourceTree = "<group>"; };
 		C8CEF9C02458A815008182F0 /* BookDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookDetailsTableViewCell.xib; sourceTree = "<group>"; };
 		C8CEF9C22458AF7C008182F0 /* BookDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsTableViewCell.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				C816D70C24547FC800078BFE /* Assets.xcassets */,
 				C816D70E24547FC800078BFE /* LaunchScreen.storyboard */,
 				C8C4AC79245723610089F29E /* Nibs */,
+				C8AEDA4D245B1F9B005B2DFE /* Extensions */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -187,6 +190,14 @@
 				C816D7202454D09900078BFE /* StorageManager.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		C8AEDA4D245B1F9B005B2DFE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C8AEDA4E245B200C005B2DFE /* UITableView+SelectAll.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		C8C4AC79245723610089F29E /* Nibs */ = {
@@ -303,6 +314,7 @@
 			files = (
 				C816D7272454D6E000078BFE /* Bookshelf.swift in Sources */,
 				C80222BC2459F1EB00CD3842 /* BookshelfDetailsViewController.swift in Sources */,
+				C8AEDA4F245B200C005B2DFE /* UITableView+SelectAll.swift in Sources */,
 				C80222BE245A1F0F00CD3842 /* NoSelectTextField.swift in Sources */,
 				C8CEF9C52458B463008182F0 /* SearchResultsViewController.swift in Sources */,
 				C85ADE7C245A4D39003CF581 /* BookshelfEditBarView.swift in Sources */,
