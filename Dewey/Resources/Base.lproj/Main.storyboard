@@ -415,6 +415,35 @@ reading today, Jessica?</string>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DeleteAllCell" rowHeight="55" id="YFg-fI-FnN">
+                                <rect key="frame" x="0.0" y="165.5" width="414" height="55"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YFg-fI-FnN" id="F1J-GX-7Qo">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTa-9o-Z00">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="55.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="55.5" id="JZJ-i3-NmM"/>
+                                            </constraints>
+                                            <state key="normal" title="DELETE ALL">
+                                                <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="deleteAllTapped:" destination="TKF-qN-Gt2" eventType="touchUpInside" id="wyf-r8-gjN"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="LTa-9o-Z00" secondAttribute="bottom" constant="-0.5" id="34h-Sr-wg4"/>
+                                        <constraint firstAttribute="trailing" secondItem="LTa-9o-Z00" secondAttribute="trailing" id="f22-jd-03m"/>
+                                        <constraint firstItem="LTa-9o-Z00" firstAttribute="top" secondItem="F1J-GX-7Qo" secondAttribute="top" id="nF9-bv-cSf"/>
+                                        <constraint firstItem="LTa-9o-Z00" firstAttribute="leading" secondItem="F1J-GX-7Qo" secondAttribute="leading" id="wB2-mK-eSw"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="TKF-qN-Gt2" id="K6U-YD-re5"/>

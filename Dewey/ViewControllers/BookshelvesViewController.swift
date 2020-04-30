@@ -35,15 +35,30 @@ class BookshelvesViewController: UITableViewController {
     
     @IBAction func editTapped(_ sender: Any) {
         didEditBookshelves = true
+        toggleEditMode()
+    }
+    
+    @IBAction func deleteAllTapped(_ sender: Any) {
+        let alert = UIAlertController(title: "Delete All Bookshelves",
+                                      message: "Are you sure you want to proceed? This will remove all bookshelves and any books associated with them.",
+                                      preferredStyle: .alert)
+        let deleteAction = UIAlertAction(title: "Yes", style: .default) {
+            _ in
+            self.storageManager.bookshelves = []
+            self.toggleEditMode()
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        alert.addAction(deleteAction)
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+
+    func toggleEditMode() {
         tableView.setEditing(!tableView.isEditing, animated: true)
         inEditMode = tableView.isEditing
         editButton.title = tableView.isEditing ? "Done" : "Edit"
-    
-        if inEditMode {
-            tableView.deleteRows(at: [IndexPath(row: 0, section: 1)], with: .fade)
-        } else {
-            tableView.insertRows(at: [IndexPath(row: 0, section: 1)], with: .fade)
-        }
+        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -69,7 +84,7 @@ class BookshelvesViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 1 { return inEditMode ? 0 : 1 }
+        if section == 1 { return (inEditMode && storageManager.bookshelves.isEmpty) ? 0 : 1 }
         return storageManager.bookshelves.count
     }
     
@@ -79,7 +94,7 @@ class BookshelvesViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 1 {
-            return tableView.dequeueReusableCell(withIdentifier: "AddBookshelfCell")!
+            return inEditMode ? tableView.dequeueReusableCell(withIdentifier: "DeleteAllCell")! : tableView.dequeueReusableCell(withIdentifier: "AddBookshelfCell")!
         }
         
         let bookshelf = storageManager.bookshelves[indexPath.row]
