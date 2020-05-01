@@ -22,14 +22,14 @@ class StorageManager {
         let book4 = Book(isbn: "1250301696", title: "The Silent Patient", author: "Alex Michaelides", description: "Theo Faber looks into the mystery of a famous painter who stops speaking after shooting her husband.", cover: "https://s1.nyt.com/du/books/images/9781250301697.jpg")
         
         var bestsellers: [Book] = []
-        bestsellers.append(book1.with(dateAddedToShelf: Date()))
-        bestsellers.append(book2.with(dateAddedToShelf: Date()))
-        bestsellers.append(book3.with(dateAddedToShelf: Date()))
-        bestsellers.append(book4.with(dateAddedToShelf: Date()))
+        bestsellers.append(book1)
+        bestsellers.append(book2)
+        bestsellers.append(book3)
+        bestsellers.append(book4)
         
         var favs: [Book] = []
-        favs.append(book3.with(dateAddedToShelf: Date()))
-        favs.append(book4.with(dateAddedToShelf: Date()))
+        favs.append(book3)
+        favs.append(book4)
         
         addBookshelf(with: "Bestsellers", books: bestsellers)
         addBookshelf(with: "Favourites", books: favs)
@@ -37,14 +37,12 @@ class StorageManager {
     }
     
     func addBookshelf(with name: String, books: [Book] = []) {
-        let bookshelf = Bookshelf(id: bookshelfID, name: name, books: books)
-        bookshelves.append(bookshelf)
+        let bookshelf = Bookshelf(id: bookshelfID, name: name)
         bookshelfID = bookshelfID + 1
+        bookshelves.append(bookshelf)
         
         for book in books {
             addBook(book: book, to: bookshelf)
-            let oldValue: [Int] = bookshelvesForIsbn[book.isbn] ?? []
-            bookshelvesForIsbn.updateValue([bookshelf.id] + oldValue, forKey: book.isbn)
         }
     }
     
@@ -66,8 +64,8 @@ class StorageManager {
     }
     
     func addBook(book: Book, to bookshelf: Bookshelf) {
-        if bookshelf.addBook(book: book) {
-            let oldValue = bookshelvesForIsbn[book.isbn]!
+        if bookshelf.addBook(book: book.with(dateAddedToShelf: Date())) {
+            let oldValue = bookshelvesForIsbn[book.isbn] ?? []
             bookshelvesForIsbn.updateValue(oldValue + [bookshelf.id], forKey: book.isbn)
         }
     }

@@ -57,14 +57,14 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
             ])
     }
     
-    @IBAction func backTapped(_ sender: Any) {
+    @IBAction func closeTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func showActions(_ sender: Any) {
         let actions = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let addAction = UIAlertAction(title: "Add To Bookshelf", style: .default) {
+        let addAction = UIAlertAction(title: "Add To A Bookshelf", style: .default) {
             _ in
             self.presentBookshelfOptionsViewController()
         }
@@ -108,7 +108,7 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
     func bookshelfOptionsViewController(_ controller: BookshelfOptionsViewController, didSelectBookshelfAt index: Int) {
         let bookshelf = StorageManager.instance.bookshelves[index]
         controller.dismiss(animated: true, completion: nil)
-        storageManager.addBook(book: book.with(dateAddedToShelf: Date()), to: bookshelf)
+        storageManager.addBook(book: book, to: bookshelf)
         didEditBookshelves = true
     }
 }
