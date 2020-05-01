@@ -259,14 +259,14 @@ reading today, Jessica?</string>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PUw-ss-Ejr">
-                                <rect key="frame" x="27" y="55.5" width="30" height="22"/>
+                                <rect key="frame" x="27" y="59" width="18" height="16"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="QZT-Qb-IrU"/>
-                                    <constraint firstAttribute="height" constant="27" id="wCB-Wb-Arc"/>
+                                    <constraint firstAttribute="width" constant="18" id="QZT-Qb-IrU"/>
+                                    <constraint firstAttribute="height" constant="20.5" id="wCB-Wb-Arc"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="arrow.left" catalog="system"/>
+                                <state key="normal" backgroundImage="xmark" catalog="system"/>
                                 <connections>
-                                    <action selector="backTapped:" destination="zlc-RO-76g" eventType="touchUpInside" id="Duj-bH-DnC"/>
+                                    <action selector="closeTapped:" destination="zlc-RO-76g" eventType="touchUpInside" id="uE8-26-BlC"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DNz-MJ-bw4">
@@ -289,12 +289,12 @@ reading today, Jessica?</string>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Cl6-tH-ufx" secondAttribute="bottom" id="02l-Eu-Rlr"/>
                             <constraint firstItem="PUw-ss-Ejr" firstAttribute="leading" secondItem="qfs-7U-XZA" secondAttribute="leading" constant="27" id="3Ok-xg-qP0"/>
-                            <constraint firstItem="Cl6-tH-ufx" firstAttribute="top" secondItem="PUw-ss-Ejr" secondAttribute="bottom" constant="8" id="7Mo-d2-bl6"/>
-                            <constraint firstItem="sKu-lH-KT8" firstAttribute="top" secondItem="PUw-ss-Ejr" secondAttribute="bottom" constant="20.5" id="Efm-cP-2CU"/>
+                            <constraint firstItem="Cl6-tH-ufx" firstAttribute="top" secondItem="PUw-ss-Ejr" secondAttribute="bottom" constant="10.5" id="7Mo-d2-bl6"/>
+                            <constraint firstItem="sKu-lH-KT8" firstAttribute="top" secondItem="PUw-ss-Ejr" secondAttribute="bottom" constant="23" id="Efm-cP-2CU"/>
                             <constraint firstItem="Cl6-tH-ufx" firstAttribute="leading" secondItem="qfs-7U-XZA" secondAttribute="leading" id="EnJ-cJ-Bbe"/>
                             <constraint firstItem="Cl6-tH-ufx" firstAttribute="trailing" secondItem="qfs-7U-XZA" secondAttribute="trailing" id="Nge-P5-1qQ"/>
                             <constraint firstItem="DNz-MJ-bw4" firstAttribute="top" secondItem="qfs-7U-XZA" secondAttribute="top" constant="11" id="dwY-na-zYN"/>
-                            <constraint firstItem="PUw-ss-Ejr" firstAttribute="top" secondItem="qfs-7U-XZA" secondAttribute="top" constant="9" id="ibk-gF-Pxr"/>
+                            <constraint firstItem="PUw-ss-Ejr" firstAttribute="top" secondItem="qfs-7U-XZA" secondAttribute="top" constant="13" id="ibk-gF-Pxr"/>
                             <constraint firstItem="qfs-7U-XZA" firstAttribute="trailing" secondItem="sKu-lH-KT8" secondAttribute="trailing" constant="52" id="uwR-WD-Juh"/>
                             <constraint firstItem="sKu-lH-KT8" firstAttribute="leading" secondItem="qfs-7U-XZA" secondAttribute="leading" constant="53" id="xlM-eg-GKT"/>
                             <constraint firstItem="qfs-7U-XZA" firstAttribute="trailing" secondItem="DNz-MJ-bw4" secondAttribute="trailing" constant="33" id="yof-nw-Tbp"/>
@@ -621,9 +621,9 @@ reading today, Jessica?</string>
     </scenes>
     <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
-        <image name="arrow.left" catalog="system" width="128" height="98"/>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="text.alignleft" catalog="system" width="128" height="100"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
     </resources>
 </document>
