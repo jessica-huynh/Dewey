@@ -71,6 +71,8 @@ class BookshelfDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        NotificationCenter.default.addObserver(self, selector: #selector(onUpdatedBookshelves(_:)), name: .updatedBookshelves, object: nil)
+        
         let bookDetailsCell = UINib(nibName: "BookDetailsTableViewCell", bundle: nil)
         tableView.register(bookDetailsCell, forCellReuseIdentifier: "BookDetailsCell")
         
@@ -118,6 +120,10 @@ class BookshelfDetailsViewController: UIViewController {
         else { hideEditBar() }
     }
     
+    @objc func onUpdatedBookshelves(_ notification:Notification) {
+        tableView.reloadData()
+    }
+    
     func deleteBooksAt(indexPaths: [IndexPath]) {
         if allRowsSelected {
             storageManager.removeAllBooks(from: bookshelf)
@@ -156,7 +162,8 @@ extension BookshelfDetailsViewController: UITableViewDataSource, UITableViewDele
         
         let bookViewController = self.storyboard?.instantiateViewController(withIdentifier: "BookViewController") as! BookViewController
         bookViewController.book = bookshelf.books[indexPath.row]
-        navigationController?.pushViewController(bookViewController, animated: true)
+        bookViewController.modalPresentationStyle = .fullScreen
+        present(bookViewController, animated: true, completion: nil)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
