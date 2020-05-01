@@ -27,6 +27,7 @@ class HomeViewController: UIViewController {
         if segue.identifier == "BookDetails" {
             if let bookCollectionCell = sender as? BookCollectionViewCell, let controller = segue.destination as? BookViewController {
                 controller.book = bookCollectionCell.book
+                controller.originatingBookshelf = bookCollectionCell.originatingBookshelf
             }
         } else if segue.identifier == "SearchResults" {
             if let controller = segue.destination as? SearchResultsViewController {

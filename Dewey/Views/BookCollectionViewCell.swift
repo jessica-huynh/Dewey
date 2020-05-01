@@ -11,6 +11,7 @@ import Kingfisher
 
 class BookCollectionViewCell: UICollectionViewCell {
     var book: Book!
+    var originatingBookshelf: Bookshelf!
     
     @IBOutlet weak var bookCover: UIImageView!
     @IBOutlet weak var bookTitle: UILabel!

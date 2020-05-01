@@ -12,6 +12,7 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
     let storageManager = StorageManager.instance
     var book: Book!
     var bookDetailsViewController: BookDetailsViewController!
+    var originatingBookshelf: Bookshelf?
     var didEditBookshelves = false
     
     var cardHeight: CGFloat!
@@ -64,19 +65,24 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
     @IBAction func showActions(_ sender: Any) {
         let actions = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let addAction = UIAlertAction(title: "Add To A Bookshelf", style: .default) {
+        actions.addAction(UIAlertAction(title: "Add To A Bookshelf", style: .default) {
             _ in
             self.presentBookshelfOptionsViewController()
-        }
-        actions.addAction(addAction)
+        })
         
-        let deleteAction = UIAlertAction(title: "Delete Everywhere", style: .default) {
-            _ in
-            self.showDeleteConfirmation()
+        if let originatingBookshelf = originatingBookshelf {
+            actions.addAction(UIAlertAction(title: "Delete From \(originatingBookshelf.name)", style: .default) {
+                _ in
+                self.storageManager.removeBook(book: self.book, from: originatingBookshelf)
+                self.didEditBookshelves = true
+            })
         }
         
         if storageManager.bookIsInAShelf(book: book) {
-            actions.addAction(deleteAction)
+            actions.addAction(UIAlertAction(title: "Delete Everywhere", style: .destructive) {
+                _ in
+                self.showDeleteConfirmation()
+            })
         }
         
         actions.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -101,6 +107,7 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
     func presentBookshelfOptionsViewController() {
         let viewController = BookshelfOptionsViewController(nibName: "BookshelfOptionsViewController", bundle: nil)
         viewController.delegate = self
+        viewController.bookshelfToDisable = originatingBookshelf
         present(viewController, animated: true, completion: nil)
     }
     

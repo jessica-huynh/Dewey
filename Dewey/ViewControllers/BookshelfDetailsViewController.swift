@@ -162,6 +162,7 @@ extension BookshelfDetailsViewController: UITableViewDataSource, UITableViewDele
         
         let bookViewController = self.storyboard?.instantiateViewController(withIdentifier: "BookViewController") as! BookViewController
         bookViewController.book = bookshelf.books[indexPath.row]
+        bookViewController.originatingBookshelf = bookshelf
         bookViewController.modalPresentationStyle = .fullScreen
         present(bookViewController, animated: true, completion: nil)
         tableView.deselectRow(at: indexPath, animated: true)

@@ -28,6 +28,7 @@ class BookshelfTableViewCell: UITableViewCell, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let book = bookshelf.books[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookCollectionCell", for: indexPath) as! BookCollectionViewCell
+        cell.originatingBookshelf = bookshelf
         cell.book = book
         cell.configure()
         return cell
