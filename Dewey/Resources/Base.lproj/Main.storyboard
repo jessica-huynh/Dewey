@@ -141,7 +141,7 @@ reading today, Jessica?</string>
                                                                 <outlet property="bookAuthor" destination="F5o-sC-nd4" id="a6Q-P7-piq"/>
                                                                 <outlet property="bookCover" destination="55a-V4-Fh0" id="j1O-7w-ZSD"/>
                                                                 <outlet property="bookTitle" destination="VVo-zt-tMm" id="Odb-zB-84x"/>
-                                                                <segue destination="zlc-RO-76g" kind="show" identifier="BookDetails" id="Uif-kp-b2M"/>
+                                                                <segue destination="zlc-RO-76g" kind="presentation" identifier="BookDetails" modalPresentationStyle="fullScreen" id="Uif-kp-b2M"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
@@ -249,26 +249,63 @@ reading today, Jessica?</string>
             <objects>
                 <viewController storyboardIdentifier="BookViewController" id="zlc-RO-76g" customClass="BookViewController" customModule="Dewey" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NBV-0y-pRU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sKu-lH-KT8">
-                                <rect key="frame" x="53" y="20" width="309" height="462"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sKu-lH-KT8">
+                                <rect key="frame" x="53" y="100.5" width="309" height="462"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="sKu-lH-KT8" secondAttribute="height" multiplier="103:154" id="1NY-I6-9hh"/>
+                                </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PUw-ss-Ejr">
+                                <rect key="frame" x="27" y="55.5" width="30" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="QZT-Qb-IrU"/>
+                                    <constraint firstAttribute="height" constant="27" id="wCB-Wb-Arc"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="arrow.left" catalog="system"/>
+                                <connections>
+                                    <action selector="backTapped:" destination="zlc-RO-76g" eventType="touchUpInside" id="Duj-bH-DnC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DNz-MJ-bw4">
+                                <rect key="frame" x="353" y="62" width="28" height="9"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="23.5" id="8wn-Cb-HRV"/>
+                                    <constraint firstAttribute="width" constant="28" id="dQr-bx-lcE"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="ellipsis" catalog="system"/>
+                                <connections>
+                                    <action selector="showActions:" destination="zlc-RO-76g" eventType="touchUpInside" id="7Ks-KP-PPH"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cl6-tH-ufx">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.91764705879999997" green="0.90980392160000001" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Cl6-tH-ufx" secondAttribute="bottom" id="02l-Eu-Rlr"/>
+                            <constraint firstItem="PUw-ss-Ejr" firstAttribute="leading" secondItem="qfs-7U-XZA" secondAttribute="leading" constant="27" id="3Ok-xg-qP0"/>
+                            <constraint firstItem="Cl6-tH-ufx" firstAttribute="top" secondItem="PUw-ss-Ejr" secondAttribute="bottom" constant="8" id="7Mo-d2-bl6"/>
+                            <constraint firstItem="sKu-lH-KT8" firstAttribute="top" secondItem="PUw-ss-Ejr" secondAttribute="bottom" constant="20.5" id="Efm-cP-2CU"/>
+                            <constraint firstItem="Cl6-tH-ufx" firstAttribute="leading" secondItem="qfs-7U-XZA" secondAttribute="leading" id="EnJ-cJ-Bbe"/>
+                            <constraint firstItem="Cl6-tH-ufx" firstAttribute="trailing" secondItem="qfs-7U-XZA" secondAttribute="trailing" id="Nge-P5-1qQ"/>
+                            <constraint firstItem="DNz-MJ-bw4" firstAttribute="top" secondItem="qfs-7U-XZA" secondAttribute="top" constant="11" id="dwY-na-zYN"/>
+                            <constraint firstItem="PUw-ss-Ejr" firstAttribute="top" secondItem="qfs-7U-XZA" secondAttribute="top" constant="9" id="ibk-gF-Pxr"/>
+                            <constraint firstItem="qfs-7U-XZA" firstAttribute="trailing" secondItem="sKu-lH-KT8" secondAttribute="trailing" constant="52" id="uwR-WD-Juh"/>
+                            <constraint firstItem="sKu-lH-KT8" firstAttribute="leading" secondItem="qfs-7U-XZA" secondAttribute="leading" constant="53" id="xlM-eg-GKT"/>
+                            <constraint firstItem="qfs-7U-XZA" firstAttribute="trailing" secondItem="DNz-MJ-bw4" secondAttribute="trailing" constant="33" id="yof-nw-Tbp"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="qfs-7U-XZA"/>
                     </view>
-                    <navigationItem key="navigationItem" id="RFv-Yw-NXf">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="ellipsis" catalog="system" id="VSl-95-MmW">
-                            <connections>
-                                <action selector="showActions:" destination="zlc-RO-76g" id="uU6-mQ-s4Q"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="4ls-aX-LlL"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="0.0" height="808"/>
                     <connections>
                         <outlet property="bookCover" destination="sKu-lH-KT8" id="6xE-ye-KK8"/>
+                        <outlet property="bookDetailsView" destination="Cl6-tH-ufx" id="fh4-Cm-Hyl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ywI-Sb-83u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -584,6 +621,7 @@ reading today, Jessica?</string>
     </scenes>
     <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
+        <image name="arrow.left" catalog="system" width="128" height="98"/>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="text.alignleft" catalog="system" width="128" height="100"/>

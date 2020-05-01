@@ -11,28 +11,16 @@ import UIKit
 
 extension BookViewController {
     // MARK: Book Details Card Setup
-    func setupBookCover() {
-        let url = URL(string: book.cover)
-        bookCover.kf.indicatorType = .activity
-        bookCover.kf.setImage(
-            with: url,
-            placeholder: UIImage(named: "book-cover-placeholder"),
-            options: [
-                .scaleFactor(UIScreen.main.scale),
-                .cacheOriginalImage
-            ])
-    }
-    
     func setupCard() {
-        cardHeight = view.bounds.height - cardTopPadding + cardStretchSection
+        cardHeight = bookDetailsView.bounds.height - cardTopPadding + cardStretchSection
         bookDetailsViewController = BookDetailsViewController(nibName: "BookDetailsViewController", bundle: nil)
         bookDetailsViewController.book = book
         addChild(bookDetailsViewController)
-        view.addSubview(bookDetailsViewController.view)
+        bookDetailsView.addSubview(bookDetailsViewController.view)
 
         bookDetailsViewController.view.frame = CGRect(x: 0,
-                                                      y: view.bounds.height - cardMinVisibleHeight,
-                                                      width: view.bounds.width,
+                                                      y: bookDetailsView.bounds.height - cardMinVisibleHeight,
+                                                      width: bookDetailsView.bounds.width,
                                                       height: cardHeight)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleCardTap(gesture:)))
@@ -66,17 +54,17 @@ extension BookViewController {
     @objc func handleCardPan(gesture: UIPanGestureRecognizer) {
         guard let gestureView = gesture.view else { return }
         
-        let translation = gesture.translation(in: view)
+        let translation = gesture.translation(in: bookDetailsView)
         let newPosition = gestureView.frame.origin.y + translation.y
         
         // Make sure frame doesn't go past an arbitrary area on the screen
-        if newPosition > 30 && newPosition < (view.frame.height - 200) {
+        if newPosition > 10 && newPosition < (bookDetailsView.frame.height - 250) {
             gestureView.frame.origin.y = newPosition
         }
         
-        gesture.setTranslation(.zero, in: view)
+        gesture.setTranslation(.zero, in: bookDetailsView)
         
-        let inExpandArea: Bool = gestureView.frame.origin.y < (view.frame.height/2 - 20)
+        let inExpandArea: Bool = gestureView.frame.origin.y < (bookDetailsView.frame.height/2 - 20)
         switch gesture.state {
         case .began:
             if !panAnimationQueue.isEmpty {
@@ -90,7 +78,7 @@ extension BookViewController {
                 startPanAnimation(state: nextState)
             }
         case .changed:
-            let panZone = view.frame.height - cardMinVisibleHeight - cardTopPadding
+            let panZone = bookDetailsView.frame.height - cardMinVisibleHeight - cardTopPadding
             let panPosition = newPosition - cardTopPadding // position relative to the pan zone
             let fractionCompleted = (cardVisible ? panPosition : panZone - panPosition ) / panZone
             updatePanAnimation(fractionCompleted: fractionCompleted)
@@ -134,7 +122,7 @@ extension BookViewController {
             case .expanded:
                 self.bookDetailsViewController.view.frame.origin.y = self.cardTopPadding
             case .collapsed:
-                self.bookDetailsViewController.view.frame.origin.y = self.view.bounds.height - self.cardMinVisibleHeight
+                self.bookDetailsViewController.view.frame.origin.y = self.bookDetailsView.bounds.height - self.cardMinVisibleHeight
             }
         }
         

@@ -15,7 +15,7 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
     var didEditBookshelves = false
     
     var cardHeight: CGFloat!
-    let cardTopPadding: CGFloat = 40
+    let cardTopPadding: CGFloat = 20
     let cardStretchSection: CGFloat = 50
     let cardMinVisibleHeight: CGFloat = 300
     var cardVisible = false
@@ -28,15 +28,12 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
         case expanded, collapsed
     }
     
+    @IBOutlet weak var bookDetailsView: UIView!
     @IBOutlet weak var bookCover: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBookCover()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
         setupCard()
     }
     
@@ -46,6 +43,22 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
         if didEditBookshelves {
             NotificationCenter.default.post(name: .updatedBookshelves, object: self)
         }
+    }
+    
+    func setupBookCover() {
+        let url = URL(string: book.cover)
+        bookCover.kf.indicatorType = .activity
+        bookCover.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "book-cover-placeholder"),
+            options: [
+                .scaleFactor(UIScreen.main.scale),
+                .cacheOriginalImage
+            ])
+    }
+    
+    @IBAction func backTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func showActions(_ sender: Any) {
