@@ -70,6 +70,11 @@ class StorageManager {
         }
     }
     
+    func removeBook(book: Book, from bookshelf: Bookshelf) {
+        bookshelf.removeBook(book: book)
+        updateBookshelves(for: book.isbn, without: bookshelf)
+    }
+    
     func removeBook(at index: Int, from bookshelf: Bookshelf) {
         let removedBook = bookshelf.removeBook(at: index)
         updateBookshelves(for: removedBook.isbn, without: bookshelf)
