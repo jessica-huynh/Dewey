@@ -182,7 +182,6 @@ reading today, Jessica?</string>
                                 <segue destination="TKF-qN-Gt2" kind="show" id="YR3-Vq-kmp"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="bookmark" catalog="system" id="OiN-sU-o7o"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="2xR-yL-nZv" id="SpS-7T-pfu"/>
@@ -251,7 +250,11 @@ reading today, Jessica?</string>
                         <viewLayoutGuide key="safeArea" id="qfs-7U-XZA"/>
                     </view>
                     <navigationItem key="navigationItem" id="RFv-Yw-NXf">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="ellipsis" catalog="system" id="VSl-95-MmW"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="ellipsis" catalog="system" id="VSl-95-MmW">
+                            <connections>
+                                <action selector="showActions:" destination="zlc-RO-76g" id="uU6-mQ-s4Q"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="bookCover" destination="sKu-lH-KT8" id="6xE-ye-KK8"/>
@@ -570,7 +573,6 @@ reading today, Jessica?</string>
     </scenes>
     <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
-        <image name="bookmark" catalog="system" width="112" height="128"/>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="text.alignleft" catalog="system" width="128" height="100"/>

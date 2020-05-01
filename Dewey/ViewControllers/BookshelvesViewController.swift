@@ -44,7 +44,7 @@ class BookshelvesViewController: UITableViewController {
                                       preferredStyle: .alert)
         let deleteAction = UIAlertAction(title: "Yes", style: .default) {
             _ in
-            self.storageManager.bookshelves = []
+            self.storageManager.removeAllBookshelves()
             self.toggleEditMode()
         }
         
@@ -57,7 +57,7 @@ class BookshelvesViewController: UITableViewController {
         tableView.setEditing(!tableView.isEditing, animated: true)
         inEditMode = tableView.isEditing
         editButton.title = tableView.isEditing ? "Done" : "Edit"
-        tableView.reloadData()
+        tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .automatic)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -68,7 +68,7 @@ class BookshelvesViewController: UITableViewController {
         
         if segue.identifier == "BookshelfDetails", let controller = segue.destination as? BookshelfDetailsViewController {
             if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
-                controller.bookshelfIndex = indexPath.row
+                controller.bookshelf = storageManager.bookshelves[indexPath.row]
             }
         }
     }
@@ -104,9 +104,7 @@ class BookshelvesViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let movedBookshelf = storageManager.bookshelves[sourceIndexPath.row]
-        storageManager.bookshelves.remove(at: sourceIndexPath.row)
-        storageManager.bookshelves.insert(movedBookshelf, at: destinationIndexPath.row)
+        storageManager.moveBookshelf(at: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -115,7 +113,7 @@ class BookshelvesViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        storageManager.bookshelves.remove(at: indexPath.row)
+        storageManager.removeBookshelf(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .fade)
         didEditBookshelves = true
     }
@@ -124,7 +122,7 @@ class BookshelvesViewController: UITableViewController {
 // MARK: - Add Bookshelf Delegate
 extension BookshelvesViewController: AddBookshelfViewControllerDelegate {
     func addBookshelvesViewController(_ controller: AddBookshelfViewController, didAddBookshelfWith name: String) {
-        storageManager.bookshelves.append(Bookshelf(name: name))
+        storageManager.addBookshelf(with: name)
         tableView.reloadData()
         NotificationCenter.default.post(name: .updatedBookshelves, object: self)
     }

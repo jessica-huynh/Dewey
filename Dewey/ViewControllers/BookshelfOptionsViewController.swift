@@ -10,7 +10,7 @@ import UIKit
 
 class BookshelfOptionsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var storageManager = StorageManager.instance
-    var bookshelfIndexToDisable: Int = -1
+    var bookshelfToDisable: Bookshelf?
     var delegate: BookshelfOptionsViewControllerDelegate?
     
     @IBOutlet weak var tableView: UITableView!
@@ -33,7 +33,8 @@ class BookshelfOptionsViewController: UIViewController, UITableViewDataSource, U
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BookshelfCell", for: indexPath)
-        cell.textLabel?.textColor = indexPath.row == bookshelfIndexToDisable ? UIColor.gray : UIColor.black
+        cell.textLabel?.textColor =
+            (storageManager.bookshelves[indexPath.row].id == bookshelfToDisable?.id) ? UIColor.gray : UIColor.black
         cell.textLabel?.text = storageManager.bookshelves[indexPath.row].name
         cell.backgroundColor = UIColor.clear
         return cell
@@ -45,7 +46,7 @@ class BookshelfOptionsViewController: UIViewController, UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return indexPath.row == bookshelfIndexToDisable ? nil : indexPath
+        return (storageManager.bookshelves[indexPath.row].id == bookshelfToDisable?.id) ? nil : indexPath
     }
 }
 

@@ -30,7 +30,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                     <color key="barTintColor" red="0.91764705879999997" green="0.90980392160000001" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                     <items>
-                        <navigationItem id="RZC-3e-CaJ">
+                        <navigationItem title="Add to a Bookshelf" id="RZC-3e-CaJ">
                             <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="6bs-lS-ddb">
                                 <connections>
                                     <action selector="cancelTapped:" destination="-1" id="kK0-m5-mea"/>

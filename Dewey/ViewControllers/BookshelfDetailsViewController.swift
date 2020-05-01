@@ -10,7 +10,7 @@ import UIKit
 
 class BookshelfDetailsViewController: UIViewController {
     var storageManager = StorageManager.instance
-    var bookshelfIndex: Int!
+    var bookshelf: Bookshelf!
     var didEditBookshelf = false
     var didSort = false
     var isMovingBooks = false
@@ -75,7 +75,7 @@ class BookshelfDetailsViewController: UIViewController {
         tableView.register(bookDetailsCell, forCellReuseIdentifier: "BookDetailsCell")
         
         navBarTitle.isEnabled = false
-        navBarTitle.text = storageManager.bookshelves[bookshelfIndex].name
+        navBarTitle.text = bookshelf.name
         
         setupPicker()
     }
@@ -85,12 +85,12 @@ class BookshelfDetailsViewController: UIViewController {
 
         if didSort {
             // Resort back by most recently added
-            storageManager.bookshelves[bookshelfIndex].books.sort(by: { $0.dateAddedToShelf! > $1.dateAddedToShelf! })
+            bookshelf.books.sort(by: { $0.dateAddedToShelf! > $1.dateAddedToShelf! })
         }
         
         if didEditBookshelf {
             if !navBarTitle.text!.isEmpty {
-                storageManager.bookshelves[bookshelfIndex].name = navBarTitle.text!
+                bookshelf.name = navBarTitle.text!
             }
             NotificationCenter.default.post(name: .updatedBookshelves, object: self)
         }
@@ -104,7 +104,7 @@ class BookshelfDetailsViewController: UIViewController {
         navBarTitle.isEnabled = tableView.isEditing
         navBarTitle.borderStyle = tableView.isEditing ? .roundedRect : .none
         if !tableView.isEditing {
-            storageManager.bookshelves[bookshelfIndex].name = navBarTitle.text!
+            bookshelf.name = navBarTitle.text!
         }
         
         sortTextField.isEnabled = !tableView.isEditing
@@ -117,13 +117,13 @@ class BookshelfDetailsViewController: UIViewController {
     
     func deleteBooksAt(indexPaths: [IndexPath]) {
         if allRowsSelected {
-            storageManager.bookshelves[bookshelfIndex].removeAllBooks()
+            storageManager.removeAllBooks(from: bookshelf)
             tableView.reloadData()
             editBar.switchSelectAllButton(to: .selectAll)
         } else {
             let indexPaths = indexPaths.sorted(by: { $0.row > $1.row })
             for indexPath in indexPaths {
-                storageManager.bookshelves[bookshelfIndex].removeBook(at: indexPath.row)
+                storageManager.removeBook(at: indexPath.row, from: bookshelf)
             }
             tableView.deleteRows(at: indexPaths, with: .fade)
         }
@@ -138,7 +138,7 @@ extension BookshelfDetailsViewController: UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return storageManager.bookshelves[bookshelfIndex].books.count
+        return bookshelf.books.count
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -152,19 +152,19 @@ extension BookshelfDetailsViewController: UITableViewDataSource, UITableViewDele
         }
         
         let bookViewController = self.storyboard?.instantiateViewController(withIdentifier: "BookViewController") as! BookViewController
-        bookViewController.book = storageManager.bookshelves[bookshelfIndex].books[indexPath.row]
+        bookViewController.book = bookshelf.books[indexPath.row]
         navigationController?.pushViewController(bookViewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BookDetailsCell", for: indexPath) as! BookDetailsTableViewCell
-        cell.configure(book: storageManager.bookshelves[bookshelfIndex].books[indexPath.row])
+        cell.configure(book: bookshelf.books[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        storageManager.bookshelves[bookshelfIndex].books.remove(at: indexPath.row)
+        storageManager.removeBook(at: indexPath.row, from: bookshelf)
         tableView.deleteRows(at: [indexPath], with: .fade)
         didEditBookshelf = true
     }

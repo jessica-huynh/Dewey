@@ -58,11 +58,11 @@ extension BookshelfDetailsViewController: UITextFieldDelegate {
             
             switch sortOptionPicked {
             case .recent:
-                storageManager.bookshelves[bookshelfIndex].books.sort(by: { $0.dateAddedToShelf! > $1.dateAddedToShelf! })
+                bookshelf.books.sort(by: { $0.dateAddedToShelf! > $1.dateAddedToShelf! })
             case .title:
-                storageManager.bookshelves[bookshelfIndex].books.sort(by: { $0.title < $1.title })
+                bookshelf.books.sort(by: { $0.title < $1.title })
             case .author:
-                storageManager.bookshelves[bookshelfIndex].books.sort(by: { $0.author < $1.author })
+                bookshelf.books.sort(by: { $0.author < $1.author })
             }
             
             tableView.reloadData()

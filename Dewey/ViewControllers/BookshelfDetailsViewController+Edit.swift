@@ -12,8 +12,7 @@ import UIKit
 extension BookshelfDetailsViewController: BookshelfEditBarViewDelegate {
     // MARK: Edit Bar Helpers
     func showEditBar() {
-        atLeastOneRowSelected = false
-        allRowsSelected = false
+        updateEditBarButtons()
         UIView.animate(withDuration: 0.5) {
             self.editBar.alpha = 1
             self.editBar.isHidden = false
@@ -29,18 +28,18 @@ extension BookshelfDetailsViewController: BookshelfEditBarViewDelegate {
     func presentBookshelfOptionsViewController() {
         let viewController = BookshelfOptionsViewController(nibName: "BookshelfOptionsViewController", bundle: nil)
         viewController.delegate = self
-        viewController.bookshelfIndexToDisable = bookshelfIndex
+        viewController.bookshelfToDisable = bookshelf
         present(viewController, animated: true, completion: nil)
     }
     
     func updateEditBarButtons() {
-        let numberOfSelectedRows = tableView.indexPathsForSelectedRows?.count ?? 0
-        atLeastOneRowSelected = numberOfSelectedRows > 0
+        let numberOfSelectedRows = tableView.indexPathsForSelectedRows?.count
+        atLeastOneRowSelected = numberOfSelectedRows ?? 0 > 0
         
-        let totalBooks = storageManager.bookshelves[bookshelfIndex].books.count
+        let totalBooks = bookshelf.books.count
         allRowsSelected = numberOfSelectedRows == totalBooks
         
-        noBooks = storageManager.bookshelves[bookshelfIndex].books.isEmpty
+        noBooks = bookshelf.books.isEmpty
     }
 
     // MARK: - Edit Bar Delegate
@@ -83,12 +82,12 @@ extension BookshelfDetailsViewController: BookshelfOptionsViewControllerDelegate
         controller.dismiss(animated: true, completion: nil)
         
         let selectedIndexPaths = tableView.indexPathsForSelectedRows!
-        let bookshelf = storageManager.bookshelves[bookshelfIndex]
         
         // Add books to chosen bookshelf
         for indexPath in selectedIndexPaths {
             let book = bookshelf.books[indexPath.row].with(dateAddedToShelf: Date())
-            storageManager.bookshelves[index].addBook(book: book)
+            let destinationBookshelf = storageManager.bookshelves[index]
+            storageManager.addBook(book: book, to: destinationBookshelf)
         }
         
         // Remove books at current bookshelf if user is moving them
