@@ -24,12 +24,13 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
         
         let bookDetailsCell = UINib(nibName: "BookDetailsTableViewCell", bundle: nil)
         tableView.register(bookDetailsCell, forCellReuseIdentifier: "BookDetailsCell")
+        
+        addTapToResignFirstResponder()
     }
     
     @IBAction func cancelTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
     
     // MARK: - Table View Delegate
     func numberOfSections(in tableView: UITableView) -> Int {

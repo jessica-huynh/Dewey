@@ -39,6 +39,7 @@
 		C8CEF9C72458E57A008182F0 /* BookshelvesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CEF9C62458E57A008182F0 /* BookshelvesViewController.swift */; };
 		C8CEF9C924590E07008182F0 /* AddBookshelfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CEF9C824590E07008182F0 /* AddBookshelfViewController.swift */; };
 		C8E17F37245C96A7008C879C /* BookViewController+BookDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E17F36245C96A7008C879C /* BookViewController+BookDetails.swift */; };
+		C8E17F3B245CA0AF008C879C /* UIViewController+ResignFirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E17F3A245CA0AF008C879C /* UIViewController+ResignFirstResponder.swift */; };
 		C8FBBE1824564F8E00CC1B17 /* BookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FBBE1724564F8E00CC1B17 /* BookViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,7 @@
 		C8CEF9C62458E57A008182F0 /* BookshelvesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookshelvesViewController.swift; sourceTree = "<group>"; };
 		C8CEF9C824590E07008182F0 /* AddBookshelfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookshelfViewController.swift; sourceTree = "<group>"; };
 		C8E17F36245C96A7008C879C /* BookViewController+BookDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookViewController+BookDetails.swift"; sourceTree = "<group>"; };
+		C8E17F3A245CA0AF008C879C /* UIViewController+ResignFirstResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ResignFirstResponder.swift"; sourceTree = "<group>"; };
 		C8FBBE1724564F8E00CC1B17 /* BookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				C8AEDA4E245B200C005B2DFE /* UITableView+SelectAll.swift */,
+				C8E17F3A245CA0AF008C879C /* UIViewController+ResignFirstResponder.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				C80222BC2459F1EB00CD3842 /* BookshelfDetailsViewController.swift in Sources */,
 				C85920D7245B3CE20033DBD2 /* BookshelfDetailsViewController+SortByPicker.swift in Sources */,
 				C8AEDA4F245B200C005B2DFE /* UITableView+SelectAll.swift in Sources */,
+				C8E17F3B245CA0AF008C879C /* UIViewController+ResignFirstResponder.swift in Sources */,
 				C80222BE245A1F0F00CD3842 /* NoSelectTextField.swift in Sources */,
 				C8CEF9C52458B463008182F0 /* SearchResultsViewController.swift in Sources */,
 				C85ADE7C245A4D39003CF581 /* BookshelfEditBarView.swift in Sources */,

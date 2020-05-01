@@ -18,22 +18,17 @@ class AddBookshelfViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         doneButton.isEnabled = false
         textField.becomeFirstResponder()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
+        addTapToResignFirstResponder()
     }
     
     @IBAction func cancelTapped(_ sender: Any) {
+        textField.resignFirstResponder()
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func doneTapped(_ sender: Any) {
         delegate?.addBookshelvesViewController(self, didAddBookshelfWith: textField.text!)
         dismiss(animated: true, completion: nil)
-    }
-    
-    @objc func hideKeyboard() {
-        textField.resignFirstResponder()
     }
     
     // MARK: - Text Field Delegate

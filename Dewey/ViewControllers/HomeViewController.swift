@@ -18,10 +18,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(onUpdatedBookshelves(_:)), name: .updatedBookshelves, object: nil)
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(resetSearchBarIfNeeded))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
+        addTapToResignFirstResponder(with: #selector(resetSearchBarIfNeeded))
     }
     
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

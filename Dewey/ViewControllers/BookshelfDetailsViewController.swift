@@ -79,10 +79,7 @@ class BookshelfDetailsViewController: UIViewController {
         navBarTitle.text = bookshelf.name
         
         setupPicker()
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
+        addTapToResignFirstResponder()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -135,10 +132,6 @@ class BookshelfDetailsViewController: UIViewController {
         }
         updateEditBarButtons()
     }
-    
-    @objc func hideKeyboard() {
-        navBarTitle.resignFirstResponder()
-    }
 }
 
 // MARK: - Table View Delegate
@@ -183,7 +176,7 @@ extension BookshelfDetailsViewController: UITableViewDataSource, UITableViewDele
 // MARK: - Text field delegate
 extension BookshelfDetailsViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        hideKeyboard()
+        navBarTitle.resignFirstResponder()
         return true
     }
 }
