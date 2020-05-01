@@ -33,7 +33,7 @@
                                                         <constraint firstAttribute="width" constant="384" id="9p1-et-9E7"/>
                                                         <constraint firstAttribute="height" constant="44" id="Q7W-Yb-ZUP"/>
                                                     </constraints>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                                 </searchBar>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vyG-wP-ZVe">
                                                     <rect key="frame" x="25" y="31" width="366" height="77"/>
@@ -185,7 +185,7 @@ reading today, Jessica?</string>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="2xR-yL-nZv" id="SpS-7T-pfu"/>
-                        <segue destination="T7m-OL-cci" kind="show" identifier="SearchResults" id="EdR-jP-Bxd"/>
+                        <segue destination="T7m-OL-cci" kind="presentation" identifier="SearchResults" modalPresentationStyle="fullScreen" id="EdR-jP-Bxd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9vN-a3-NpE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -197,25 +197,36 @@ reading today, Jessica?</string>
             <objects>
                 <viewController id="T7m-OL-cci" customClass="SearchResultsViewController" customModule="Dewey" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sdG-iu-LKl">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gUi-gE-Cjh">
-                                <rect key="frame" x="0.0" y="71" width="414" height="737"/>
+                                <rect key="frame" x="0.0" y="115" width="414" height="781"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="Z6I-t0-XiF">
-                                <rect key="frame" x="20" y="7" width="374" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <rect key="frame" x="7" y="51" width="343" height="56"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                             </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Trp-L6-h8J">
+                                <rect key="frame" x="350" y="63" width="53" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelTapped:" destination="T7m-OL-cci" eventType="touchUpInside" id="03U-4u-3KP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.91764705879999997" green="0.90980392160000001" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="Trp-L6-h8J" firstAttribute="top" secondItem="5LC-Wh-wC3" secondAttribute="top" constant="19" id="14M-us-TvM"/>
                             <constraint firstItem="Z6I-t0-XiF" firstAttribute="top" secondItem="5LC-Wh-wC3" secondAttribute="top" constant="7" id="9id-t0-4Sg"/>
                             <constraint firstAttribute="bottom" secondItem="gUi-gE-Cjh" secondAttribute="bottom" id="C6f-LF-eeE"/>
-                            <constraint firstItem="Z6I-t0-XiF" firstAttribute="leading" secondItem="5LC-Wh-wC3" secondAttribute="leading" constant="20" id="FRz-Pl-YoY"/>
+                            <constraint firstItem="Z6I-t0-XiF" firstAttribute="leading" secondItem="5LC-Wh-wC3" secondAttribute="leading" constant="7" id="IOS-PS-lVw"/>
                             <constraint firstItem="gUi-gE-Cjh" firstAttribute="trailing" secondItem="5LC-Wh-wC3" secondAttribute="trailing" id="S2r-Jk-ITy"/>
-                            <constraint firstItem="5LC-Wh-wC3" firstAttribute="trailing" secondItem="Z6I-t0-XiF" secondAttribute="trailing" constant="20" id="fqY-Im-3Lg"/>
+                            <constraint firstItem="5LC-Wh-wC3" firstAttribute="trailing" secondItem="Trp-L6-h8J" secondAttribute="trailing" constant="11" id="gho-vd-Aca"/>
+                            <constraint firstItem="Trp-L6-h8J" firstAttribute="leading" secondItem="Z6I-t0-XiF" secondAttribute="trailing" id="pEQ-sD-Ldu"/>
+                            <constraint firstItem="gUi-gE-Cjh" firstAttribute="top" secondItem="Trp-L6-h8J" secondAttribute="bottom" constant="19" id="qWV-Yr-AI3"/>
                             <constraint firstItem="gUi-gE-Cjh" firstAttribute="top" secondItem="Z6I-t0-XiF" secondAttribute="bottom" constant="8" id="tf8-fe-IOD"/>
                             <constraint firstItem="gUi-gE-Cjh" firstAttribute="leading" secondItem="5LC-Wh-wC3" secondAttribute="leading" id="ztZ-u3-DMr"/>
                         </constraints>

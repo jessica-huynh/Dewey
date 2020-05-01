@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SearchResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     var searchQuery: String!
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -20,10 +20,16 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.text = searchQuery
+        searchBar.delegate = self
         
         let bookDetailsCell = UINib(nibName: "BookDetailsTableViewCell", bundle: nil)
         tableView.register(bookDetailsCell, forCellReuseIdentifier: "BookDetailsCell")
     }
+    
+    @IBAction func cancelTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     
     // MARK: - Table View Delegate
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -48,4 +54,8 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
         return cell
     }
 
+    // MARK: - Search Bar Delegate
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+       print("Performing search...")
+    }
 }
