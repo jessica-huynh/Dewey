@@ -326,12 +326,12 @@ reading today, Jessica?</string>
                     <navigationItem key="navigationItem" id="HWx-7l-L3a">
                         <nil key="title"/>
                         <barButtonItem key="backBarButtonItem" title=" " id="F8v-Z3-Umm"/>
-                        <textField key="titleView" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="&lt;bookshelf name&gt;" placeholder="Bookshelf Name" textAlignment="center" minimumFontSize="17" id="NgV-kU-143">
+                        <textField key="titleView" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="&lt;bookshelf name&gt;" textAlignment="center" minimumFontSize="17" id="NgV-kU-143">
                             <rect key="frame" x="130.5" y="5" width="153" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                            <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                            <textInputTraits key="textInputTraits"/>
                             <connections>
                                 <outlet property="delegate" destination="mbj-SA-6Oj" id="Rd7-6E-ixA"/>
                             </connections>

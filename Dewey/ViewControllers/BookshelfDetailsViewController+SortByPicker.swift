@@ -9,22 +9,8 @@
 import Foundation
 import UIKit
 
-extension BookshelfDetailsViewController: UITextFieldDelegate {
-    // MARK: Text field delegate
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        navBarTitle.resignFirstResponder()
-        return true
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let oldText = textField.text!
-        let stringRange = Range(range, in: oldText)!
-        let newText = oldText.replacingCharacters(in: stringRange, with: string)
-        editButton.isEnabled = !newText.isEmpty
-        return true
-    }
-    
-    // MARK: - Sort Picker Setup
+extension BookshelfDetailsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    // MARK: Sort Picker Setup
     func setupPicker() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleSortDropDownTap(gesture:)))
         sortDropdownIcon.addGestureRecognizer(tap)
@@ -72,10 +58,8 @@ extension BookshelfDetailsViewController: UITextFieldDelegate {
     @objc func handleSortDropDownTap(gesture: UITapGestureRecognizer) {
         sortTextField.becomeFirstResponder()
     }
-}
 
-// MARK: - Picker View Delegate
-extension BookshelfDetailsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    // MARK: - Picker View Delegate
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }

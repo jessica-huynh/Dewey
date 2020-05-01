@@ -75,9 +75,14 @@ class BookshelfDetailsViewController: UIViewController {
         tableView.register(bookDetailsCell, forCellReuseIdentifier: "BookDetailsCell")
         
         navBarTitle.isEnabled = false
+        navBarTitle.placeholder = bookshelf.name
         navBarTitle.text = bookshelf.name
         
         setupPicker()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -104,7 +109,8 @@ class BookshelfDetailsViewController: UIViewController {
         navBarTitle.isEnabled = tableView.isEditing
         navBarTitle.borderStyle = tableView.isEditing ? .roundedRect : .none
         if !tableView.isEditing {
-            bookshelf.name = navBarTitle.text!
+            bookshelf.name = navBarTitle.text!.isEmpty ? bookshelf.name : navBarTitle.text!
+            navBarTitle.text = bookshelf.name
         }
         
         sortTextField.isEnabled = !tableView.isEditing
@@ -128,6 +134,10 @@ class BookshelfDetailsViewController: UIViewController {
             tableView.deleteRows(at: indexPaths, with: .fade)
         }
         updateEditBarButtons()
+    }
+    
+    @objc func hideKeyboard() {
+        navBarTitle.resignFirstResponder()
     }
 }
 
@@ -167,5 +177,13 @@ extension BookshelfDetailsViewController: UITableViewDataSource, UITableViewDele
         storageManager.removeBook(at: indexPath.row, from: bookshelf)
         tableView.deleteRows(at: [indexPath], with: .fade)
         didEditBookshelf = true
+    }
+}
+
+// MARK: - Text field delegate
+extension BookshelfDetailsViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        hideKeyboard()
+        return true
     }
 }
