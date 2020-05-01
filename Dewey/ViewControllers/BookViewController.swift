@@ -8,9 +8,11 @@
 
 import UIKit
 
-class BookViewController: UIViewController {
+class BookViewController: UIViewController, BookshelfOptionsViewControllerDelegate {
+    let storageManager = StorageManager.instance
     var book: Book!
     var bookDetailsViewController: BookDetailsViewController!
+    var didEditBookshelves = false
     
     var cardHeight: CGFloat!
     let cardTopPadding: CGFloat = 40
@@ -38,162 +40,62 @@ class BookViewController: UIViewController {
         setupCard()
     }
     
-    func setupBookCover() {
-        let url = URL(string: book.cover)
-        bookCover.kf.indicatorType = .activity
-        bookCover.kf.setImage(
-            with: url,
-            placeholder: UIImage(named: "book-cover-placeholder"),
-            options: [
-                .scaleFactor(UIScreen.main.scale),
-                .cacheOriginalImage
-            ])
-    }
-    
-    func setupCard() {
-        cardHeight = view.bounds.height - cardTopPadding + cardStretchSection
-        bookDetailsViewController = BookDetailsViewController(nibName: "BookDetailsViewController", bundle: nil)
-        bookDetailsViewController.book = book
-        addChild(bookDetailsViewController)
-        view.addSubview(bookDetailsViewController.view)
-
-        bookDetailsViewController.view.frame = CGRect(x: 0,
-                                                      y: view.bounds.height - cardMinVisibleHeight,
-                                                      width: view.bounds.width,
-                                                      height: cardHeight)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleCardTap(gesture:)))
-        let pan = UIPanGestureRecognizer(target: self, action: #selector(handleCardPan(gesture:)))
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(handleCardSwipe(gesture:)))
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleCardSwipe(gesture:)))
-        swipeUp.direction = .up
-        swipeDown.direction = .down
-
-        bookDetailsViewController.handleArea.addGestureRecognizer(tap)
-        bookDetailsViewController.view.addGestureRecognizer(pan)
-        bookDetailsViewController.view.addGestureRecognizer(swipeUp)
-        bookDetailsViewController.view.addGestureRecognizer(swipeDown)
-    }
-
-    // MARK: - Gesture Handlers
-    @objc func handleCardTap(gesture: UITapGestureRecognizer) {
-        if gesture.state == .ended {
-            toggleBookDetails(state: nextState)
+        if didEditBookshelves {
+            NotificationCenter.default.post(name: .updatedBookshelves, object: self)
         }
     }
     
-    @objc func handleCardSwipe(gesture: UISwipeGestureRecognizer) {
-        if gesture.direction == .down {
-            toggleBookDetails(state: .collapsed)
-        } else if gesture.direction == .up {
-            toggleBookDetails(state: .expanded)
-        }
-    }
-    
-    @objc func handleCardPan(gesture: UIPanGestureRecognizer) {
-        guard let gestureView = gesture.view else { return }
+    @IBAction func showActions(_ sender: Any) {
+        let actions = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let translation = gesture.translation(in: view)
-        let newPosition = gestureView.frame.origin.y + translation.y
-        
-        // Make sure frame doesn't go past an arbitrary area on the screen
-        if newPosition > 30 && newPosition < (view.frame.height - 200) {
-            gestureView.frame.origin.y = newPosition
-        }
-        
-        gesture.setTranslation(.zero, in: view)
-        
-        let inExpandArea: Bool = gestureView.frame.origin.y < (view.frame.height/2 - 20)
-        switch gesture.state {
-        case .began:
-            if !panAnimationQueue.isEmpty {
-                for animation in panAnimationQueue {
-                    animation.stopAnimation(true)
-                }
-                panAnimationQueue.removeAll()
-                startPanAnimation(state: inExpandArea ? .collapsed : .expanded)
-                cardVisible = inExpandArea ? true : false
-            } else {
-                startPanAnimation(state: nextState)
-            }
-        case .changed:
-            let panZone = view.frame.height - cardMinVisibleHeight - cardTopPadding
-            let panPosition = newPosition - cardTopPadding // position relative to the pan zone
-            let fractionCompleted = (cardVisible ? panPosition : panZone - panPosition ) / panZone
-            updatePanAnimation(fractionCompleted: fractionCompleted)
-        case .ended:
-            if (inExpandArea && cardVisible) || (!inExpandArea && !cardVisible) {
-                for animation in panAnimationQueue {
-                    // Reverse pan animation if there will be no changes in card state
-                    animation.isReversed = true
-                }
-            }
-            continuePanAnimation()
-            animateCard(state: inExpandArea ? .expanded : .collapsed)
-        default:
-            break
-        }
-    }
-    
-    // MARK: - Helper Functions for Gesture Handlers
-    func toggleBookDetails(state: CardState, duration: TimeInterval = 0.5) {
-        animateCard(state: state, duration: duration)
-        animateBookScale(state: state, duration: duration)
-    }
-
-    func animateBookScale(state: CardState, duration: TimeInterval) {
-        let bookScaleAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
-            switch state {
-            case .expanded:
-                self.bookCover.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-            case .collapsed:
-                self.bookCover.transform = .identity
-            }
-        }
-        
-        bookScaleAnimator.startAnimation()
-        panAnimationQueue.append(bookScaleAnimator)
-    }
-    
-    func animateCard(state: CardState, duration: TimeInterval = 0.5) {
-        let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
-            switch state {
-            case .expanded:
-                self.bookDetailsViewController.view.frame.origin.y = self.cardTopPadding
-            case .collapsed:
-                self.bookDetailsViewController.view.frame.origin.y = self.view.bounds.height - self.cardMinVisibleHeight
-            }
-        }
-        
-        frameAnimator.addCompletion {
+        let addAction = UIAlertAction(title: "Add To Bookshelf", style: .default) {
             _ in
-            self.cardVisible = state == .expanded ? true : false
-            self.panAnimationQueue.removeAll()
+            self.presentBookshelfOptionsViewController()
+        }
+        actions.addAction(addAction)
+        
+        let deleteAction = UIAlertAction(title: "Delete Everywhere", style: .default) {
+            _ in
+            self.showDeleteConfirmation()
         }
         
-        frameAnimator.startAnimation()
-        panAnimationQueue.append(frameAnimator)
-    }
-    
-    func startPanAnimation(state: CardState, duration: TimeInterval = 0.5) {
-        animateBookScale(state: state, duration: duration)
+        if storageManager.bookIsInAShelf(book: book) {
+            actions.addAction(deleteAction)
+        }
         
-        for animation in panAnimationQueue {
-            animation.pauseAnimation()
-        }
+        actions.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(actions, animated: true)
     }
     
-    func updatePanAnimation(fractionCompleted: CGFloat) {
-        for animation in panAnimationQueue {
-            animation.fractionComplete = fractionCompleted
+    func showDeleteConfirmation() {
+        let alert = UIAlertController(title: "Delete Everywhere",
+                                      message: "Are you sure you want to remove this book from \(storageManager.numberOfBookshelves(with: book)) bookshelves.",
+                                      preferredStyle: .alert)
+        let deleteAction = UIAlertAction(title: "Yes", style: .default) {
+            _ in
+            self.storageManager.removeBookEverywhere(book: self.book)
+            self.didEditBookshelves = true
         }
+        
+        alert.addAction(deleteAction)
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
-    func continuePanAnimation() {
-        for animation in panAnimationQueue {
-            animation.continueAnimation(withTimingParameters: nil, durationFactor: 0)
-        }
+    func presentBookshelfOptionsViewController() {
+        let viewController = BookshelfOptionsViewController(nibName: "BookshelfOptionsViewController", bundle: nil)
+        viewController.delegate = self
+        present(viewController, animated: true, completion: nil)
     }
     
+    // MARK: - Book Options Delegate
+    func bookshelfOptionsViewController(_ controller: BookshelfOptionsViewController, didSelectBookshelfAt index: Int) {
+        let bookshelf = StorageManager.instance.bookshelves[index]
+        controller.dismiss(animated: true, completion: nil)
+        storageManager.addBook(book: book.with(dateAddedToShelf: Date()), to: bookshelf)
+        didEditBookshelves = true
+    }
 }
- 

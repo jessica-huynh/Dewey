@@ -29,6 +29,11 @@ class Bookshelf {
         return true
     }
     
+    func removeBook(book: Book) {
+        let index = books.firstIndex(where: { $0.isbn == book.isbn })!
+        books.remove(at: index)
+    }
+    
     func removeBook(at index: Int) -> Book {
         return books.remove(at: index)
     }

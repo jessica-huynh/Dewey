@@ -77,6 +77,17 @@ class StorageManager {
         updateBookshelves(for: removedBook.isbn, without: bookshelf)
     }
     
+    func removeBookEverywhere(book: Book) {
+        let effectedBookshelves = bookshelves.filter {
+            bookshelvesForIsbn[book.isbn]!.contains($0.id)
+        }
+        
+        for bookshelf in effectedBookshelves {
+            bookshelf.removeBook(book: book)
+        }
+        bookshelvesForIsbn.removeValue(forKey: book.isbn)
+    }
+    
     func removeAllBooks(from bookshelf: Bookshelf) {
         for book in bookshelf.books {
             updateBookshelves(for: book.isbn, without: bookshelf)
@@ -98,5 +109,13 @@ class StorageManager {
         } else {
             bookshelvesForIsbn.updateValue(bookshelfIds, forKey: isbn)
         }
+    }
+    
+    func bookIsInAShelf(book: Book) -> Bool {
+        return bookshelvesForIsbn[book.isbn] != nil
+    }
+    
+    func numberOfBookshelves(with book: Book) -> Int {
+        return bookshelvesForIsbn[book.isbn]?.count ?? 0
     }
 }
