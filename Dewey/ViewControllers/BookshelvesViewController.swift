@@ -19,6 +19,10 @@ class BookshelvesViewController: UITableViewController {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(onUpdatedBookshelves(_:)), name: .updatedBookshelves, object: nil)
+        
+        if storageManager.bookshelves.isEmpty {
+            editButton.isEnabled = false
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -45,6 +49,7 @@ class BookshelvesViewController: UITableViewController {
         let deleteAction = UIAlertAction(title: "Yes", style: .default) {
             _ in
             self.storageManager.removeAllBookshelves()
+            self.tableView.reloadData()
             self.toggleEditMode()
         }
         
@@ -58,6 +63,10 @@ class BookshelvesViewController: UITableViewController {
         inEditMode = tableView.isEditing
         editButton.title = tableView.isEditing ? "Done" : "Edit"
         tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .automatic)
+        
+        if storageManager.bookshelves.isEmpty {
+            editButton.isEnabled = false
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -74,6 +83,7 @@ class BookshelvesViewController: UITableViewController {
     }
     
     @objc func onUpdatedBookshelves(_ notification:Notification) {
+        editButton.isEnabled = !storageManager.bookshelves.isEmpty
         tableView.reloadData()
     }
     
@@ -83,7 +93,7 @@ class BookshelvesViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 1 { return (inEditMode && storageManager.bookshelves.isEmpty) ? 0 : 1 }
+        if section == 1 { return 1 }
         return storageManager.bookshelves.count
     }
     
@@ -93,7 +103,9 @@ class BookshelvesViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 1 {
-            return inEditMode ? tableView.dequeueReusableCell(withIdentifier: "DeleteAllCell")! : tableView.dequeueReusableCell(withIdentifier: "AddBookshelfCell")!
+            return inEditMode ?
+                tableView.dequeueReusableCell(withIdentifier: "DeleteAllCell")! :
+                tableView.dequeueReusableCell(withIdentifier: "AddBookshelfCell")!
         }
         
         let bookshelf = storageManager.bookshelves[indexPath.row]
@@ -113,9 +125,18 @@ class BookshelvesViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        didEditBookshelves = true
         storageManager.removeBookshelf(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .fade)
-        didEditBookshelves = true
+        
+        if storageManager.bookshelves.isEmpty && inEditMode {
+            DispatchQueue.main.async {
+                // Push to main thread due to race condition with `tableView.isEditing`
+                self.toggleEditMode()
+            }
+        } else if storageManager.bookshelves.isEmpty {
+            editButton.isEnabled = false
+        }
     }
 }
 
