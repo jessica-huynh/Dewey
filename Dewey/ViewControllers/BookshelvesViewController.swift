@@ -70,11 +70,6 @@ class BookshelvesViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AddBookshelf", let controller = segue.destination as? AddBookshelfViewController {
-            controller.delegate = self
-            return
-        }
-        
         if segue.identifier == "BookshelfDetails", let controller = segue.destination as? BookshelfDetailsViewController {
             if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
                 controller.bookshelf = storageManager.bookshelves[indexPath.row]
@@ -137,15 +132,6 @@ class BookshelvesViewController: UITableViewController {
         } else if storageManager.bookshelves.isEmpty {
             editButton.isEnabled = false
         }
-    }
-}
-
-// MARK: - Add Bookshelf Delegate
-extension BookshelvesViewController: AddBookshelfViewControllerDelegate {
-    func addBookshelvesViewController(_ controller: AddBookshelfViewController, didAddBookshelfWith name: String) {
-        storageManager.addBookshelf(with: name)
-        tableView.reloadData()
-        NotificationCenter.default.post(name: .updatedBookshelves, object: self)
     }
 }
 

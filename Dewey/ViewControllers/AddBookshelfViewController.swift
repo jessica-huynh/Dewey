@@ -9,8 +9,6 @@
 import UIKit
 
 class AddBookshelfViewController: UIViewController, UITextFieldDelegate {
-    var delegate: AddBookshelfViewControllerDelegate?
-    
     @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBOutlet weak var textField: UITextField!
     
@@ -23,12 +21,13 @@ class AddBookshelfViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func cancelTapped(_ sender: Any) {
         textField.resignFirstResponder()
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func doneTapped(_ sender: Any) {
-        delegate?.addBookshelvesViewController(self, didAddBookshelfWith: textField.text!)
-        dismiss(animated: true, completion: nil)
+        StorageManager.instance.addBookshelf(with: textField.text!)
+        NotificationCenter.default.post(name: .updatedBookshelves, object: self)
+        navigationController?.popViewController(animated: true)
     }
     
     // MARK: - Text Field Delegate
@@ -44,8 +43,4 @@ class AddBookshelfViewController: UIViewController, UITextFieldDelegate {
         doneButton.isEnabled = false
         return true
     }
-}
-
-protocol AddBookshelfViewControllerDelegate: class {
-    func addBookshelvesViewController(_ controller: AddBookshelfViewController, didAddBookshelfWith name: String)
 }
