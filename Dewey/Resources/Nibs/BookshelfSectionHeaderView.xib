@@ -36,7 +36,6 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="nXn-Zl-OTa" secondAttribute="trailing" constant="20" id="4dO-Sw-grb"/>
                 <constraint firstItem="hyQ-MB-FWY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="9pV-3D-sec"/>
