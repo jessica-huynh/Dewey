@@ -70,8 +70,6 @@ class BookshelfDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        NotificationCenter.default.addObserver(self, selector: #selector(onUpdatedBookshelves(_:)), name: .updatedBookshelves, object: nil)
         
         let bookDetailsCell = UINib(nibName: "BookDetailsTableViewCell", bundle: nil)
         tableView.register(bookDetailsCell, forCellReuseIdentifier: "BookDetailsCell")
@@ -118,10 +116,6 @@ class BookshelfDetailsViewController: UIViewController {
         
         if tableView.isEditing { showEditBar() }
         else { hideEditBar() }
-    }
-    
-    @objc func onUpdatedBookshelves(_ notification:Notification) {
-        tableView.reloadData()
     }
     
     func deleteBooksAt(indexPaths: [IndexPath]) {
