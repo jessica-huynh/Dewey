@@ -9,6 +9,7 @@
 import UIKit
 
 class BookshelfTableViewCell: UITableViewCell, UICollectionViewDataSource {
+    let maxBooksToShow = 8
     var bookshelf: Bookshelf! {
         didSet { bookCollectionView.reloadData() }
     }
@@ -22,7 +23,7 @@ class BookshelfTableViewCell: UITableViewCell, UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return bookshelf.books.count
+        return bookshelf.books.count > maxBooksToShow ? maxBooksToShow : bookshelf.books.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
