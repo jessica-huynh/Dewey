@@ -545,7 +545,7 @@ reading today, Jessica?</string>
                                             </constraints>
                                             <state key="normal" title="Add Bookshelf +"/>
                                             <connections>
-                                                <segue destination="fCU-NU-Q5k" kind="presentation" identifier="AddBookshelf" id="Ial-Up-Y57"/>
+                                                <segue destination="fCU-NU-Q5k" kind="show" identifier="AddBookshelf" id="Ial-Up-Y57"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -609,35 +609,14 @@ reading today, Jessica?</string>
             </objects>
             <point key="canvasLocation" x="1271.0144927536232" y="-143.30357142857142"/>
         </scene>
-        <!--Add Bookshelf View Controller-->
+        <!--Add Bookshelf-->
         <scene sceneID="6rh-Zb-Llq">
             <objects>
-                <viewController id="fCU-NU-Q5k" customClass="AddBookshelfViewController" customModule="Dewey" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddBookshelfViewController" id="fCU-NU-Q5k" customClass="AddBookshelfViewController" customModule="Dewey" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lLG-mN-rti">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCq-cw-xVg">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="5EQ-0N-Dn2"/>
-                                </constraints>
-                                <color key="barTintColor" red="0.91764705879999997" green="0.90980392160000001" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
-                                <items>
-                                    <navigationItem title="Add Bookshelf" id="ek5-17-sbc">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="fl0-mt-dHU">
-                                            <connections>
-                                                <action selector="cancelTapped:" destination="fCU-NU-Q5k" id="rbn-PV-Y3K"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="3t0-bC-6gY">
-                                            <connections>
-                                                <action selector="doneTapped:" destination="fCU-NU-Q5k" id="WVT-Ns-S3u"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What would you like to name it?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBc-br-2kV">
                                 <rect key="frame" x="34" y="218" width="251.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
@@ -667,21 +646,30 @@ reading today, Jessica?</string>
                         </subviews>
                         <color key="backgroundColor" red="0.91764705879999997" green="0.90980392160000001" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="fBc-br-2kV" firstAttribute="top" secondItem="bCq-cw-xVg" secondAttribute="bottom" constant="174" id="CnS-NP-rWq"/>
+                            <constraint firstItem="fBc-br-2kV" firstAttribute="top" secondItem="uNF-V0-dc9" secondAttribute="top" constant="218" id="3Mp-dd-azn"/>
                             <constraint firstItem="F7a-FT-9Xk" firstAttribute="leading" secondItem="uNF-V0-dc9" secondAttribute="leading" constant="34" id="F1P-r1-CIp"/>
                             <constraint firstItem="pB0-gG-Pad" firstAttribute="leading" secondItem="lLG-mN-rti" secondAttribute="leadingMargin" constant="14" id="Mdc-k3-9h9"/>
                             <constraint firstItem="pB0-gG-Pad" firstAttribute="top" secondItem="fBc-br-2kV" secondAttribute="bottom" constant="46.5" id="NhN-6T-rVg"/>
-                            <constraint firstItem="bCq-cw-xVg" firstAttribute="trailing" secondItem="uNF-V0-dc9" secondAttribute="trailing" id="P38-Ne-Hho"/>
-                            <constraint firstItem="bCq-cw-xVg" firstAttribute="leading" secondItem="uNF-V0-dc9" secondAttribute="leading" id="Pkg-Ed-EjB"/>
                             <constraint firstItem="F7a-FT-9Xk" firstAttribute="top" secondItem="fBc-br-2kV" secondAttribute="bottom" constant="13.5" id="Wd1-84-wk9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="pB0-gG-Pad" secondAttribute="trailing" constant="15" id="Xge-op-AlX"/>
-                            <constraint firstItem="bCq-cw-xVg" firstAttribute="top" secondItem="uNF-V0-dc9" secondAttribute="top" id="b84-S1-N8C"/>
                             <constraint firstItem="uNF-V0-dc9" firstAttribute="trailing" secondItem="F7a-FT-9Xk" secondAttribute="trailing" constant="35" id="bSE-La-C9I"/>
                             <constraint firstItem="fBc-br-2kV" firstAttribute="leading" secondItem="uNF-V0-dc9" secondAttribute="leading" constant="34" id="kaR-T3-WGT"/>
                             <constraint firstItem="uNF-V0-dc9" firstAttribute="trailing" secondItem="fBc-br-2kV" secondAttribute="trailing" constant="128.5" id="mvn-6h-20Z"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uNF-V0-dc9"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Add Bookshelf" id="aJR-oC-3KN">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="wZy-lS-bCJ">
+                            <connections>
+                                <action selector="cancelTapped:" destination="fCU-NU-Q5k" id="raN-Ob-YkF"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="3t0-bC-6gY">
+                            <connections>
+                                <action selector="doneTapped:" destination="fCU-NU-Q5k" id="WVT-Ns-S3u"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="doneButton" destination="3t0-bC-6gY" id="xGQ-WP-HqO"/>
                         <outlet property="textField" destination="F7a-FT-9Xk" id="S7j-Dl-s7j"/>

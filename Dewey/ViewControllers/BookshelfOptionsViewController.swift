@@ -12,21 +12,55 @@ class BookshelfOptionsViewController: UIViewController, UITableViewDataSource, U
     var storageManager = StorageManager.instance
     var bookshelfToDisable: Bookshelf?
     var delegate: BookshelfOptionsViewControllerDelegate?
-    
-    @IBOutlet weak var tableView: UITableView!
+    var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.clipsToBounds = true
-        view.layer.cornerRadius = 20
         
+        view.backgroundColor = UIColor(hexString: "#EEECE4")
+        
+        tableView = UITableView(frame: view.frame, style: .grouped)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = UIColor.clear
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "BookshelfCell")
+        view.addSubview(tableView)
+        
+        setupNavigationButtons()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onUpdatedBookshelves(_:)), name: .updatedBookshelves, object: nil)
     }
     
-    @IBAction func cancelTapped(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
+    func setupNavigationButtons() {
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped))
+        navigationItem.setLeftBarButton(cancelButton, animated: true)
+        let addBookshelfButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addBookshelf))
+        navigationItem.setRightBarButton(addBookshelfButton, animated: true)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
+    }
+    
+    @objc func cancelTapped(_ sender: Any) {
+        if navigationController?.viewControllers.first == self {
+            dismiss(animated: true, completion: nil)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    @objc func addBookshelf(_ sender: Any) {
+        let addBookshelfViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddBookshelfViewController") as! AddBookshelfViewController
+        navigationController?.pushViewController(addBookshelfViewController, animated: true)
+    }
+    
+    @objc func onUpdatedBookshelves(_ notification:Notification) {
+        tableView.reloadData()
+    }
+    
+    // MARK: - Table View Delegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return storageManager.bookshelves.count
     }
@@ -50,7 +84,7 @@ class BookshelfOptionsViewController: UIViewController, UITableViewDataSource, U
     }
 }
 
+// MARK: - Protocol
 protocol BookshelfOptionsViewControllerDelegate : class {
     func bookshelfOptionsViewController(_ controller: BookshelfOptionsViewController, didSelectBookshelfAt index: Int)
 }
-

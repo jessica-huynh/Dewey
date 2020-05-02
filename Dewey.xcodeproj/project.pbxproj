@@ -25,9 +25,9 @@
 		C816D72B2454FA6200078BFE /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = C816D72A2454FA6200078BFE /* Podfile */; };
 		C816D72D2455092800078BFE /* HomeHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C816D72C2455092800078BFE /* HomeHeaderTableViewCell.swift */; };
 		C8221C1A245A46DA00FE5605 /* BookshelfEditBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8221C19245A46DA00FE5605 /* BookshelfEditBarView.xib */; };
+		C8386FCE245E070000B86713 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8386FCD245E070000B86713 /* UIColor+Hex.swift */; };
 		C85920D7245B3CE20033DBD2 /* BookshelfDetailsViewController+SortByPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85920D6245B3CE20033DBD2 /* BookshelfDetailsViewController+SortByPicker.swift */; };
 		C85920D9245B3D130033DBD2 /* BookshelfDetailsViewController+Edit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85920D8245B3D130033DBD2 /* BookshelfDetailsViewController+Edit.swift */; };
-		C85920DB245B45F30033DBD2 /* BookshelfOptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C85920DA245B45F30033DBD2 /* BookshelfOptionsViewController.xib */; };
 		C85920DD245B47770033DBD2 /* BookshelfOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85920DC245B47770033DBD2 /* BookshelfOptionsViewController.swift */; };
 		C85ADE7C245A4D39003CF581 /* BookshelfEditBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85ADE7B245A4D39003CF581 /* BookshelfEditBarView.swift */; };
 		C893DB6A24560912006CE0BB /* BookDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C893DB6924560912006CE0BB /* BookDetailsViewController.swift */; };
@@ -38,6 +38,7 @@
 		C8CEF9C52458B463008182F0 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CEF9C42458B463008182F0 /* SearchResultsViewController.swift */; };
 		C8CEF9C72458E57A008182F0 /* BookshelvesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CEF9C62458E57A008182F0 /* BookshelvesViewController.swift */; };
 		C8CEF9C924590E07008182F0 /* AddBookshelfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CEF9C824590E07008182F0 /* AddBookshelfViewController.swift */; };
+		C8DE661C245E247800568C2B /* UINavigationController+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DE661B245E247800568C2B /* UINavigationController+Custom.swift */; };
 		C8E17F37245C96A7008C879C /* BookViewController+BookDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E17F36245C96A7008C879C /* BookViewController+BookDetails.swift */; };
 		C8E17F3B245CA0AF008C879C /* UIViewController+ResignFirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E17F3A245CA0AF008C879C /* UIViewController+ResignFirstResponder.swift */; };
 		C8FBBE1824564F8E00CC1B17 /* BookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FBBE1724564F8E00CC1B17 /* BookViewController.swift */; };
@@ -68,9 +69,9 @@
 		C816D72A2454FA6200078BFE /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C816D72C2455092800078BFE /* HomeHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		C8221C19245A46DA00FE5605 /* BookshelfEditBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookshelfEditBarView.xib; sourceTree = "<group>"; };
+		C8386FCD245E070000B86713 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		C85920D6245B3CE20033DBD2 /* BookshelfDetailsViewController+SortByPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookshelfDetailsViewController+SortByPicker.swift"; sourceTree = "<group>"; };
 		C85920D8245B3D130033DBD2 /* BookshelfDetailsViewController+Edit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookshelfDetailsViewController+Edit.swift"; sourceTree = "<group>"; };
-		C85920DA245B45F30033DBD2 /* BookshelfOptionsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookshelfOptionsViewController.xib; sourceTree = "<group>"; };
 		C85920DC245B47770033DBD2 /* BookshelfOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookshelfOptionsViewController.swift; sourceTree = "<group>"; };
 		C85ADE7B245A4D39003CF581 /* BookshelfEditBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookshelfEditBarView.swift; sourceTree = "<group>"; };
 		C893DB6924560912006CE0BB /* BookDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +82,7 @@
 		C8CEF9C42458B463008182F0 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		C8CEF9C62458E57A008182F0 /* BookshelvesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookshelvesViewController.swift; sourceTree = "<group>"; };
 		C8CEF9C824590E07008182F0 /* AddBookshelfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookshelfViewController.swift; sourceTree = "<group>"; };
+		C8DE661B245E247800568C2B /* UINavigationController+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Custom.swift"; sourceTree = "<group>"; };
 		C8E17F36245C96A7008C879C /* BookViewController+BookDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookViewController+BookDetails.swift"; sourceTree = "<group>"; };
 		C8E17F3A245CA0AF008C879C /* UIViewController+ResignFirstResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ResignFirstResponder.swift"; sourceTree = "<group>"; };
 		C8FBBE1724564F8E00CC1B17 /* BookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewController.swift; sourceTree = "<group>"; };
@@ -218,6 +220,8 @@
 			children = (
 				C8AEDA4E245B200C005B2DFE /* UITableView+SelectAll.swift */,
 				C8E17F3A245CA0AF008C879C /* UIViewController+ResignFirstResponder.swift */,
+				C8386FCD245E070000B86713 /* UIColor+Hex.swift */,
+				C8DE661B245E247800568C2B /* UINavigationController+Custom.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -228,7 +232,6 @@
 				C8C4AC7C24572C620089F29E /* BookDetailsViewController.xib */,
 				C8CEF9C02458A815008182F0 /* BookDetailsTableViewCell.xib */,
 				C8221C19245A46DA00FE5605 /* BookshelfEditBarView.xib */,
-				C85920DA245B45F30033DBD2 /* BookshelfOptionsViewController.xib */,
 				C8FFC59E245CEC35001CFE55 /* BookshelfSectionHeaderView.xib */,
 			);
 			path = Nibs;
@@ -298,7 +301,6 @@
 				C816D71A245483EB00078BFE /* .gitignore in Resources */,
 				C816D71024547FC800078BFE /* LaunchScreen.storyboard in Resources */,
 				C8221C1A245A46DA00FE5605 /* BookshelfEditBarView.xib in Resources */,
-				C85920DB245B45F30033DBD2 /* BookshelfOptionsViewController.xib in Resources */,
 				C816D70D24547FC800078BFE /* Assets.xcassets in Resources */,
 				C816D70B24547FC000078BFE /* Main.storyboard in Resources */,
 				C8C4AC7D24572C620089F29E /* BookDetailsViewController.xib in Resources */,
@@ -347,6 +349,7 @@
 				C8CEF9C52458B463008182F0 /* SearchResultsViewController.swift in Sources */,
 				C85ADE7C245A4D39003CF581 /* BookshelfEditBarView.swift in Sources */,
 				C8E17F37245C96A7008C879C /* BookViewController+BookDetails.swift in Sources */,
+				C8386FCE245E070000B86713 /* UIColor+Hex.swift in Sources */,
 				C8CEF9C32458AF7C008182F0 /* BookDetailsTableViewCell.swift in Sources */,
 				C816D70824547FC000078BFE /* HomeViewController.swift in Sources */,
 				C8CEF9C72458E57A008182F0 /* BookshelvesViewController.swift in Sources */,
@@ -362,6 +365,7 @@
 				C8CEF9C924590E07008182F0 /* AddBookshelfViewController.swift in Sources */,
 				C816D70424547FC000078BFE /* AppDelegate.swift in Sources */,
 				C816D70624547FC000078BFE /* SceneDelegate.swift in Sources */,
+				C8DE661C245E247800568C2B /* UINavigationController+Custom.swift in Sources */,
 				C816D7292454EE3B00078BFE /* BookshelfTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

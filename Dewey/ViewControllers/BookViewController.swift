@@ -105,10 +105,12 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
     }
     
     func presentBookshelfOptionsViewController() {
-        let viewController = BookshelfOptionsViewController(nibName: "BookshelfOptionsViewController", bundle: nil)
-        viewController.delegate = self
-        viewController.bookshelfToDisable = originatingBookshelf
-        present(viewController, animated: true, completion: nil)
+        let bookshelfOptionsViewController = BookshelfOptionsViewController()
+        bookshelfOptionsViewController.delegate = self
+        bookshelfOptionsViewController.bookshelfToDisable = originatingBookshelf
+        bookshelfOptionsViewController.title = "Add To A Bookshelf"
+        
+        present(UINavigationController.custom(with: bookshelfOptionsViewController), animated: true, completion: nil)
     }
     
     // MARK: - Book Options Delegate

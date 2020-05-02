@@ -25,11 +25,13 @@ extension BookshelfDetailsViewController: BookshelfEditBarViewDelegate {
                        completion: { _ in self.editBar.isHidden = true })
     }
     
-    func presentBookshelfOptionsViewController() {
-        let viewController = BookshelfOptionsViewController(nibName: "BookshelfOptionsViewController", bundle: nil)
-        viewController.delegate = self
-        viewController.bookshelfToDisable = bookshelf
-        present(viewController, animated: true, completion: nil)
+    func presentBookshelfOptionsViewController(with title: String) {
+        let bookshelfOptionsViewController = BookshelfOptionsViewController()
+        bookshelfOptionsViewController.delegate = self
+        bookshelfOptionsViewController.bookshelfToDisable = bookshelf
+        bookshelfOptionsViewController.title = title
+        
+        present(UINavigationController.custom(with: bookshelfOptionsViewController), animated: true, completion: nil)
     }
     
     func updateEditBarButtons() {
@@ -52,12 +54,12 @@ extension BookshelfDetailsViewController: BookshelfEditBarViewDelegate {
     
     func bookshelfEditBarView(_ view: BookshelfEditBarView, didTapMove _: UIButton) {
         isMovingBooks = true
-        presentBookshelfOptionsViewController()
+        presentBookshelfOptionsViewController(with: "Move To A Bookshelf")
     }
     
     func bookshelfEditBarView(_ view: BookshelfEditBarView, didTapAdd _: UIButton) {
         isMovingBooks = false
-        presentBookshelfOptionsViewController()
+        presentBookshelfOptionsViewController(with: "Add To A Bookshelf")
     }
     
     func bookshelfEditBarView(_ view: BookshelfEditBarView, didTapDelete _: UIButton) {
