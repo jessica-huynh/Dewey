@@ -10,12 +10,16 @@ import UIKit
 
 class SearchResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     var searchQuery: String!
+    var searchResults: [Book] = []
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Fake search results
+        searchResults = StorageManager.instance.bookshelves.first!.books
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -38,12 +42,12 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return searchResults.isEmpty ? 1 : searchResults.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let bookViewController = self.storyboard?.instantiateViewController(withIdentifier: "BookViewController") as! BookViewController
-        bookViewController.book = StorageManager.instance.bookshelves.first!.books[indexPath.row]
+        bookViewController.book = searchResults[indexPath.row]
         bookViewController.modalPresentationStyle = .fullScreen
         present(bookViewController, animated: true, completion: nil)
         
@@ -51,8 +55,11 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if searchResults.isEmpty {
+            return tableView.dequeueReusableCell(withIdentifier: "NoResultsCell")!
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "BookDetailsCell", for: indexPath) as! BookDetailsTableViewCell
-        cell.configure(book: StorageManager.instance.bookshelves.first!.books[indexPath.row])
+        cell.configure(book: searchResults[indexPath.row])
         return cell
     }
 

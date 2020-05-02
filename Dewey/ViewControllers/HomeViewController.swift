@@ -55,7 +55,7 @@ class HomeViewController: UIViewController {
 // MARK: - Table View Data Source
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return storageManager.bookshelves.count + 1
+        return storageManager.bookshelves.isEmpty ? 2 : storageManager.bookshelves.count + 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -74,17 +74,27 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             searchBar = cell.searchBar
             return cell
         }
+        
+        if storageManager.bookshelves.isEmpty {
+            return tableView.dequeueReusableCell(withIdentifier: "NoBookshelvesCell")!
+        }
+        
+        let bookshelf = storageManager.bookshelves[indexPath.section - 1]
+        if bookshelf.books.isEmpty {
+            return tableView.dequeueReusableCell(withIdentifier: "EmptyBookshelfCell")!
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "BookshelfCell", for: indexPath) as! BookshelfTableViewCell
-        cell.bookshelf = storageManager.bookshelves[indexPath.section - 1]
+        cell.bookshelf = bookshelf
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 0 : 50
+        return section == 0 || storageManager.bookshelves.isEmpty ? 0 : 50
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 { return nil }
+        if section == 0 || storageManager.bookshelves.isEmpty { return nil }
         
         let bookshelf = storageManager.bookshelves[section - 1]
         let bookshelfSectionHeader = tableView.dequeueReusableHeaderFooterView(withIdentifier: "BookshelfSectionHeader") as! BookshelfSectionHeaderView

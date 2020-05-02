@@ -147,7 +147,12 @@ extension BookshelfDetailsViewController: UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bookshelf.books.count
+        return bookshelf.books.isEmpty ? 1 : bookshelf.books.count
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if bookshelf.books.isEmpty { return nil }
+        return indexPath
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -169,9 +174,18 @@ extension BookshelfDetailsViewController: UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if bookshelf.books.isEmpty {
+            return tableView.dequeueReusableCell(withIdentifier: "NoBooksCell")!
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "BookDetailsCell", for: indexPath) as! BookDetailsTableViewCell
         cell.configure(book: bookshelf.books[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if bookshelf.books.isEmpty { return false }
+        return true
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
