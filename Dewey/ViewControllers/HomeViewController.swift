@@ -20,6 +20,9 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
         NotificationCenter.default.addObserver(self, selector: #selector(onUpdatedBookshelves(_:)), name: .updatedBookshelves, object: nil)
         
+        let bookshelfSectionHeader = UINib(nibName: "BookshelfSectionHeaderView", bundle: nil)
+        tableView.register(bookshelfSectionHeader, forHeaderFooterViewReuseIdentifier: "BookshelfSectionHeader")
+        
         addTapToResignFirstResponder(with: #selector(resetSearchBarIfNeeded))
     }
     
@@ -76,9 +79,19 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 { return "" }
-        return storageManager.bookshelves[section - 1].name
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == 0 ? 0 : 50
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 { return nil }
+        
+        let bookshelf = storageManager.bookshelves[section - 1]
+        let bookshelfSectionHeader = tableView.dequeueReusableHeaderFooterView(withIdentifier: "BookshelfSectionHeader") as! BookshelfSectionHeaderView
+        bookshelfSectionHeader.delegate = self
+        bookshelfSectionHeader.bookshelf = bookshelf
+        bookshelfSectionHeader.bookshelfName.text = bookshelf.name
+        return bookshelfSectionHeader
     }
 }
 
@@ -88,4 +101,15 @@ extension HomeViewController: UISearchBarDelegate {
         performSegue(withIdentifier: "SearchResults", sender: self)
         resetSearchBarIfNeeded()
     }
+}
+
+// MARK: - Bookshelf Section View Delegate
+extension HomeViewController: BookshelfSectionHeaderViewDelegate {
+    func bookshelfSectionHeaderView(_ bookshelfSectionHeaderView: BookshelfSectionHeaderView, didTapSeeAll button: UIButton) {
+        let bookshelfDetailsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BookshelfDetailsViewController") as! BookshelfDetailsViewController
+        bookshelfDetailsViewController.bookshelf = bookshelfSectionHeaderView.bookshelf
+        navigationController?.pushViewController(bookshelfDetailsViewController, animated: true)
+    }
+    
+    
 }
