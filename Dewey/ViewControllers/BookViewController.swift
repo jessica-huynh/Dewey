@@ -47,7 +47,7 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
     }
     
     func setupBookCover() {
-        let url = URL(string: book.cover)
+        let url = URL(string: book.coverLarge)
         bookCover.kf.indicatorType = .activity
         bookCover.kf.setImage(
             with: url,

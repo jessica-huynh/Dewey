@@ -38,7 +38,6 @@ class BookDetailsViewController: UIViewController {
         bookTitle.text = book.title
         author.text = book.author
         bookDescription.text = book.description
-        isbn.text = book.isbn
     }
     
     @IBAction func previewTapped(_ sender: Any) {

@@ -20,7 +20,7 @@ class Bookshelf {
     }
     
     func contains(book: Book) -> Bool {
-        return books.contains(where: { $0.isbn == book.isbn })
+        return books.contains(where: { $0 == book })
     }
     
     func addBook(book: Book) -> Bool {
@@ -30,7 +30,7 @@ class Bookshelf {
     }
     
     func removeBook(book: Book) {
-        let index = books.firstIndex(where: { $0.isbn == book.isbn })!
+        let index = books.firstIndex(where: { $0 == book })!
         books.remove(at: index)
     }
     

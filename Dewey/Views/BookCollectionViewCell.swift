@@ -18,7 +18,7 @@ class BookCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var bookAuthor: UILabel!
     
     func configure() {
-        let url = URL(string: book.cover)
+        let url = URL(string: book.coverSmall)
         bookCover.kf.indicatorType = .activity
         bookCover.kf.setImage(
             with: url,

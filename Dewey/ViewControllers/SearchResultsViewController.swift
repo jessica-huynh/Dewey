@@ -18,9 +18,6 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Fake search results
-        searchResults = StorageManager.instance.bookshelves.first!.books
-        
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.text = searchQuery
@@ -30,10 +27,22 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.register(bookDetailsCell, forCellReuseIdentifier: "BookDetailsCell")
         
         addTapToResignFirstResponder()
+        performSearch()
     }
     
     @IBAction func cancelTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func performSearch() {
+        iTunesSearchAPI.request(for: .search(query: searchBar.text!)) {
+            [weak self] response in
+            guard let self = self else { return }
+            
+            let searchResponse = try SearchResponse(data: response.data)
+            self.searchResults = searchResponse.results
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: - Table View Delegate
@@ -65,6 +74,7 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
 
     // MARK: - Search Bar Delegate
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-       print("Performing search...")
+        performSearch()
+        searchBar.resignFirstResponder()
     }
 }

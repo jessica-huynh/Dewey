@@ -16,7 +16,7 @@ class BookDetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var bookDescription: UILabel!
     
     func configure(book: Book) {
-        let url = URL(string: book.cover)
+        let url = URL(string: book.coverSmall)
         bookCover.kf.indicatorType = .activity
         bookCover.kf.setImage(
             with: url,

@@ -13,27 +13,9 @@ class StorageManager {
     
     private var bookshelfID: Int = 0
     private(set) var bookshelves: [Bookshelf] = []
-    private var bookshelvesForIsbn: [String: [Int]] = [:]
+    private var bookshelvesForIsbn: [Int: [Int]] = [:]
     
     private init() {
-        let book1 = Book(isbn: "0735219095", title: "Where the Crawdads Sing", author: "Delia Owens", description: "In a quiet town on the North Carolina coast in 1969, a young woman who survived alone in the marsh becomes a murder suspect.", cover: "https://s1.nyt.com/du/books/images/9780735219090.jpg")
-        let book2 = Book(isbn: "0525539522", title: "Masked Prey", author: "John Sandford", description: "The 30th book in the Prey series. Washington politicians ask Lucas Davenport to look into someone who is targeting their children.", cover: "https://s1.nyt.com/du/books/images/9780525539520.jpg")
-        let book3 = Book(isbn: "1250209765", title: "American Dirt", author: "Jeanine Cummins", description: "A bookseller flees Mexico for the United States with her son while pursued by the head of a drug cartel.", cover: "https://s1.nyt.com/du/books/images/9781250209764.jpg")
-        let book4 = Book(isbn: "1250301696", title: "The Silent Patient", author: "Alex Michaelides", description: "Theo Faber looks into the mystery of a famous painter who stops speaking after shooting her husband.", cover: "https://s1.nyt.com/du/books/images/9781250301697.jpg")
-        
-        var bestsellers: [Book] = []
-        bestsellers.append(book1)
-        bestsellers.append(book2)
-        bestsellers.append(book3)
-        bestsellers.append(book4)
-        
-        var favs: [Book] = []
-        favs.append(book3)
-        favs.append(book4)
-        
-        addBookshelf(with: "Bestsellers", books: bestsellers)
-        addBookshelf(with: "Favourites", books: favs)
-        addBookshelf(with: "Want To Read")
     }
     
     func addBookshelf(with name: String, books: [Book] = []) {
@@ -49,7 +31,7 @@ class StorageManager {
     func removeBookshelf(at index: Int) {
         let removedBookshelf = bookshelves.remove(at: index)
         for book in removedBookshelf.books {
-            updateBookshelves(for: book.isbn, without: removedBookshelf)
+            updateBookshelves(for: book.id, without: removedBookshelf)
         }
     }
     
@@ -65,41 +47,41 @@ class StorageManager {
     
     func addBook(book: Book, to bookshelf: Bookshelf) {
         if bookshelf.addBook(book: book.with(dateAddedToShelf: Date())) {
-            let oldValue = bookshelvesForIsbn[book.isbn] ?? []
-            bookshelvesForIsbn.updateValue(oldValue + [bookshelf.id], forKey: book.isbn)
+            let oldValue = bookshelvesForIsbn[book.id] ?? []
+            bookshelvesForIsbn.updateValue(oldValue + [bookshelf.id], forKey: book.id)
         }
     }
     
     func removeBook(book: Book, from bookshelf: Bookshelf) {
         bookshelf.removeBook(book: book)
-        updateBookshelves(for: book.isbn, without: bookshelf)
+        updateBookshelves(for: book.id, without: bookshelf)
     }
     
     func removeBook(at index: Int, from bookshelf: Bookshelf) {
         let removedBook = bookshelf.removeBook(at: index)
-        updateBookshelves(for: removedBook.isbn, without: bookshelf)
+        updateBookshelves(for: removedBook.id, without: bookshelf)
     }
     
     func removeBookEverywhere(book: Book) {
         let effectedBookshelves = bookshelves.filter {
-            bookshelvesForIsbn[book.isbn]!.contains($0.id)
+            bookshelvesForIsbn[book.id]!.contains($0.id)
         }
         
         for bookshelf in effectedBookshelves {
             bookshelf.removeBook(book: book)
         }
-        bookshelvesForIsbn.removeValue(forKey: book.isbn)
+        bookshelvesForIsbn.removeValue(forKey: book.id)
     }
     
     func removeAllBooks(from bookshelf: Bookshelf) {
         for book in bookshelf.books {
-            updateBookshelves(for: book.isbn, without: bookshelf)
+            updateBookshelves(for: book.id, without: bookshelf)
         }
         bookshelf.removeAllBooks()
     }
     
-    func updateBookshelves(for isbn: String, without bookshelf: Bookshelf) {
-        var bookshelfIds = bookshelvesForIsbn[isbn]!
+    func updateBookshelves(for id: Int, without bookshelf: Bookshelf) {
+        var bookshelfIds = bookshelvesForIsbn[id]!
         
         for i in 0..<bookshelfIds.count {
             if bookshelfIds[i] == bookshelf.id {
@@ -108,17 +90,17 @@ class StorageManager {
             }
         }
         if bookshelfIds.isEmpty {
-            bookshelvesForIsbn.removeValue(forKey: isbn)
+            bookshelvesForIsbn.removeValue(forKey: id)
         } else {
-            bookshelvesForIsbn.updateValue(bookshelfIds, forKey: isbn)
+            bookshelvesForIsbn.updateValue(bookshelfIds, forKey: id)
         }
     }
     
     func bookIsInAShelf(book: Book) -> Bool {
-        return bookshelvesForIsbn[book.isbn] != nil
+        return bookshelvesForIsbn[book.id] != nil
     }
     
     func numberOfBookshelves(with book: Book) -> Int {
-        return bookshelvesForIsbn[book.isbn]?.count ?? 0
+        return bookshelvesForIsbn[book.id]?.count ?? 0
     }
 }
