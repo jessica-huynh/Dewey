@@ -20,8 +20,6 @@ struct Book: Codable, Equatable {
     var coverSmall: String { return Book.processCoverUrl(url: artworkUrl100, size: 200) }
     var coverLarge: String { return Book.processCoverUrl(url: artworkUrl100, size: 900) }
     var dateAddedToShelf: Date?
-    lazy var averageRating: Double = averageUserRating ?? 0
-    lazy var ratingCount: Int = userRatingCount ?? 0
 
     enum CodingKeys: String, CodingKey {
         case genres, description, averageUserRating, userRatingCount, artworkUrl100
