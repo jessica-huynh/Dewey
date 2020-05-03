@@ -12,6 +12,7 @@ struct Book: Codable, Equatable {
     let id: Int
     let url, title, author, description: String
     let artworkUrl100: String?
+    /// A string representing the publication date in ISO 8601 format (i.e. YYYY-MM-DD)
     let publicationDate: String
     let genres: [String]
     let averageUserRating: Double?
@@ -19,6 +20,7 @@ struct Book: Codable, Equatable {
     
     var coverSmall: String { return Book.processCoverUrl(url: artworkUrl100, size: 200) }
     var coverLarge: String { return Book.processCoverUrl(url: artworkUrl100, size: 900) }
+    var publicationYear: String { return String(publicationDate.prefix(4)) }
     var dateAddedToShelf: Date?
 
     enum CodingKeys: String, CodingKey {

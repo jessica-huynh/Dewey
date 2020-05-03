@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Cosmos
 
 class BookDetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var bookCover: UIImageView!
@@ -14,6 +15,7 @@ class BookDetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var author: UILabel!
     @IBOutlet weak var publicationYear: UILabel!
     @IBOutlet weak var bookDescription: UILabel!
+    @IBOutlet weak var ratingView: CosmosView!
     
     func configure(book: Book) {
         let url = URL(string: book.coverSmall)
@@ -28,6 +30,11 @@ class BookDetailsTableViewCell: UITableViewCell {
         
         bookTitle.text = book.title
         author.text = book.author
-        bookDescription.text = book.description
+        publicationYear.text = "(\(book.publicationYear))"
+        bookDescription.attributedText = book.description.toAttributedString(with: UIFont.systemFont(ofSize: 13))
+        bookDescription.lineBreakMode = .byTruncatingTail
+        ratingView.settings.fillMode = .precise
+        ratingView.rating = book.averageUserRating ?? 0
+        ratingView.text = book.userRatingCount != nil ? "\(book.userRatingCount!) ratings" : "No ratings yet"
     }
 }
