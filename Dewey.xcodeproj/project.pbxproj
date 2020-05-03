@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02762BCB091C66F3B4E9FEE4 /* libPods-Dewey.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B7CC22076C901EF27187683 /* libPods-Dewey.a */; };
+		3C4CAB99C66BBA55171B6FE4 /* Pods_Dewey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29EAFA464E275349977D3116 /* Pods_Dewey.framework */; };
 		C80222BC2459F1EB00CD3842 /* BookshelfDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80222BB2459F1EB00CD3842 /* BookshelfDetailsViewController.swift */; };
 		C80222BE245A1F0F00CD3842 /* NoSelectTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80222BD245A1F0F00CD3842 /* NoSelectTextField.swift */; };
 		C816D70424547FC000078BFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C816D70324547FC000078BFE /* AppDelegate.swift */; };
@@ -50,8 +50,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29EAFA464E275349977D3116 /* Pods_Dewey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dewey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F423C5A44366DEE14B9A0CA /* Pods-Dewey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dewey.release.xcconfig"; path = "Target Support Files/Pods-Dewey/Pods-Dewey.release.xcconfig"; sourceTree = "<group>"; };
-		8B7CC22076C901EF27187683 /* libPods-Dewey.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Dewey.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A09C0F96138C191358417CF7 /* Pods-Dewey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dewey.debug.xcconfig"; path = "Target Support Files/Pods-Dewey/Pods-Dewey.debug.xcconfig"; sourceTree = "<group>"; };
 		C80222BB2459F1EB00CD3842 /* BookshelfDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookshelfDetailsViewController.swift; sourceTree = "<group>"; };
 		C80222BD245A1F0F00CD3842 /* NoSelectTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoSelectTextField.swift; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02762BCB091C66F3B4E9FEE4 /* libPods-Dewey.a in Frameworks */,
+				3C4CAB99C66BBA55171B6FE4 /* Pods_Dewey.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +120,7 @@
 		23E9B0417D9064B417BE31E5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8B7CC22076C901EF27187683 /* libPods-Dewey.a */,
+				29EAFA464E275349977D3116 /* Pods_Dewey.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -281,6 +281,7 @@
 				C816D6FC24547FC000078BFE /* Sources */,
 				C816D6FD24547FC000078BFE /* Frameworks */,
 				C816D6FE24547FC000078BFE /* Resources */,
+				21FFBB25332669D3DA6B329C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -345,6 +346,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		21FFBB25332669D3DA6B329C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dewey/Pods-Dewey-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dewey/Pods-Dewey-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dewey/Pods-Dewey-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2710ADC07A4259E036509AE4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

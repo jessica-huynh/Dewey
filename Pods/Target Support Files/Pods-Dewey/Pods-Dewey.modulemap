@@ -1,4 +1,4 @@
-module Pods_Dewey {
+framework module Pods_Dewey {
   umbrella header "Pods-Dewey-umbrella.h"
 
   export *
