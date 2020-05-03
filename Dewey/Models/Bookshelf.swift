@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Bookshelf {
+class Bookshelf: Equatable {
     let id: Int
     var name: String
     var books: [Book] = []
@@ -40,5 +40,9 @@ class Bookshelf {
     
     func removeAllBooks() {
         books = []
+    }
+    
+    static func ==(lhs: Bookshelf, rhs: Bookshelf) -> Bool {
+        return lhs.id == rhs.id
     }
 }
