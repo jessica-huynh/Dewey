@@ -38,6 +38,7 @@
 		C8CEF9C72458E57A008182F0 /* BookshelvesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CEF9C62458E57A008182F0 /* BookshelvesViewController.swift */; };
 		C8CEF9C924590E07008182F0 /* AddBookshelfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CEF9C824590E07008182F0 /* AddBookshelfViewController.swift */; };
 		C8DAEE5D245F38890054FF0D /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DAEE5C245F38890054FF0D /* Book.swift */; };
+		C8DAEE5F245F45A50054FF0D /* NoBookshelvesFoundTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8DAEE5E245F45A50054FF0D /* NoBookshelvesFoundTableViewCell.xib */; };
 		C8DE661C245E247800568C2B /* UINavigationController+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DE661B245E247800568C2B /* UINavigationController+Custom.swift */; };
 		C8DE661F245E31BA00568C2B /* iTunesSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DE661E245E31BA00568C2B /* iTunesSearchAPI.swift */; };
 		C8DE6622245E38F500568C2B /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DE6621245E38F500568C2B /* SearchResponse.swift */; };
@@ -84,6 +85,7 @@
 		C8CEF9C62458E57A008182F0 /* BookshelvesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookshelvesViewController.swift; sourceTree = "<group>"; };
 		C8CEF9C824590E07008182F0 /* AddBookshelfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookshelfViewController.swift; sourceTree = "<group>"; };
 		C8DAEE5C245F38890054FF0D /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		C8DAEE5E245F45A50054FF0D /* NoBookshelvesFoundTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoBookshelvesFoundTableViewCell.xib; sourceTree = "<group>"; };
 		C8DE661B245E247800568C2B /* UINavigationController+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Custom.swift"; sourceTree = "<group>"; };
 		C8DE661E245E31BA00568C2B /* iTunesSearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesSearchAPI.swift; sourceTree = "<group>"; };
 		C8DE6621245E38F500568C2B /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				C8CEF9C02458A815008182F0 /* BookDetailsTableViewCell.xib */,
 				C8221C19245A46DA00FE5605 /* BookshelfEditBarView.xib */,
 				C8FFC59E245CEC35001CFE55 /* BookshelfSectionHeaderView.xib */,
+				C8DAEE5E245F45A50054FF0D /* NoBookshelvesFoundTableViewCell.xib */,
 			);
 			path = Nibs;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C8CEF9C12458A815008182F0 /* BookDetailsTableViewCell.xib in Resources */,
+				C8DAEE5F245F45A50054FF0D /* NoBookshelvesFoundTableViewCell.xib in Resources */,
 				C816D72B2454FA6200078BFE /* Podfile in Resources */,
 				C816D71A245483EB00078BFE /* .gitignore in Resources */,
 				C816D71024547FC800078BFE /* LaunchScreen.storyboard in Resources */,

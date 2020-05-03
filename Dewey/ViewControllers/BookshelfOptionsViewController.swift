@@ -26,6 +26,9 @@ class BookshelfOptionsViewController: UIViewController, UITableViewDataSource, U
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "BookshelfCell")
         view.addSubview(tableView)
         
+        let noBookshelvesCell = UINib(nibName: "NoBookshelvesFoundTableViewCell", bundle: nil)
+        tableView.register(noBookshelvesCell, forCellReuseIdentifier: "NoBookshelvesCell")
+        
         setupNavigationButtons()
         
         NotificationCenter.default.addObserver(self, selector: #selector(onUpdatedBookshelves(_:)), name: .updatedBookshelves, object: nil)
@@ -62,10 +65,14 @@ class BookshelfOptionsViewController: UIViewController, UITableViewDataSource, U
     
     // MARK: - Table View Delegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return storageManager.bookshelves.count
+        return storageManager.bookshelves.isEmpty ? 1 : storageManager.bookshelves.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if storageManager.bookshelves.isEmpty {
+            return tableView.dequeueReusableCell(withIdentifier: "NoBookshelvesCell")!
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "BookshelfCell", for: indexPath)
         cell.textLabel?.textColor =
             (storageManager.bookshelves[indexPath.row].id == bookshelfToDisable?.id) ? UIColor.gray : UIColor.black
@@ -80,7 +87,11 @@ class BookshelfOptionsViewController: UIViewController, UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return (storageManager.bookshelves[indexPath.row].id == bookshelfToDisable?.id) ? nil : indexPath
+        if storageManager.bookshelves.isEmpty ||
+            (storageManager.bookshelves[indexPath.row] == bookshelfToDisable) {
+            return nil
+        }
+        return indexPath
     }
 }
 
