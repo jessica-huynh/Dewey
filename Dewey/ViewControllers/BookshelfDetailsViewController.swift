@@ -70,6 +70,8 @@ class BookshelfDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(onUpdatedBookshelves(_:)), name: .updatedBookshelves, object: nil)
+        
         let bookDetailsCell = UINib(nibName: "BookDetailsTableViewCell", bundle: nil)
         tableView.register(bookDetailsCell, forCellReuseIdentifier: "BookDetailsCell")
         
@@ -95,6 +97,12 @@ class BookshelfDetailsViewController: UIViewController {
             }
             NotificationCenter.default.post(name: .updatedBookshelves, object: self)
         }
+    }
+    
+    @objc func onUpdatedBookshelves(_ notification:Notification) {
+        let selectedIndexPaths = tableView.indexPathsForSelectedRows
+        tableView.reloadData()
+        tableView.selectRow(at: selectedIndexPaths, animated: false, scrollPosition: .none)
     }
     
     // MARK: - Actions
