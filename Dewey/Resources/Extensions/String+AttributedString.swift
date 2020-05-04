@@ -22,7 +22,8 @@ extension String {
         if let attributedString =
             try? NSMutableAttributedString(
                 data: data,
-                options: [.documentType: NSAttributedString.DocumentType.html],
+                options: [.documentType: NSAttributedString.DocumentType.html,
+                          .characterEncoding: String.Encoding.utf8.rawValue],
                 documentAttributes: nil) {
         attributedString.addAttributes(attributes,
                                        range: NSRange(location: 0,
