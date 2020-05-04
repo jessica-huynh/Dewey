@@ -35,9 +35,17 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         spinnerView = createSpinnerView(with: UIColor(hexString: "#EEECE4"))
-        showSpinner(spinnerView: spinnerView)
+        //showSpinner(spinnerView: spinnerView)
         setupBookCover()
-        setupBackground()
+        //setupBackground()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if navigationController?.viewControllers.first == self {
+            let closeButton = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(backTapped))
+            navigationItem.setLeftBarButton(closeButton, animated: true)
+        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -54,6 +62,7 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
         }
     }
     
+    // MARK: - Setup Helpers
     func setupBackground() {
         if book.coverLarge.isEmpty {
             removeSpinner(spinnerView: self.spinnerView)
@@ -98,8 +107,9 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
         bookCover.dropShadow()
     }
     
+    // MARK: - Actions
     @IBAction func backTapped(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        dismiss()
     }
     
     @IBAction func showActions(_ sender: Any) {
@@ -129,6 +139,7 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
         self.present(actions, animated: true)
     }
     
+    // MARK: - Misc Helpers
     func showDeleteConfirmation() {
         let alert = UIAlertController(title: "Delete Everywhere",
                                       message: "Are you sure you want to remove this book from \(storageManager.numberOfBookshelves(with: book)) bookshelves.",
