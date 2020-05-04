@@ -57,9 +57,10 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let bookViewController = self.storyboard?.instantiateViewController(withIdentifier: "BookViewController") as! BookViewController
         bookViewController.book = searchResults[indexPath.row]
-        bookViewController.modalPresentationStyle = .fullScreen
-        present(bookViewController, animated: true, completion: nil)
+        let navController = UINavigationController.custom(with: bookViewController)
+        navController.modalPresentationStyle = .fullScreen
         
+        present(navController, animated: true, completion: nil)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
