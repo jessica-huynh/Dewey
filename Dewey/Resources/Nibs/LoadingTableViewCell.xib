@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="98" id="6se-53-5DT" customClass="LoadingTableViewCell" customModule="Dewey" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="98"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6se-53-5DT" id="YWf-KY-QkI">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="98"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="OK6-Eb-e5B">
+                        <rect key="frame" x="197" y="39" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="0V4-rW-WTz"/>
+                            <constraint firstAttribute="width" constant="20" id="up0-Vk-06t"/>
+                        </constraints>
+                    </activityIndicatorView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="OK6-Eb-e5B" firstAttribute="centerX" secondItem="YWf-KY-QkI" secondAttribute="centerX" id="Fqf-aR-Kng"/>
+                    <constraint firstItem="OK6-Eb-e5B" firstAttribute="top" secondItem="YWf-KY-QkI" secondAttribute="top" constant="39" id="jlV-Pa-263"/>
+                    <constraint firstAttribute="bottom" secondItem="OK6-Eb-e5B" secondAttribute="bottom" constant="39" id="vPc-M0-IW0"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="activityIndicator" destination="OK6-Eb-e5B" id="SFQ-sB-j3q"/>
+            </connections>
+            <point key="canvasLocation" x="37.681159420289859" y="63.616071428571423"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -11,6 +11,9 @@ import UIKit
 class SearchResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     var searchQuery: String!
     var searchResults: [Book] = []
+    var isLoading: Bool = false {
+        didSet { tableView.reloadData() }
+    }
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -25,6 +28,8 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
         
         let bookDetailsCell = UINib(nibName: "BookDetailsTableViewCell", bundle: nil)
         tableView.register(bookDetailsCell, forCellReuseIdentifier: "BookDetailsCell")
+        let loadingCell = UINib(nibName: "LoadingTableViewCell", bundle: nil)
+        tableView.register(loadingCell, forCellReuseIdentifier: "LoadingCell")
         
         addTapToResignFirstResponder()
         performSearch()
@@ -35,6 +40,7 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func performSearch() {
+        isLoading = true
         iTunesSearchAPI.request(for: .search(query: searchBar.text!)) {
             [weak self] response in
             guard let self = self else { return }
@@ -42,6 +48,7 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
             let searchResponse = try SearchResponse(data: response.data)
             self.searchResults = searchResponse.results
             self.tableView.reloadData()
+            self.isLoading = false
         }
     }
     
@@ -51,7 +58,12 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResults.isEmpty ? 1 : searchResults.count
+        return searchResults.isEmpty || isLoading ? 1 : searchResults.count
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if searchResults.isEmpty || isLoading { return nil }
+        return indexPath
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -65,6 +77,12 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if isLoading {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingCell") as! LoadingTableViewCell
+            cell.activityIndicator.startAnimating()
+            return cell
+        }
+        
         if searchResults.isEmpty {
             return tableView.dequeueReusableCell(withIdentifier: "NoResultsCell")!
         }
