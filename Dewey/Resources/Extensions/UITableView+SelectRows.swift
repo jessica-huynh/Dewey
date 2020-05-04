@@ -1,5 +1,5 @@
 //
-//  UITableView+SelectAll.swift
+//  UITableView+SelectRows.swift
 //  Dewey
 //
 //  Created by Jessica Huynh on 2020-04-30.
@@ -23,6 +23,13 @@ extension UITableView {
             for row in 0..<numberOfRows(inSection: section) {
                 deselectRow(at: IndexPath(row: row, section: section), animated: false)
             }
+        }
+    }
+    
+    func selectRow(at indexPaths: [IndexPath]?, animated: Bool, scrollPosition: UITableView.ScrollPosition) {
+        guard let indexPaths = indexPaths else { return }
+        for indexPath in indexPaths {
+            selectRow(at: indexPath, animated: animated, scrollPosition: scrollPosition)
         }
     }
 }
