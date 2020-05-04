@@ -10,6 +10,11 @@ import UIKit
 
 class BookshelfEditBarView: UIView {
     var delegate: BookshelfEditBarViewDelegate?
+    var currentAction: Action = .none
+    
+    enum Action {
+        case none, move, add, delete
+    }
     
     enum SelectMode {
         case selectAll, deselectAll
@@ -53,15 +58,18 @@ class BookshelfEditBarView: UIView {
     }
     
     @IBAction func moveBooksTapped(_ sender: UIButton) {
+        currentAction = .move
         delegate?.bookshelfEditBarView(self, didTapMove: sender)
     }
     
     
     @IBAction func addBooksTapped(_ sender: UIButton) {
+        currentAction = .add
         delegate?.bookshelfEditBarView(self, didTapAdd: sender)
     }
     
     @IBAction func deleteBooksTapped(_ sender: UIButton) {
+        currentAction = .delete
         delegate?.bookshelfEditBarView(self, didTapDelete: sender)
     }
     

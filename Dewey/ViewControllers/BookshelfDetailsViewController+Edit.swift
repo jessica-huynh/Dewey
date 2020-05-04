@@ -53,12 +53,10 @@ extension BookshelfDetailsViewController: BookshelfEditBarViewDelegate {
     }
     
     func bookshelfEditBarView(_ view: BookshelfEditBarView, didTapMove _: UIButton) {
-        isMovingBooks = true
         presentBookshelfOptionsViewController(with: "Move To A Bookshelf")
     }
     
     func bookshelfEditBarView(_ view: BookshelfEditBarView, didTapAdd _: UIButton) {
-        isMovingBooks = false
         presentBookshelfOptionsViewController(with: "Add To A Bookshelf")
     }
     
@@ -93,6 +91,6 @@ extension BookshelfDetailsViewController: BookshelfOptionsViewControllerDelegate
         }
         
         // Remove books at current bookshelf if user is moving them
-        if isMovingBooks { deleteBooksAt(indexPaths: selectedIndexPaths) }
+        if editBar.currentAction == .move { deleteBooksAt(indexPaths: selectedIndexPaths) }
     }
 }

@@ -13,7 +13,6 @@ class BookshelfDetailsViewController: UIViewController {
     var bookshelf: Bookshelf!
     var didEditBookshelf = false
     var didSort = false
-    var isMovingBooks = false
     
     var noBooks = false {
         didSet {
@@ -98,6 +97,7 @@ class BookshelfDetailsViewController: UIViewController {
         }
     }
     
+    // MARK: - Actions
     @IBAction func editTapped(_ sender: Any) {
         didEditBookshelf = true
         tableView.setEditing(!tableView.isEditing, animated: true)
