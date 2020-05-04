@@ -20,10 +20,11 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
     let cardTopPadding: CGFloat = 40
     let cardStretchSection: CGFloat = 50
     let cardMinVisibleHeight: CGFloat = 300
-    var cardVisible = false
+    var isCardSetup = false
+    var isCardVisible = false
     var panAnimationQueue: [UIViewPropertyAnimator] = []
     var nextState: CardState {
-        return cardVisible ? .collapsed : .expanded
+        return isCardVisible ? .collapsed : .expanded
     }
     
     enum CardState {
@@ -50,7 +51,10 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        setupCard()
+        if !isCardSetup {
+            setupCard()
+            isCardSetup = true
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

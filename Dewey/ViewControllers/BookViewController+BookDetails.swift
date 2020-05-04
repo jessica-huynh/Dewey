@@ -73,17 +73,17 @@ extension BookViewController {
                 }
                 panAnimationQueue.removeAll()
                 startPanAnimation(state: inExpandArea ? .collapsed : .expanded)
-                cardVisible = inExpandArea ? true : false
+                isCardVisible = inExpandArea ? true : false
             } else {
                 startPanAnimation(state: nextState)
             }
         case .changed:
             let panZone = view.bounds.height - cardMinVisibleHeight - cardTopPadding
             let panPosition = newPosition - cardTopPadding // position relative to the pan zone
-            let fractionCompleted = (cardVisible ? panPosition : panZone - panPosition ) / panZone
+            let fractionCompleted = (isCardVisible ? panPosition : panZone - panPosition ) / panZone
             updatePanAnimation(fractionCompleted: fractionCompleted)
         case .ended:
-            if (inExpandArea && cardVisible) || (!inExpandArea && !cardVisible) {
+            if (inExpandArea && isCardVisible) || (!inExpandArea && !isCardVisible) {
                 for animation in panAnimationQueue {
                     // Reverse pan animation if there will be no changes in card state
                     animation.isReversed = true
@@ -128,7 +128,7 @@ extension BookViewController {
         
         frameAnimator.addCompletion {
             _ in
-            self.cardVisible = state == .expanded ? true : false
+            self.isCardVisible = state == .expanded ? true : false
             self.panAnimationQueue.removeAll()
         }
         
