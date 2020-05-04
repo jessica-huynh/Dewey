@@ -12,14 +12,17 @@ import UIKit
 extension BookViewController {
     // MARK: Book Details Card Setup
     func setupCard() {
-        cardHeight = view.bounds.height - cardTopPadding + cardStretchSection
+        cardHeight = view.bounds.height - cardPadding + cardStretchSection
+        cardExpandedY = cardPadding
+        cardCollapsedY = bookCover.frame.origin.y + bookCover.bounds.height + cardPadding
+        
         bookDetailsViewController = BookDetailsViewController(nibName: "BookDetailsViewController", bundle: nil)
         bookDetailsViewController.book = book
         addChild(bookDetailsViewController)
         view.addSubview(bookDetailsViewController.view)
 
         bookDetailsViewController.view.frame = CGRect(x: 0,
-                                                      y: view.bounds.height - cardMinVisibleHeight,
+                                                      y: cardCollapsedY,
                                                       width: view.bounds.width,
                                                       height: cardHeight)
         
@@ -58,7 +61,7 @@ extension BookViewController {
         let newPosition = gestureView.frame.origin.y + translation.y
         
         // Make sure frame doesn't go past an arbitrary area on the screen
-        if newPosition > 10 && newPosition < (view.bounds.height - 250) {
+        if newPosition > (cardExpandedY - 30) && newPosition < (cardCollapsedY + 30) {
             gestureView.frame.origin.y = newPosition
         }
         
@@ -78,8 +81,8 @@ extension BookViewController {
                 startPanAnimation(state: nextState)
             }
         case .changed:
-            let panZone = view.bounds.height - cardMinVisibleHeight - cardTopPadding
-            let panPosition = newPosition - cardTopPadding // position relative to the pan zone
+            let panZone = cardCollapsedY - cardExpandedY
+            let panPosition = newPosition - cardExpandedY // position relative to the pan zone
             let fractionCompleted = (isCardVisible ? panPosition : panZone - panPosition ) / panZone
             updatePanAnimation(fractionCompleted: fractionCompleted)
         case .ended:
@@ -120,9 +123,9 @@ extension BookViewController {
         let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
             switch state {
             case .expanded:
-                self.bookDetailsViewController.view.frame.origin.y = self.cardTopPadding
+                self.bookDetailsViewController.view.frame.origin.y = self.cardExpandedY
             case .collapsed:
-                self.bookDetailsViewController.view.frame.origin.y = self.view.bounds.height - self.cardMinVisibleHeight
+                self.bookDetailsViewController.view.frame.origin.y = self.cardCollapsedY
             }
         }
         

@@ -17,9 +17,10 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
     var spinnerView: UIView!
     
     var cardHeight: CGFloat!
-    let cardTopPadding: CGFloat = 40
+    let cardPadding: CGFloat = 40
     let cardStretchSection: CGFloat = 50
-    let cardMinVisibleHeight: CGFloat = 300
+    var cardExpandedY: CGFloat!
+    var cardCollapsedY: CGFloat!
     var isCardSetup = false
     var isCardVisible = false
     var panAnimationQueue: [UIViewPropertyAnimator] = []
