@@ -337,13 +337,13 @@ reading today, Jessica?</string>
                                     <action selector="closeTapped:" destination="zlc-RO-76g" eventType="touchUpInside" id="uE8-26-BlC"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DNz-MJ-bw4">
-                                <rect key="frame" x="353" y="62" width="28" height="9"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DNz-MJ-bw4">
+                                <rect key="frame" x="344" y="52" width="42" height="26"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="23.5" id="8wn-Cb-HRV"/>
-                                    <constraint firstAttribute="width" constant="28" id="dQr-bx-lcE"/>
+                                    <constraint firstAttribute="height" constant="26" id="RtZ-jo-4fn"/>
+                                    <constraint firstAttribute="width" constant="42" id="dQr-bx-lcE"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="ellipsis" catalog="system"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <connections>
                                     <action selector="showActions:" destination="zlc-RO-76g" eventType="touchUpInside" id="7Ks-KP-PPH"/>
                                 </connections>
@@ -352,20 +352,29 @@ reading today, Jessica?</string>
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ellipsis" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fPb-nV-01I">
+                                <rect key="frame" x="351" y="59" width="28" height="13"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="28" id="Oia-la-54f"/>
+                                    <constraint firstAttribute="height" constant="27.5" id="VRk-cf-eWd"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.91764705879999997" green="0.90980392160000001" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Cl6-tH-ufx" secondAttribute="bottom" id="02l-Eu-Rlr"/>
                             <constraint firstItem="PUw-ss-Ejr" firstAttribute="leading" secondItem="qfs-7U-XZA" secondAttribute="leading" constant="27" id="3Ok-xg-qP0"/>
                             <constraint firstItem="Cl6-tH-ufx" firstAttribute="top" secondItem="PUw-ss-Ejr" secondAttribute="bottom" constant="10.5" id="7Mo-d2-bl6"/>
+                            <constraint firstItem="Cl6-tH-ufx" firstAttribute="top" secondItem="fPb-nV-01I" secondAttribute="bottom" constant="8.5" id="CJQ-fC-M6Q"/>
                             <constraint firstItem="sKu-lH-KT8" firstAttribute="top" secondItem="PUw-ss-Ejr" secondAttribute="bottom" constant="23" id="Efm-cP-2CU"/>
                             <constraint firstItem="Cl6-tH-ufx" firstAttribute="leading" secondItem="qfs-7U-XZA" secondAttribute="leading" id="EnJ-cJ-Bbe"/>
                             <constraint firstItem="Cl6-tH-ufx" firstAttribute="trailing" secondItem="qfs-7U-XZA" secondAttribute="trailing" id="Nge-P5-1qQ"/>
-                            <constraint firstItem="DNz-MJ-bw4" firstAttribute="top" secondItem="qfs-7U-XZA" secondAttribute="top" constant="11" id="dwY-na-zYN"/>
+                            <constraint firstItem="qfs-7U-XZA" firstAttribute="trailing" secondItem="fPb-nV-01I" secondAttribute="trailing" constant="35" id="ciZ-KO-CaI"/>
+                            <constraint firstItem="DNz-MJ-bw4" firstAttribute="top" secondItem="qfs-7U-XZA" secondAttribute="top" constant="8" id="dwY-na-zYN"/>
                             <constraint firstItem="PUw-ss-Ejr" firstAttribute="top" secondItem="qfs-7U-XZA" secondAttribute="top" constant="13" id="ibk-gF-Pxr"/>
                             <constraint firstItem="qfs-7U-XZA" firstAttribute="trailing" secondItem="sKu-lH-KT8" secondAttribute="trailing" constant="52" id="uwR-WD-Juh"/>
                             <constraint firstItem="sKu-lH-KT8" firstAttribute="leading" secondItem="qfs-7U-XZA" secondAttribute="leading" constant="53" id="xlM-eg-GKT"/>
-                            <constraint firstItem="qfs-7U-XZA" firstAttribute="trailing" secondItem="DNz-MJ-bw4" secondAttribute="trailing" constant="33" id="yof-nw-Tbp"/>
+                            <constraint firstItem="qfs-7U-XZA" firstAttribute="trailing" secondItem="DNz-MJ-bw4" secondAttribute="trailing" constant="28" id="yof-nw-Tbp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qfs-7U-XZA"/>
                     </view>
