@@ -13,7 +13,7 @@ class StorageManager {
     
     private var bookshelfID: Int = 0
     private(set) var bookshelves: [Bookshelf] = []
-    private var bookshelvesForIsbn: [Int: [Int]] = [:]
+    private var bookshelvesForId: [Int: [Int]] = [:]
     
     private init() {
         let description = "\"Turning the envelope over, his hand trembling, Harry saw a purple wax seal bearing a coat of arms; a lion, an eagle, a badger and a snake surrounding a large letter 'H'.\"<br /><br />Harry Potter has never even heard of Hogwarts when the letters start dropping on the doormat at number four, Privet Drive. Addressed in green ink on yellowish parchment with a purple seal, they are swiftly confiscated by his grisly aunt and uncle. Then, on Harry's eleventh birthday, a great beetle-eyed giant of a man called Rubeus Hagrid bursts in with some astonishing news: Harry Potter is a wizard, and he has a place at Hogwarts School of Witchcraft and Wizardry. An incredible adventure is about to begin!"
@@ -41,7 +41,7 @@ class StorageManager {
     
     func removeAllBookshelves() {
         bookshelves = []
-        bookshelvesForIsbn = [:]
+        bookshelvesForId = [:]
     }
     
     func moveBookshelf(at sourceIndex: Int, to destinationIndex: Int) {
@@ -51,8 +51,8 @@ class StorageManager {
     
     func addBook(book: Book, to bookshelf: Bookshelf) {
         if bookshelf.addBook(book: book.with(dateAddedToShelf: Date())) {
-            let oldValue = bookshelvesForIsbn[book.id] ?? []
-            bookshelvesForIsbn.updateValue(oldValue + [bookshelf.id], forKey: book.id)
+            let oldValue = bookshelvesForId[book.id] ?? []
+            bookshelvesForId.updateValue(oldValue + [bookshelf.id], forKey: book.id)
         }
     }
     
@@ -68,13 +68,13 @@ class StorageManager {
     
     func removeBookEverywhere(book: Book) {
         let effectedBookshelves = bookshelves.filter {
-            bookshelvesForIsbn[book.id]!.contains($0.id)
+            bookshelvesForId[book.id]!.contains($0.id)
         }
         
         for bookshelf in effectedBookshelves {
             bookshelf.removeBook(book: book)
         }
-        bookshelvesForIsbn.removeValue(forKey: book.id)
+        bookshelvesForId.removeValue(forKey: book.id)
     }
     
     func removeAllBooks(from bookshelf: Bookshelf) {
@@ -85,7 +85,7 @@ class StorageManager {
     }
     
     func updateBookshelves(for id: Int, without bookshelf: Bookshelf) {
-        var bookshelfIds = bookshelvesForIsbn[id]!
+        var bookshelfIds = bookshelvesForId[id]!
         
         for i in 0..<bookshelfIds.count {
             if bookshelfIds[i] == bookshelf.id {
@@ -94,17 +94,17 @@ class StorageManager {
             }
         }
         if bookshelfIds.isEmpty {
-            bookshelvesForIsbn.removeValue(forKey: id)
+            bookshelvesForId.removeValue(forKey: id)
         } else {
-            bookshelvesForIsbn.updateValue(bookshelfIds, forKey: id)
+            bookshelvesForId.updateValue(bookshelfIds, forKey: id)
         }
     }
     
     func bookIsInAShelf(book: Book) -> Bool {
-        return bookshelvesForIsbn[book.id] != nil
+        return bookshelvesForId[book.id] != nil
     }
     
     func numberOfBookshelves(with book: Book) -> Int {
-        return bookshelvesForIsbn[book.id]?.count ?? 0
+        return bookshelvesForId[book.id]?.count ?? 0
     }
 }
