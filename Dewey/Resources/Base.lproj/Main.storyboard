@@ -33,7 +33,7 @@
                                                         <constraint firstAttribute="width" constant="384" id="9p1-et-9E7"/>
                                                         <constraint firstAttribute="height" constant="44" id="Q7W-Yb-ZUP"/>
                                                     </constraints>
-                                                    <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                                                 </searchBar>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vyG-wP-ZVe">
                                                     <rect key="frame" x="25" y="31" width="366" height="77"/>
@@ -447,7 +447,7 @@ reading today, Jessica?</string>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             <connections>
                                 <outlet property="delegate" destination="mbj-SA-6Oj" id="Rd7-6E-ixA"/>
                             </connections>
@@ -613,7 +613,7 @@ reading today, Jessica?</string>
                                     <constraint firstAttribute="height" constant="34" id="vwQ-za-yqc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="doneTapped:" destination="fCU-NU-Q5k" eventType="editingDidEndOnExit" id="Wov-Vw-HR9"/>
                                     <outlet property="delegate" destination="fCU-NU-Q5k" id="czL-Wr-XML"/>
