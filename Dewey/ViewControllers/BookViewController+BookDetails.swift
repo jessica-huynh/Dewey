@@ -64,7 +64,7 @@ extension BookViewController {
         
         gesture.setTranslation(.zero, in: view)
         
-        let inExpandArea: Bool = gestureView.frame.origin.y < (view.bounds.height/2 - 20)
+        let inExpandArea: Bool = gestureView.frame.origin.y < (view.bounds.height/2 - 60)
         switch gesture.state {
         case .began:
             if !panAnimationQueue.isEmpty {
