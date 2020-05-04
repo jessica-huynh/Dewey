@@ -47,11 +47,7 @@ class BookshelfOptionsViewController: UIViewController, UITableViewDataSource, U
     }
     
     @objc func cancelTapped(_ sender: Any) {
-        if navigationController?.viewControllers.first == self {
-            dismiss(animated: true, completion: nil)
-        } else {
-            navigationController?.popViewController(animated: true)
-        }
+        dismiss()
     }
     
     @objc func addBookshelf(_ sender: Any) {

@@ -52,6 +52,7 @@
 		C8E17F3B245CA0AF008C879C /* UIViewController+ResignFirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E17F3A245CA0AF008C879C /* UIViewController+ResignFirstResponder.swift */; };
 		C8EC3BD32460912900BB0044 /* ColourAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EC3BD22460912900BB0044 /* ColourAnalysis.swift */; };
 		C8EC3BD52460913B00BB0044 /* Colour.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EC3BD42460913A00BB0044 /* Colour.swift */; };
+		C8EC3BD72460A9FC00BB0044 /* UIViewController+Dismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EC3BD62460A9FC00BB0044 /* UIViewController+Dismiss.swift */; };
 		C8FBBE1824564F8E00CC1B17 /* BookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FBBE1724564F8E00CC1B17 /* BookViewController.swift */; };
 		C8FFC59F245CEC35001CFE55 /* BookshelfSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8FFC59E245CEC35001CFE55 /* BookshelfSectionHeaderView.xib */; };
 		C8FFC5A1245CEC73001CFE55 /* BookshelfSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FFC5A0245CEC73001CFE55 /* BookshelfSectionHeaderView.swift */; };
@@ -107,6 +108,7 @@
 		C8E17F3A245CA0AF008C879C /* UIViewController+ResignFirstResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ResignFirstResponder.swift"; sourceTree = "<group>"; };
 		C8EC3BD22460912900BB0044 /* ColourAnalysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColourAnalysis.swift; sourceTree = "<group>"; };
 		C8EC3BD42460913A00BB0044 /* Colour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colour.swift; sourceTree = "<group>"; };
+		C8EC3BD62460A9FC00BB0044 /* UIViewController+Dismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Dismiss.swift"; sourceTree = "<group>"; };
 		C8FBBE1724564F8E00CC1B17 /* BookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewController.swift; sourceTree = "<group>"; };
 		C8FFC59E245CEC35001CFE55 /* BookshelfSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookshelfSectionHeaderView.xib; sourceTree = "<group>"; };
 		C8FFC5A0245CEC73001CFE55 /* BookshelfSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookshelfSectionHeaderView.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				C8AF525A245F7702005DEE36 /* String+AttributedString.swift */,
 				C8AF5260245F989D005DEE36 /* UIView+DropShadow.swift */,
 				C8AF5268245FA724005DEE36 /* UIView+SpinnerView.swift */,
+				C8EC3BD62460A9FC00BB0044 /* UIViewController+Dismiss.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				C8DE661F245E31BA00568C2B /* iTunesSearchAPI.swift in Sources */,
 				C8CEF9C72458E57A008182F0 /* BookshelvesViewController.swift in Sources */,
 				C893DB6A24560912006CE0BB /* BookDetailsViewController.swift in Sources */,
+				C8EC3BD72460A9FC00BB0044 /* UIViewController+Dismiss.swift in Sources */,
 				C8AF525B245F7702005DEE36 /* String+AttributedString.swift in Sources */,
 				C85920D9245B3D130033DBD2 /* BookshelfDetailsViewController+Edit.swift in Sources */,
 				C8EC3BD52460913B00BB0044 /* Colour.swift in Sources */,
