@@ -14,9 +14,10 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
     var bookDetailsViewController: BookDetailsViewController!
     var originatingBookshelf: Bookshelf?
     var didEditBookshelves = false
+    var spinnerView: UIView!
     
     var cardHeight: CGFloat!
-    let cardTopPadding: CGFloat = 20
+    let cardTopPadding: CGFloat = 40
     let cardStretchSection: CGFloat = 50
     let cardMinVisibleHeight: CGFloat = 300
     var cardVisible = false
@@ -29,22 +30,59 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
         case expanded, collapsed
     }
     
-    @IBOutlet weak var bookDetailsView: UIView!
     @IBOutlet weak var bookCover: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        spinnerView = createSpinnerView(with: UIColor(hexString: "#EEECE4"))
+        showSpinner(spinnerView: spinnerView)
         setupBookCover()
+        setupBackground()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         setupCard()
-        bookCover.dropShadow()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        navigationController?.navigationBar.barTintColor = UIColor(hexString: "#EEECE4")
         
         if didEditBookshelves {
             NotificationCenter.default.post(name: .updatedBookshelves, object: self)
         }
+    }
+    
+    func setupBackground() {
+        if book.coverLarge.isEmpty {
+            removeSpinner(spinnerView: self.spinnerView)
+            return
+        }
+        
+        SightEngineAPI.request(for: .analyzeImage(url: book.coverLarge)) {
+            [weak self] response in
+            guard let self = self else { return }
+            
+            let analyzeImageResponse = try AnalyzeImageResponse(data: response.data)
+            let dominantColour = analyzeImageResponse.colourAnalysis.dominantColour
+            
+            if dominantColour.hex != "#ffffff" {
+                self.addBackgroundGradient(with: UIColor(hexString: dominantColour.hex).lighten(by: 10))
+            }
+            self.removeSpinner(spinnerView: self.spinnerView)
+        }
+    }
+    
+    func addBackgroundGradient(with colour: UIColor) {
+        let gradient = CAGradientLayer()
+        gradient.frame = view.bounds
+        gradient.colors = [colour.cgColor, UIColor.white.cgColor]
+        view.layer.insertSublayer(gradient, at: 0)
+        
+        navigationController?.navigationBar.barTintColor = colour
+        navigationItem.leftBarButtonItem?.tintColor = colour.lighten(by: 50)
+        navigationItem.rightBarButtonItem?.tintColor = colour.lighten(by: 50)
     }
     
     func setupBookCover() {
@@ -57,10 +95,11 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
                 .scaleFactor(UIScreen.main.scale),
                 .cacheOriginalImage
             ])
+        bookCover.dropShadow()
     }
     
-    @IBAction func closeTapped(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+    @IBAction func backTapped(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func showActions(_ sender: Any) {
