@@ -46,5 +46,7 @@ class BookDetailsViewController: UIViewController {
     }
     
     @IBAction func openTapped(_ sender: Any) {
+        guard let url = URL(string: book.url) else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 }
