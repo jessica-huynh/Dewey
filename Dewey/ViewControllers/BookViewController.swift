@@ -36,6 +36,7 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
         super.viewDidLoad()
         setupBookCover()
         setupCard()
+        bookCover.dropShadow()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

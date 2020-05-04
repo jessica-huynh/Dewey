@@ -32,6 +32,7 @@
 		C893DB6A24560912006CE0BB /* BookDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C893DB6924560912006CE0BB /* BookDetailsViewController.swift */; };
 		C8AEDA4F245B200C005B2DFE /* UITableView+SelectAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AEDA4E245B200C005B2DFE /* UITableView+SelectAll.swift */; };
 		C8AF525B245F7702005DEE36 /* String+AttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AF525A245F7702005DEE36 /* String+AttributedString.swift */; };
+		C8AF5261245F989D005DEE36 /* UIView+DropShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AF5260245F989D005DEE36 /* UIView+DropShadow.swift */; };
 		C8C4AC7D24572C620089F29E /* BookDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8C4AC7C24572C620089F29E /* BookDetailsViewController.xib */; };
 		C8CEF9C12458A815008182F0 /* BookDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8CEF9C02458A815008182F0 /* BookDetailsTableViewCell.xib */; };
 		C8CEF9C32458AF7C008182F0 /* BookDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CEF9C22458AF7C008182F0 /* BookDetailsTableViewCell.swift */; };
@@ -80,6 +81,7 @@
 		C893DB6924560912006CE0BB /* BookDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsViewController.swift; sourceTree = "<group>"; };
 		C8AEDA4E245B200C005B2DFE /* UITableView+SelectAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+SelectAll.swift"; sourceTree = "<group>"; };
 		C8AF525A245F7702005DEE36 /* String+AttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+AttributedString.swift"; sourceTree = "<group>"; };
+		C8AF5260245F989D005DEE36 /* UIView+DropShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+DropShadow.swift"; sourceTree = "<group>"; };
 		C8C4AC7C24572C620089F29E /* BookDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookDetailsViewController.xib; sourceTree = "<group>"; };
 		C8CEF9C02458A815008182F0 /* BookDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookDetailsTableViewCell.xib; sourceTree = "<group>"; };
 		C8CEF9C22458AF7C008182F0 /* BookDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsTableViewCell.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				C8386FCD245E070000B86713 /* UIColor+Hex.swift */,
 				C8DE661B245E247800568C2B /* UINavigationController+Custom.swift */,
 				C8AF525A245F7702005DEE36 /* String+AttributedString.swift */,
+				C8AF5260245F989D005DEE36 /* UIView+DropShadow.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 				C816D70424547FC000078BFE /* AppDelegate.swift in Sources */,
 				C816D70624547FC000078BFE /* SceneDelegate.swift in Sources */,
 				C8DE661C245E247800568C2B /* UINavigationController+Custom.swift in Sources */,
+				C8AF5261245F989D005DEE36 /* UIView+DropShadow.swift in Sources */,
 				C816D7292454EE3B00078BFE /* BookshelfTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
