@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIView {
-    func dropShadow() {
+    func addDropShadow() {
         layer.masksToBounds = false
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.5
