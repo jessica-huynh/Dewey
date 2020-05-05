@@ -34,9 +34,13 @@ extension UIViewController {
         return view.createSpinnerView(at: position, with: backgroundColour)
     }
     
-    func showSpinner(spinnerView: UIView) {
+    func showSpinner(spinnerView: UIView, belowNavBar: Bool = false) {
         if let navigationController = navigationController {
-            navigationController.view.insertSubview(spinnerView, belowSubview: navigationController.navigationBar)
+            if belowNavBar {
+                navigationController.view.insertSubview(spinnerView, belowSubview: navigationController.navigationBar)
+            } else {
+                navigationController.view.addSubview(spinnerView)
+            }
         } else {
             view.showSpinner(spinnerView: spinnerView)
         }
