@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Book: Codable, Equatable {
+class Book: Codable, Equatable {
     let id: Int
     let url, title, author, description: String
     let artworkUrl100: String?
@@ -18,10 +18,11 @@ struct Book: Codable, Equatable {
     let averageUserRating: Double?
     let userRatingCount: Int?
     
-    var coverSmall: String { return Book.processCoverUrl(url: artworkUrl100, size: 200) }
-    var coverLarge: String { return Book.processCoverUrl(url: artworkUrl100, size: 900) }
+    lazy var coverSmall: String = Book.processCoverUrl(url: artworkUrl100, size: 200)
+    lazy var coverLarge: String = Book.processCoverUrl(url: artworkUrl100, size: 900)
     var publicationYear: String { return String(publicationDate.prefix(4)) }
     var dateAddedToShelf: Date?
+    var dominantColour: Colour?
 
     enum CodingKeys: String, CodingKey {
         case genres, description, averageUserRating, userRatingCount, artworkUrl100
@@ -30,6 +31,32 @@ struct Book: Codable, Equatable {
         case title = "trackName"
         case publicationDate = "releaseDate"
         case author = "artistName"
+    }
+    
+    init(id: Int,
+         url: String,
+         title: String,
+         author: String,
+         description: String,
+         artworkUrl100: String?,
+         publicationDate: String,
+         genres: [String],
+         averageUserRating: Double?,
+         userRatingCount: Int?,
+         dateAddedToShelf: Date?,
+         dominantColour: Colour?) {
+        self.id = id
+        self.url = url
+        self.title = title
+        self.author = author
+        self.description = description
+        self.artworkUrl100 = artworkUrl100
+        self.publicationDate = publicationDate
+        self.genres = genres
+        self.averageUserRating = averageUserRating
+        self.userRatingCount = userRatingCount
+        self.dateAddedToShelf = dateAddedToShelf
+        self.dominantColour = dominantColour
     }
     
     static func processCoverUrl(url: String?, size: Int) -> String {
@@ -44,11 +71,23 @@ struct Book: Codable, Equatable {
 }
 
 extension Book {
-    init(data: Data) throws {
-        self = try JSONDecoder().decode(Book.self, from: data)
+    convenience init(data: Data) throws {
+        let me = try JSONDecoder().decode(Book.self, from: data)
+        self.init(id: me.id,
+                  url: me.url,
+                  title: me.title,
+                  author: me.author,
+                  description: me.description,
+                  artworkUrl100: me.artworkUrl100,
+                  publicationDate: me.publicationDate,
+                  genres: me.genres,
+                  averageUserRating: me.averageUserRating,
+                  userRatingCount: me.userRatingCount,
+                  dateAddedToShelf: me.dateAddedToShelf,
+                  dominantColour: me.dominantColour)
     }
     
-    func with(dateAddedToShelf: Date) -> Book {
+    func with(dateAddedToShelf: Date? = nil) -> Book {
         return Book(id: self.id,
                     url: self.url,
                     title: self.title,
@@ -59,6 +98,7 @@ extension Book {
                     genres: self.genres,
                     averageUserRating: self.averageUserRating,
                     userRatingCount: self.userRatingCount,
-                    dateAddedToShelf: dateAddedToShelf)
+                    dateAddedToShelf: dateAddedToShelf,
+                    dominantColour: self.dominantColour)
         }
 }

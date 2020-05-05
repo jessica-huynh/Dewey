@@ -17,7 +17,7 @@ class StorageManager {
     
     private init() {
         let description = "\"Turning the envelope over, his hand trembling, Harry saw a purple wax seal bearing a coat of arms; a lion, an eagle, a badger and a snake surrounding a large letter 'H'.\"<br /><br />Harry Potter has never even heard of Hogwarts when the letters start dropping on the doormat at number four, Privet Drive. Addressed in green ink on yellowish parchment with a purple seal, they are swiftly confiscated by his grisly aunt and uncle. Then, on Harry's eleventh birthday, a great beetle-eyed giant of a man called Rubeus Hagrid bursts in with some astonishing news: Harry Potter is a wizard, and he has a place at Hogwarts School of Witchcraft and Wizardry. An incredible adventure is about to begin!"
-        let book1 = Book(id: 1, url: "https://books.apple.com/us/book/harry-potter-and-the-sorcerers-stone-enhanced-edition/id1037193578?uo=4", title: "Harry Potter and the Sorcerer's Stone (Enhanced Edition)", author: "J.K. Rowling", description: description, artworkUrl100: "https://is4-ssl.mzstatic.com/image/thumb/Publication3/v4/d2/c0/2f/d2c02f2a-a388-3310-95e2-34ab4d65d0cd/source/100x100bb.jpg", publicationDate: "2015-11-20T08:00:00Z", genres: ["Action & Adventure"], averageUserRating: nil, userRatingCount: nil, dateAddedToShelf: nil)
+        let book1 = Book(id: 1, url: "https://books.apple.com/us/book/harry-potter-and-the-sorcerers-stone-enhanced-edition/id1037193578?uo=4", title: "Harry Potter and the Sorcerer's Stone (Enhanced Edition)", author: "J.K. Rowling", description: description, artworkUrl100: "https://is4-ssl.mzstatic.com/image/thumb/Publication3/v4/d2/c0/2f/d2c02f2a-a388-3310-95e2-34ab4d65d0cd/source/100x100bb.jpg", publicationDate: "2015-11-20T08:00:00Z", genres: ["Action & Adventure"], averageUserRating: nil, userRatingCount: nil, dateAddedToShelf: nil, dominantColour: nil)
         
         addBookshelf(with: "Favourites", books: [book1])
     }
@@ -106,5 +106,18 @@ class StorageManager {
     
     func numberOfBookshelves(with book: Book) -> Int {
         return bookshelvesForId[book.id]?.count ?? 0
+    }
+    
+    func updateDominantColour(for book: Book, with dominantColour: Colour) {
+        guard let bookshelfIds = bookshelvesForId[book.id] else { return }
+        let effectedBookshelves = bookshelves.filter {
+            bookshelfIds.contains($0.id)
+        }
+        for bookshelf in effectedBookshelves {
+            for book in bookshelf.books {
+                book.dominantColour = dominantColour
+                break
+            }
+        }
     }
 }
