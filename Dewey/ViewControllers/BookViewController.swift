@@ -7,14 +7,20 @@
 //
 
 import UIKit
+import AVFoundation
 
 class BookViewController: UIViewController, BookshelfOptionsViewControllerDelegate {
     let storageManager = StorageManager.instance
     var book: Book!
-    var bookDetailsViewController: BookDetailsViewController!
     var originatingBookshelf: Bookshelf?
+    
     var didEditBookshelves = false
+    var bookDetailsViewController: BookDetailsViewController!
+    var finalBookCoverFrame: CGRect!
+    var bookCoverDropShadow: UIView!
+    
     var spinnerView: UIView!
+    var isLoading: Bool = true
     
     var cardHeight: CGFloat!
     let cardPadding: CGFloat = 40
@@ -22,11 +28,11 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
     var cardExpandedY: CGFloat!
     var cardCollapsedY: CGFloat!
     var isCardSetup = false
-    var isCardVisible = false
+    var wasCardSetupStarted = false
+    var wasCardPresented = false
+    var isCardExpanded = false
+    
     var panAnimationQueue: [UIViewPropertyAnimator] = []
-    var nextState: CardState {
-        return isCardVisible ? .collapsed : .expanded
-    }
     
     enum CardState {
         case expanded, collapsed
@@ -37,9 +43,8 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         spinnerView = createSpinnerView(with: UIColor(hexString: "#EEECE4"))
-        //showSpinner(spinnerView: spinnerView)
-        setupBookCover()
-        //setupBackground()
+        showSpinner(spinnerView: spinnerView)
+        setupBackground()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,9 +57,11 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        if !isCardSetup {
-            setupCard()
-            isCardSetup = true
+        if !wasCardSetupStarted {
+            // Setup card after book cover is loaded so we can determine the collapsed
+            // Y position of the card based on the book cover height
+            setupBookCover(completionHandler: { self.setupCard() })
+            self.wasCardSetupStarted = true
         }
     }
     
@@ -69,37 +76,50 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
     
     // MARK: - Setup Helpers
     func setupBackground() {
-        if book.coverLarge.isEmpty {
-            removeSpinner(spinnerView: self.spinnerView)
+        if let dominantColour = book.dominantColour {
+            addBackgroundGradient(with: UIColor(hexString: dominantColour.hex))
+        } else if !book.coverLarge.isEmpty {
+            SightEngineAPI.request(for: .analyzeImage(url: book.coverLarge)) {
+                [weak self] response in
+                guard let self = self else { return }
+                
+                let analyzeImageResponse = try AnalyzeImageResponse(data: response.data)
+                let dominantColour = analyzeImageResponse.colourAnalysis.dominantColour
+                
+                self.addBackgroundGradient(with: UIColor(hexString: dominantColour.hex))
+                self.book.dominantColour = dominantColour
+                self.storageManager.updateDominantColour(for: self.book, with: dominantColour)
+                self.endBackgroundSetup()
+            }
             return
         }
+        endBackgroundSetup()
+    }
+    
+    func endBackgroundSetup() {
+        removeSpinner(spinnerView: spinnerView)
+        isLoading = false
         
-        SightEngineAPI.request(for: .analyzeImage(url: book.coverLarge)) {
-            [weak self] response in
-            guard let self = self else { return }
-            
-            let analyzeImageResponse = try AnalyzeImageResponse(data: response.data)
-            let dominantColour = analyzeImageResponse.colourAnalysis.dominantColour
-            
-            if dominantColour.hex != "#ffffff" {
-                self.addBackgroundGradient(with: UIColor(hexString: dominantColour.hex).lighten(by: 10))
-            }
-            self.removeSpinner(spinnerView: self.spinnerView)
+        if !wasCardPresented && isCardSetup {
+            wasCardPresented = true
+            presentCard()
         }
     }
     
     func addBackgroundGradient(with colour: UIColor) {
+        let backgroundColour = colour.isLight()! ? colour.darken(by: 10) : colour.lighten(by: 10)
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
-        gradient.colors = [colour.cgColor, UIColor.white.cgColor]
+        gradient.colors = [backgroundColour.cgColor, UIColor.white.cgColor]
         view.layer.insertSublayer(gradient, at: 0)
         
-        navigationController?.navigationBar.barTintColor = colour
-        navigationItem.leftBarButtonItem?.tintColor = colour.lighten(by: 50)
-        navigationItem.rightBarButtonItem?.tintColor = colour.lighten(by: 50)
+        let barButtonColour = colour.isLight()! ? colour.darken(by: 40) : colour.lighten(by: 40)
+        navigationController?.navigationBar.barTintColor = backgroundColour
+        navigationItem.leftBarButtonItem?.tintColor = barButtonColour
+        navigationItem.rightBarButtonItem?.tintColor = barButtonColour
     }
     
-    func setupBookCover() {
+    func setupBookCover(completionHandler: @escaping () -> Void) {
         let url = URL(string: book.coverLarge)
         bookCover.kf.indicatorType = .activity
         bookCover.kf.setImage(
@@ -108,8 +128,26 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
             options: [
                 .scaleFactor(UIScreen.main.scale),
                 .cacheOriginalImage
-            ])
-        bookCover.dropShadow()
+        ]) {
+            result in
+            var bookCoverAspectRatio: CGSize!
+            switch result {
+            case .success(let value):
+                bookCoverAspectRatio = CGSize(width: value.image.size.width, height: value.image.size.height)
+            case .failure(_):
+                bookCoverAspectRatio = UIImage(named: "book-cover-placeholder")!.size
+            }
+            self.finalBookCoverFrame = AVMakeRect(aspectRatio: bookCoverAspectRatio,
+                                                  insideRect: self.bookCover.frame)
+            self.addBookDropShadow()
+            completionHandler()
+        }
+    }
+    
+    func addBookDropShadow() {
+        bookCoverDropShadow = UIView(frame: finalBookCoverFrame)
+        bookCoverDropShadow.addDropShadow()
+        view.insertSubview(bookCoverDropShadow , belowSubview: bookCover)
     }
     
     // MARK: - Actions

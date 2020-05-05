@@ -14,18 +14,37 @@ extension BookViewController {
     func setupCard() {
         cardHeight = view.bounds.height - cardPadding + cardStretchSection
         cardExpandedY = cardPadding
-        cardCollapsedY = bookCover.frame.origin.y + bookCover.bounds.height + cardPadding
+        cardCollapsedY = finalBookCoverFrame.origin.y + finalBookCoverFrame.height + cardPadding
         
         bookDetailsViewController = BookDetailsViewController(nibName: "BookDetailsViewController", bundle: nil)
         bookDetailsViewController.book = book
         addChild(bookDetailsViewController)
         view.addSubview(bookDetailsViewController.view)
 
+        // Card frame starts at bottom of screen and slides by calling `presentCard()`
         bookDetailsViewController.view.frame = CGRect(x: 0,
-                                                      y: cardCollapsedY,
+                                                      y: view.bounds.height,
                                                       width: view.bounds.width,
                                                       height: cardHeight)
-        
+        if !isLoading && !wasCardPresented {
+            wasCardPresented = true
+            presentCard()
+        }
+        isCardSetup = true
+    }
+    
+    func presentCard() {
+        let cardAnimator = UIViewPropertyAnimator(duration: 0.5, dampingRatio: 1) {
+            self.bookDetailsViewController.view.frame.origin.y = self.cardCollapsedY
+        }
+        cardAnimator.addCompletion() {
+            _ in
+            self.addCardTapGestures()
+        }
+        cardAnimator.startAnimation()
+    }
+    
+    func addCardTapGestures() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleCardTap(gesture:)))
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handleCardPan(gesture:)))
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(handleCardSwipe(gesture:)))
@@ -42,7 +61,7 @@ extension BookViewController {
     // MARK: - Gesture Handlers
     @objc func handleCardTap(gesture: UITapGestureRecognizer) {
         if gesture.state == .ended {
-            toggleBookDetails(state: nextState)
+            toggleBookDetails(state: isCardExpanded ? .collapsed : .expanded)
         }
     }
     
@@ -76,17 +95,17 @@ extension BookViewController {
                 }
                 panAnimationQueue.removeAll()
                 startPanAnimation(state: inExpandArea ? .collapsed : .expanded)
-                isCardVisible = inExpandArea ? true : false
+                isCardExpanded = inExpandArea ? true : false
             } else {
-                startPanAnimation(state: nextState)
+                startPanAnimation(state: isCardExpanded ? .collapsed : .expanded)
             }
         case .changed:
             let panZone = cardCollapsedY - cardExpandedY
             let panPosition = newPosition - cardExpandedY // position relative to the pan zone
-            let fractionCompleted = (isCardVisible ? panPosition : panZone - panPosition ) / panZone
+            let fractionCompleted = (isCardExpanded ? panPosition : panZone - panPosition ) / panZone
             updatePanAnimation(fractionCompleted: fractionCompleted)
         case .ended:
-            if (inExpandArea && isCardVisible) || (!inExpandArea && !isCardVisible) {
+            if (inExpandArea && isCardExpanded) || (!inExpandArea && !isCardExpanded) {
                 for animation in panAnimationQueue {
                     // Reverse pan animation if there will be no changes in card state
                     animation.isReversed = true
@@ -110,8 +129,10 @@ extension BookViewController {
             switch state {
             case .expanded:
                 self.bookCover.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+                self.bookCoverDropShadow.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
             case .collapsed:
                 self.bookCover.transform = .identity
+                self.bookCoverDropShadow.transform = .identity
             }
         }
         
@@ -131,7 +152,7 @@ extension BookViewController {
         
         frameAnimator.addCompletion {
             _ in
-            self.isCardVisible = state == .expanded ? true : false
+            self.isCardExpanded = state == .expanded ? true : false
             self.panAnimationQueue.removeAll()
         }
         
