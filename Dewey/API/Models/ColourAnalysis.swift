@@ -10,7 +10,7 @@ import Foundation
 
 struct ColourAnalysis: Codable {
     let dominantColour: Colour
-    let accentColours, otherColours: [Colour]
+    let accentColours, otherColours: [Colour]?
     
     enum CodingKeys: String, CodingKey {
         case dominantColour = "dominant"
