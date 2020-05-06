@@ -1,23 +1,17 @@
 //
-//  Bookshelf.swift
-//  Dewey
+//  Bookshelf+CoreDataClass.swift
+//  
 //
-//  Created by Jessica Huynh on 2020-04-25.
-//  Copyright © 2020 Jessica Huynh. All rights reserved.
+//  Created by Jessica Huynh on 2020-05-05.
+//
 //
 
 import Foundation
+import CoreData
 
-class Bookshelf: Equatable {
-    let id: Int
-    var name: String
+@objc(Bookshelf)
+public class Bookshelf: NSManagedObject {
     var books: [Book] = []
-    
-    init(id: Int, name: String, books: [Book] = []) {
-        self.id = id
-        self.name = name
-        self.books = books
-    }
     
     func contains(book: Book) -> Bool {
         return books.contains(where: { $0 == book })
@@ -40,9 +34,5 @@ class Bookshelf: Equatable {
     
     func removeAllBooks() {
         books = []
-    }
-    
-    static func ==(lhs: Bookshelf, rhs: Bookshelf) -> Bool {
-        return lhs.id == rhs.id
     }
 }

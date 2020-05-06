@@ -9,14 +9,13 @@
 import Foundation
 
 class Book: Codable, Equatable {
-    let id: Int
+    let id: Int32
     let url, title, author, description: String
     let artworkUrl100: String?
     /// A string representing the publication date in ISO 8601 format (i.e. YYYY-MM-DD)
     let publicationDate: String
-    let genres: [String]
     let averageUserRating: Double?
-    let userRatingCount: Int?
+    let userRatingCount: Int32?
     
     lazy var coverSmall: String = Book.processCoverUrl(url: artworkUrl100, size: 200)
     lazy var coverLarge: String = Book.processCoverUrl(url: artworkUrl100, size: 900)
@@ -25,7 +24,7 @@ class Book: Codable, Equatable {
     var dominantColour: Colour?
 
     enum CodingKeys: String, CodingKey {
-        case genres, description, averageUserRating, userRatingCount, artworkUrl100
+        case description, averageUserRating, userRatingCount, artworkUrl100
         case url = "trackViewUrl"
         case id = "trackId"
         case title = "trackName"
@@ -33,16 +32,15 @@ class Book: Codable, Equatable {
         case author = "artistName"
     }
     
-    init(id: Int,
+    init(id: Int32,
          url: String,
          title: String,
          author: String,
          description: String,
          artworkUrl100: String?,
          publicationDate: String,
-         genres: [String],
          averageUserRating: Double?,
-         userRatingCount: Int?,
+         userRatingCount: Int32?,
          dateAddedToShelf: Date?,
          dominantColour: Colour?) {
         self.id = id
@@ -52,7 +50,6 @@ class Book: Codable, Equatable {
         self.description = description
         self.artworkUrl100 = artworkUrl100
         self.publicationDate = publicationDate
-        self.genres = genres
         self.averageUserRating = averageUserRating
         self.userRatingCount = userRatingCount
         self.dateAddedToShelf = dateAddedToShelf
@@ -80,7 +77,6 @@ extension Book {
                   description: me.description,
                   artworkUrl100: me.artworkUrl100,
                   publicationDate: me.publicationDate,
-                  genres: me.genres,
                   averageUserRating: me.averageUserRating,
                   userRatingCount: me.userRatingCount,
                   dateAddedToShelf: me.dateAddedToShelf,
@@ -95,7 +91,6 @@ extension Book {
                     description: self.description,
                     artworkUrl100: self.artworkUrl100,
                     publicationDate: self.publicationDate,
-                    genres: self.genres,
                     averageUserRating: self.averageUserRating,
                     userRatingCount: self.userRatingCount,
                     dateAddedToShelf: dateAddedToShelf,

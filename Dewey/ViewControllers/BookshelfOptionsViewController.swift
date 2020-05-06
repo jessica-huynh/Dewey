@@ -71,7 +71,7 @@ class BookshelfOptionsViewController: UIViewController, UITableViewDataSource, U
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "BookshelfCell", for: indexPath)
         cell.textLabel?.textColor =
-            (storageManager.bookshelves[indexPath.row].id == bookshelfToDisable?.id) ? UIColor.gray : UIColor.black
+            (storageManager.bookshelves[indexPath.row] == bookshelfToDisable) ? UIColor.gray : UIColor.black
         cell.textLabel?.text = storageManager.bookshelves[indexPath.row].name
         cell.backgroundColor = UIColor.clear
         return cell

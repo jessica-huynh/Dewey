@@ -92,8 +92,8 @@ class BookshelfDetailsViewController: UIViewController {
         }
         
         if didEditBookshelf {
-            if !navBarTitle.text!.isEmpty {
-                bookshelf.name = navBarTitle.text!
+            if !navBarTitle.text!.isEmpty && bookshelf.name != navBarTitle.text! {
+                storageManager.updateBookshelf(bookshelf: bookshelf, name: navBarTitle.text!)
             }
             NotificationCenter.default.post(name: .updatedBookshelves, object: self)
         }
@@ -114,7 +114,10 @@ class BookshelfDetailsViewController: UIViewController {
         navBarTitle.isEnabled = tableView.isEditing
         navBarTitle.borderStyle = tableView.isEditing ? .roundedRect : .none
         if !tableView.isEditing {
-            bookshelf.name = navBarTitle.text!.isEmpty ? bookshelf.name : navBarTitle.text!
+            if !navBarTitle.text!.isEmpty {
+                storageManager.updateBookshelf(bookshelf: bookshelf,
+                                               name: navBarTitle.text!)
+            }
             navBarTitle.text = bookshelf.name
         }
         
