@@ -48,8 +48,8 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
         }
         
         spinnerView = createSpinnerView(with: UIColor(hexString: "#EEECE4"))
-        showSpinner(spinnerView: spinnerView)
-        setupBackground()
+        //showSpinner(spinnerView: spinnerView)
+        //setupBackground()
     }
     
     override func viewWillLayoutSubviews() {
@@ -170,7 +170,7 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
                 _ in
                 self.storageManager.removeBook(book: self.book, from: originatingBookshelf)
                 self.didEditBookshelves = true
-                ConfirmationHudView.present(inView: self.navigationController!.view, animated: true)
+                self.dismissAfterBookDeletedIfNeeded()
             })
         }
         
@@ -194,12 +194,23 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
             _ in
             self.storageManager.removeBookEverywhere(book: self.book)
             self.didEditBookshelves = true
-            ConfirmationHudView.present(inView: self.navigationController!.view, animated: true)
+            self.dismissAfterBookDeletedIfNeeded()
         }
         
         alert.addAction(deleteAction)
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+    
+    func dismissAfterBookDeletedIfNeeded() {
+        if let _ = self.navigationController?.presentingViewController as? SearchResultsViewController {
+            // View controller does not need to be dismissed if `book` was assigned from
+            // an instance of Book that will not be empty after deletion (e.g. when
+            // coming from the search results page)
+            ConfirmationHudView.present(inView: self.navigationController!.view, animated: true)
+        } else {
+            dismiss()
+        }
     }
     
     func presentBookshelfOptionsViewController() {
