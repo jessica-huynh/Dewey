@@ -92,5 +92,6 @@ extension BookshelfDetailsViewController: BookshelfOptionsViewControllerDelegate
         
         // Remove books at current bookshelf if user is moving them
         if editBar.currentAction == .move { deleteBooksAt(indexPaths: selectedIndexPaths) }
+        ConfirmationHudView.present(inView: self.navigationController!.view, animated: true)
     }
 }

@@ -170,6 +170,7 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
                 _ in
                 self.storageManager.removeBook(book: self.book, from: originatingBookshelf)
                 self.didEditBookshelves = true
+                ConfirmationHudView.present(inView: self.navigationController!.view, animated: true)
             })
         }
         
@@ -193,6 +194,7 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
             _ in
             self.storageManager.removeBookEverywhere(book: self.book)
             self.didEditBookshelves = true
+            ConfirmationHudView.present(inView: self.navigationController!.view, animated: true)
         }
         
         alert.addAction(deleteAction)
@@ -215,5 +217,6 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
         controller.dismiss(animated: true, completion: nil)
         storageManager.addBook(book: book, to: bookshelf)
         didEditBookshelves = true
+        ConfirmationHudView.present(inView: self.navigationController!.view, animated: true)
     }
 }
