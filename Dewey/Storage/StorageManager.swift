@@ -220,7 +220,7 @@ class StorageManager {
         if effectedBookshelves.isEmpty {
             bookshelvesForId.removeValue(forKey: id)
         } else {
-            bookshelvesForId.updateValue(bookshelves, forKey: id)
+            bookshelvesForId.updateValue(effectedBookshelves, forKey: id)
         }
     }
     
