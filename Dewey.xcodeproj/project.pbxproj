@@ -39,10 +39,10 @@
 		C8AEDA4F245B200C005B2DFE /* UITableView+SelectRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AEDA4E245B200C005B2DFE /* UITableView+SelectRows.swift */; };
 		C8AF525B245F7702005DEE36 /* String+AttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AF525A245F7702005DEE36 /* String+AttributedString.swift */; };
 		C8AF5261245F989D005DEE36 /* UIView+DropShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AF5260245F989D005DEE36 /* UIView+DropShadow.swift */; };
-		C8AF5263245F9B3D005DEE36 /* SightEngineAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AF5262245F9B3D005DEE36 /* SightEngineAPI.swift */; };
 		C8AF5265245F9E8E005DEE36 /* AnalyzeImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AF5264245F9E8E005DEE36 /* AnalyzeImageResponse.swift */; };
 		C8AF5267245FA41A005DEE36 /* UIColor+Adjust.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AF5266245FA41A005DEE36 /* UIColor+Adjust.swift */; };
 		C8AF5269245FA724005DEE36 /* UIView+SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AF5268245FA724005DEE36 /* UIView+SpinnerView.swift */; };
+		C8C4A7C924630E03000AA525 /* SightEngineAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C4A7C824630E03000AA525 /* SightEngineAPI.swift */; };
 		C8C4AC7D24572C620089F29E /* BookDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8C4AC7C24572C620089F29E /* BookDetailsViewController.xib */; };
 		C8CEF9C12458A815008182F0 /* BookDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8CEF9C02458A815008182F0 /* BookDetailsTableViewCell.xib */; };
 		C8CEF9C32458AF7C008182F0 /* BookDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CEF9C22458AF7C008182F0 /* BookDetailsTableViewCell.swift */; };
@@ -101,10 +101,10 @@
 		C8AEDA4E245B200C005B2DFE /* UITableView+SelectRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+SelectRows.swift"; sourceTree = "<group>"; };
 		C8AF525A245F7702005DEE36 /* String+AttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+AttributedString.swift"; sourceTree = "<group>"; };
 		C8AF5260245F989D005DEE36 /* UIView+DropShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+DropShadow.swift"; sourceTree = "<group>"; };
-		C8AF5262245F9B3D005DEE36 /* SightEngineAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SightEngineAPI.swift; sourceTree = "<group>"; };
 		C8AF5264245F9E8E005DEE36 /* AnalyzeImageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeImageResponse.swift; sourceTree = "<group>"; };
 		C8AF5266245FA41A005DEE36 /* UIColor+Adjust.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Adjust.swift"; sourceTree = "<group>"; };
 		C8AF5268245FA724005DEE36 /* UIView+SpinnerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+SpinnerView.swift"; sourceTree = "<group>"; };
+		C8C4A7C824630E03000AA525 /* SightEngineAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SightEngineAPI.swift; sourceTree = "<group>"; };
 		C8C4AC7C24572C620089F29E /* BookDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookDetailsViewController.xib; sourceTree = "<group>"; };
 		C8CEF9C02458A815008182F0 /* BookDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookDetailsTableViewCell.xib; sourceTree = "<group>"; };
 		C8CEF9C22458AF7C008182F0 /* BookDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsTableViewCell.swift; sourceTree = "<group>"; };
@@ -299,7 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				C8DE661E245E31BA00568C2B /* iTunesSearchAPI.swift */,
-				C8AF5262245F9B3D005DEE36 /* SightEngineAPI.swift */,
+				C8C4A7C824630E03000AA525 /* SightEngineAPI.swift */,
 				C8DAEE5B245F387A0054FF0D /* Models */,
 				C8DE6620245E38CE00568C2B /* Responses */,
 			);
@@ -445,6 +445,7 @@
 				C85920D7245B3CE20033DBD2 /* BookshelfDetailsViewController+SortByPicker.swift in Sources */,
 				C8AEDA4F245B200C005B2DFE /* UITableView+SelectRows.swift in Sources */,
 				C8E17F3B245CA0AF008C879C /* UIViewController+ResignFirstResponder.swift in Sources */,
+				C8C4A7C924630E03000AA525 /* SightEngineAPI.swift in Sources */,
 				C8AF5265245F9E8E005DEE36 /* AnalyzeImageResponse.swift in Sources */,
 				C80222BE245A1F0F00CD3842 /* NoSelectTextField.swift in Sources */,
 				C86F2F342461DD62001090E9 /* StoredBook+CoreDataProperties.swift in Sources */,
@@ -478,7 +479,6 @@
 				C816D70624547FC000078BFE /* SceneDelegate.swift in Sources */,
 				C8DE661C245E247800568C2B /* UINavigationController+Custom.swift in Sources */,
 				C8AF5261245F989D005DEE36 /* UIView+DropShadow.swift in Sources */,
-				C8AF5263245F9B3D005DEE36 /* SightEngineAPI.swift in Sources */,
 				C86F2F332461DD62001090E9 /* Bookshelf+CoreDataClass.swift in Sources */,
 				C816D7292454EE3B00078BFE /* BookshelfTableViewCell.swift in Sources */,
 			);
