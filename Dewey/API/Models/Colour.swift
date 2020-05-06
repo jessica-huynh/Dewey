@@ -9,7 +9,6 @@
 import Foundation
 
 struct Colour: Codable {
-    let r, g, b: Int
     let hex: String
 }
 
