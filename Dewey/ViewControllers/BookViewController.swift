@@ -79,16 +79,21 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
         if let dominantColour = book.dominantColour {
             addBackgroundGradient(with: UIColor(hexString: dominantColour.hex))
         } else if !book.coverLarge.isEmpty {
+            if storageManager.bookIsInAShelf(book: book) {
+                let dominantColour = storageManager.getDominantColour(for: book)!
+                addBackgroundGradient(with: UIColor(hexString: dominantColour.hex))
+                endBackgroundSetup()
+                return
+            }
+            
             SightEngineAPI.request(for: .analyzeImage(url: book.coverLarge)) {
                 [weak self] response in
                 guard let self = self else { return }
-                
                 let analyzeImageResponse = try AnalyzeImageResponse(data: response.data)
                 let dominantColour = analyzeImageResponse.colourAnalysis.dominantColour
                 
                 self.addBackgroundGradient(with: UIColor(hexString: dominantColour.hex))
                 self.book.dominantColour = dominantColour
-                self.storageManager.updateDominantColour(for: self.book, with: dominantColour)
                 self.endBackgroundSetup()
             }
             return
