@@ -89,13 +89,15 @@
                     <constraint firstItem="43E-Qp-xJb" firstAttribute="top" secondItem="08k-Iy-R2q" secondAttribute="bottom" constant="8" id="MF1-f7-Tq5"/>
                     <constraint firstItem="QQ7-oQ-SXY" firstAttribute="top" secondItem="iMy-GI-KTP" secondAttribute="bottom" constant="2" id="MXX-qt-HKP"/>
                     <constraint firstItem="5Y2-ro-0Ht" firstAttribute="top" secondItem="x4C-xG-Q5x" secondAttribute="top" constant="14" id="Mgj-df-44I"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hzT-yz-YZ2" secondAttribute="trailing" constant="14" id="PvD-OE-UQt"/>
                     <constraint firstItem="43E-Qp-xJb" firstAttribute="trailing" secondItem="x4C-xG-Q5x" secondAttribute="trailingMargin" id="RFM-dV-Nth"/>
                     <constraint firstItem="08k-Iy-R2q" firstAttribute="top" secondItem="QQ7-oQ-SXY" secondAttribute="bottom" constant="3" id="aL2-lg-O7U"/>
                     <constraint firstItem="iMy-GI-KTP" firstAttribute="top" secondItem="x4C-xG-Q5x" secondAttribute="top" constant="14" id="cLf-1k-idc"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QQ7-oQ-SXY" secondAttribute="trailing" constant="110" id="mSN-iZ-3sI"/>
                     <constraint firstItem="43E-Qp-xJb" firstAttribute="leading" secondItem="5Y2-ro-0Ht" secondAttribute="trailing" constant="14" id="n7b-q4-Yhq"/>
                     <constraint firstItem="08k-Iy-R2q" firstAttribute="leading" secondItem="5Y2-ro-0Ht" secondAttribute="trailing" constant="14" id="rXP-A1-NZr"/>
-                    <constraint firstItem="hzT-yz-YZ2" firstAttribute="leading" secondItem="QQ7-oQ-SXY" secondAttribute="trailing" constant="9" id="ymi-Jw-5e8"/>
                     <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="43E-Qp-xJb" secondAttribute="bottom" constant="3" id="z5L-FE-btT"/>
+                    <constraint firstItem="hzT-yz-YZ2" firstAttribute="leading" secondItem="QQ7-oQ-SXY" secondAttribute="trailing" constant="9" id="zbc-EV-MkV"/>
                     <constraint firstItem="hzT-yz-YZ2" firstAttribute="top" secondItem="iMy-GI-KTP" secondAttribute="bottom" constant="2" id="zwI-BH-Pj1"/>
                 </constraints>
             </tableViewCellContentView>
