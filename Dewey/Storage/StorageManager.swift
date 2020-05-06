@@ -61,7 +61,7 @@ class StorageManager {
                 var storedBooks = bookshelf.storedBooks?.allObjects as! [StoredBook]
                 storedBooks.sort(by: { $0.dateAddedToShelf > $1.dateAddedToShelf })
                 for book in storedBooks {
-                    bookshelf.books.append(Book(id: book.id, url: book.url, title: book.title, author: book.author, description: book.bookDescription, artworkUrl100: book.artworkUrl100, publicationDate: book.publicationDate, averageUserRating: book.averageUserRating, userRatingCount: book.userRatingCount, dateAddedToShelf: book.dateAddedToShelf, dominantColour: book.dominantColour == nil ? nil : Colour(hex: book.dominantColour!)))
+                    bookshelf.books.append(Book(id: book.id, url: book.url, title: book.title, author: book.author, description: book.bookDescription, artworkUrl100: book.artworkUrl100, publicationDate: book.publicationDate, averageUserRating: book.averageUserRating == 0 ? nil : book.averageUserRating, userRatingCount: book.userRatingCount == 0 ? nil : book.userRatingCount, dateAddedToShelf: book.dateAddedToShelf, dominantColour: book.dominantColour == nil ? nil : Colour(hex: book.dominantColour!)))
                     
                     let oldValue = bookshelvesForId[book.id] ?? []
                     bookshelvesForId.updateValue(oldValue + [bookshelf], forKey: book.id)
