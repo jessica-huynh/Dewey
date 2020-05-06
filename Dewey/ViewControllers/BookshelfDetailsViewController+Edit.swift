@@ -85,7 +85,7 @@ extension BookshelfDetailsViewController: BookshelfOptionsViewControllerDelegate
         
         // Add books to chosen bookshelf
         for indexPath in selectedIndexPaths {
-            let book = bookshelf.books[indexPath.row].with(dateAddedToShelf: Date())
+            let book = bookshelf.books[indexPath.row]
             let destinationBookshelf = storageManager.bookshelves[index]
             storageManager.addBook(book: book, to: destinationBookshelf)
         }

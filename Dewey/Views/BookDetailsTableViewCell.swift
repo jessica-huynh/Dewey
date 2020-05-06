@@ -31,7 +31,7 @@ class BookDetailsTableViewCell: UITableViewCell {
         bookTitle.text = book.title
         author.text = book.author
         publicationYear.text = "(\(book.publicationYear))"
-        bookDescription.attributedText = book.description.toAttributedString(with: UIFont.systemFont(ofSize: 13))
+        bookDescription.attributedText = book.bookDescription.toAttributedString(with: UIFont.systemFont(ofSize: 13))
         bookDescription.lineBreakMode = .byTruncatingTail
         ratingView.settings.fillMode = .precise
         ratingView.rating = book.averageUserRating ?? 0

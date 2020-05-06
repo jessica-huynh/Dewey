@@ -44,7 +44,7 @@ extension BookshelfDetailsViewController: UIPickerViewDelegate, UIPickerViewData
             
             switch sortOptionPicked {
             case .recent:
-                bookshelf.books.sort(by: { $0.dateAddedToShelf! > $1.dateAddedToShelf! })
+                bookshelf.books.sort(by: { $0.dateAddedToShelf > $1.dateAddedToShelf })
             case .title:
                 bookshelf.books.sort(by: { $0.title < $1.title })
             case .author:

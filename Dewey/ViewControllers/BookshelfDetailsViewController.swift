@@ -88,7 +88,7 @@ class BookshelfDetailsViewController: UIViewController {
 
         if didSort {
             // Resort back by most recently added
-            bookshelf.books.sort(by: { $0.dateAddedToShelf! > $1.dateAddedToShelf! })
+            bookshelf.books.sort(by: { $0.dateAddedToShelf > $1.dateAddedToShelf })
         }
         
         if didEditBookshelf {

@@ -25,14 +25,14 @@ class StorageManager {
         return container
     }()
     
-    private lazy var managedObjectContext: NSManagedObjectContext = persistentContainer.viewContext
+    lazy var managedObjectContext: NSManagedObjectContext = persistentContainer.viewContext
     
     private init() {
         let applicationDocumentsDirectory =
             FileManager.default.urls(for: .documentDirectory,
                                      in: .userDomainMask)[0]
         print(applicationDocumentsDirectory)
-        loadBookshelves()
+        loadBookshelvesFromStorage()
     }
     
     // MARK: - Core Data Saving support
@@ -49,7 +49,7 @@ class StorageManager {
     }
     
     // MARK: - Core Data Helpers
-    private func loadBookshelves() {
+    private func loadBookshelvesFromStorage() {
         let bookshelvesFetchRequest = Bookshelf.createFetchRequest()
         bookshelvesFetchRequest.entity = Bookshelf.entity()
         let sortDescriptor = NSSortDescriptor(key: "index", ascending: true)
@@ -58,13 +58,12 @@ class StorageManager {
         do {
             bookshelves = try managedObjectContext.fetch(bookshelvesFetchRequest)
             for bookshelf in bookshelves {
-                var storedBooks = bookshelf.storedBooks?.allObjects as! [StoredBook]
-                storedBooks.sort(by: { $0.dateAddedToShelf > $1.dateAddedToShelf })
-                for book in storedBooks {
-                    bookshelf.books.append(Book(id: book.id, url: book.url, title: book.title, author: book.author, description: book.bookDescription, artworkUrl100: book.artworkUrl100, publicationDate: book.publicationDate, averageUserRating: book.averageUserRating == 0 ? nil : book.averageUserRating, userRatingCount: book.userRatingCount == 0 ? nil : book.userRatingCount, dateAddedToShelf: book.dateAddedToShelf, dominantColour: book.dominantColour == nil ? nil : Colour(hex: book.dominantColour!)))
-                    
-                    let oldValue = bookshelvesForId[book.id] ?? []
-                    bookshelvesForId.updateValue(oldValue + [bookshelf], forKey: book.id)
+                var books = bookshelf.storedBooks?.allObjects as! [Book]
+                books.sort(by: { $0.dateAddedToShelf > $1.dateAddedToShelf })
+                bookshelf.books = books
+                
+                for book in books {
+                    updateBookshelves(for: book.id, with: bookshelf)
                 }
             }
         } catch {
@@ -80,8 +79,11 @@ class StorageManager {
     }
     
     private func deleteStoredBook(book: Book, from bookshelf: Bookshelf? = nil) {
-        let bookFetchRequest = StoredBook.createFetchRequest()
-        bookFetchRequest.entity = StoredBook.entity()
+        // It is not guaranteed that the passed in `book` is an existing book in
+        // storage (e.g. when looking at a book from the search results page).
+        // Therefore, we need to fetch the correct stored book first.
+        let bookFetchRequest = Book.createFetchRequest()
+        bookFetchRequest.entity = Book.entity()
         if let bookshelf = bookshelf {
             bookFetchRequest.predicate = NSPredicate(format: "id == %i AND bookshelf == %@", book.id, bookshelf)
         } else {
@@ -151,27 +153,24 @@ class StorageManager {
     
     // MARK: - Modify Books
     func addBook(book: Book, to bookshelf: Bookshelf) {
-        let today = Date()
-        if bookshelf.addBook(book: book.with(dateAddedToShelf: today)) {
-            let oldValue = bookshelvesForId[book.id] ?? []
-            bookshelvesForId.updateValue(oldValue + [bookshelf], forKey: book.id)
-            
-            let storedBook = StoredBook(context: managedObjectContext)
-            storedBook.id = book.id
-            storedBook.url = book.url
-            storedBook.title = book.title
-            storedBook.author = book.author
-            storedBook.bookDescription = book.description
-            storedBook.artworkUrl100 = book.artworkUrl100
-            storedBook.publicationDate = book.publicationDate
-            storedBook.averageUserRating = book.averageUserRating ?? 0
-            storedBook.userRatingCount = book.userRatingCount ?? 0
-            storedBook.dateAddedToShelf = today
-            storedBook.dominantColour = book.dominantColour?.hex
-            
-            bookshelf.addToStoredBooks(storedBook)
-            saveContext()
-        }
+        if bookshelf.contains(book: book) { return }
+        let storedBook = Book(context: managedObjectContext)
+        storedBook.id = book.id
+        storedBook.url = book.url
+        storedBook.title = book.title
+        storedBook.author = book.author
+        storedBook.bookDescription = book.bookDescription
+        storedBook.artworkUrl100 = book.artworkUrl100
+        storedBook.publicationDate = book.publicationDate
+        storedBook.rating = book.averageUserRating ?? 0
+        storedBook.ratingCount = book.userRatingCount ?? 0
+        storedBook.dateAddedToShelf = Date()
+        storedBook.dominantColour = book.dominantColour
+        
+        bookshelf.addBook(book: storedBook)
+        bookshelf.addToStoredBooks(storedBook)
+        saveContext()
+        updateBookshelves(for: book.id, with: bookshelf)
     }
     
     func removeBook(book: Book, from bookshelf: Bookshelf) {
@@ -199,7 +198,7 @@ class StorageManager {
     }
     
     func removeAllBooks(from bookshelf: Bookshelf) {
-        let storedBooks = bookshelf.storedBooks!.allObjects as! [StoredBook]
+        let storedBooks = bookshelf.storedBooks!.allObjects as! [Book]
         for storedBook in storedBooks {
             updateBookshelves(for: storedBook.id, without: bookshelf)
             managedObjectContext.delete(storedBook)
@@ -225,6 +224,11 @@ class StorageManager {
         }
     }
     
+    private func updateBookshelves(for id: Int32, with bookshelf: Bookshelf) {
+        let oldValue = bookshelvesForId[id] ?? []
+        bookshelvesForId.updateValue(oldValue + [bookshelf], forKey: id)
+    }
+    
     func bookIsInAShelf(book: Book) -> Bool {
         return bookshelvesForId[book.id] != nil
     }
@@ -233,7 +237,7 @@ class StorageManager {
         return bookshelvesForId[book.id]?.count ?? 0
     }
     
-    func getDominantColour(for book: Book) -> Colour? {
+    func getDominantColour(for book: Book) -> String? {
         guard let bookshelf = bookshelvesForId[book.id]?.first else { return nil }
         let book = bookshelf.books.first(where: { $0.id == book.id })!
         return book.dominantColour

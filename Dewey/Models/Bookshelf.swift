@@ -1,9 +1,9 @@
 //
-//  Bookshelf+CoreDataClass.swift
-//  
+//  Bookshelf.swift
+//  Dewey
 //
 //  Created by Jessica Huynh on 2020-05-05.
-//
+//  Copyright © 2020 Jessica Huynh. All rights reserved.
 //
 
 import Foundation
@@ -13,14 +13,16 @@ import CoreData
 public class Bookshelf: NSManagedObject {
     var books: [Book] = []
     
+    @NSManaged public var name: String
+    @NSManaged public var index: Int32
+    @NSManaged public var storedBooks: NSSet?
+    
     func contains(book: Book) -> Bool {
         return books.contains(where: { $0 == book })
     }
     
-    func addBook(book: Book) -> Bool {
-        if self.contains(book: book) { return false }
+    func addBook(book: Book) {
         books = [book] + books // Maintain order by most recently added
-        return true
     }
     
     func removeBook(book: Book) {
@@ -35,4 +37,15 @@ public class Bookshelf: NSManagedObject {
     func removeAllBooks() {
         books = []
     }
+    
+    @nonobjc public class func createFetchRequest() -> NSFetchRequest<Bookshelf> {
+        return NSFetchRequest<Bookshelf>(entityName: "Bookshelf")
+    }
+    
+    // MARK: - Accessors for storedBooks
+    @objc(addStoredBooksObject:)
+    @NSManaged public func addToStoredBooks(_ value: Book)
+
+    @objc(addStoredBooks:)
+    @NSManaged public func addToStoredBooks(_ values: NSSet)
 }

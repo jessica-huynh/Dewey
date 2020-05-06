@@ -42,17 +42,14 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        spinnerView = createSpinnerView(with: UIColor(hexString: "#EEECE4"))
-        showSpinner(spinnerView: spinnerView)
-        setupBackground()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         if navigationController?.viewControllers.first == self {
             let closeButton = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(backTapped))
             navigationItem.setLeftBarButton(closeButton, animated: true)
         }
+        
+        spinnerView = createSpinnerView(with: UIColor(hexString: "#EEECE4"))
+        showSpinner(spinnerView: spinnerView)
+        setupBackground()
     }
     
     override func viewWillLayoutSubviews() {
@@ -77,11 +74,11 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
     // MARK: - Setup Helpers
     func setupBackground() {
         if let dominantColour = book.dominantColour {
-            addBackgroundGradient(with: UIColor(hexString: dominantColour.hex))
+            addBackgroundGradient(with: UIColor(hexString: dominantColour))
         } else if !book.coverLarge.isEmpty {
             if storageManager.bookIsInAShelf(book: book) {
                 let dominantColour = storageManager.getDominantColour(for: book)!
-                addBackgroundGradient(with: UIColor(hexString: dominantColour.hex))
+                addBackgroundGradient(with: UIColor(hexString: dominantColour))
                 endBackgroundSetup()
                 return
             }
@@ -93,7 +90,7 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
                 let dominantColour = analyzeImageResponse.colourAnalysis.dominantColour
                 
                 self.addBackgroundGradient(with: UIColor(hexString: dominantColour.hex))
-                self.book.dominantColour = dominantColour
+                self.book.dominantColour = dominantColour.hex
                 self.endBackgroundSetup()
             }
             return

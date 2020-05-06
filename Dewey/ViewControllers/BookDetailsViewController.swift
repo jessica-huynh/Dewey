@@ -39,10 +39,10 @@ class BookDetailsViewController: UIViewController {
     func setupBookDetails() {
         bookTitle.text = book.title
         author.text = book.author
-        bookDescription.attributedText = book.description.toAttributedString(with: UIFont.systemFont(ofSize: 16), colour: UIColor.systemGray, lineSpacing: 10)
+        bookDescription.attributedText = book.bookDescription.toAttributedString(with: UIFont.systemFont(ofSize: 16), colour: UIColor.systemGray, lineSpacing: 10)
         bookDescription.lineBreakMode = .byTruncatingTail
-        ratingsView.rating = book.averageUserRating ?? 0
-        ratingsView.text = book.userRatingCount != nil ? "\(book.userRatingCount!) ratings" : "No ratings yet"
+        ratingsView.rating = book.rating
+        ratingsView.text = book.ratingCount != 0 ? "\(book.ratingCount) ratings" : "No ratings yet"
     }
     
     @IBAction func openTapped(_ sender: Any) {
