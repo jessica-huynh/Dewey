@@ -31,10 +31,11 @@ extension StorageManager {
             bookFetchRequest.entity = Book.entity()
             bookFetchRequest.predicate = NSPredicate(format: "id == %i", id)
             
-            do {
-                dispatch.enter()
-                let books = try self.managedObjectContext.fetch(bookFetchRequest)
+            execute(fetchRequest: bookFetchRequest) {
+                [weak self] books in
+                guard let self = self else { return }
                 
+                dispatch.enter()
                 iTunesSearchAPI.request(for: .lookup(id: id)) {
                     response in
                     
@@ -59,8 +60,6 @@ extension StorageManager {
                     self.bookshelves.forEach { $0.syncBooksWithStorage() }
                     NotificationCenter.default.post(name: .updatedBookshelves, object: nil)
                 }
-            } catch {
-                print("Fetch request failed: \(error)")
             }
         }
     }

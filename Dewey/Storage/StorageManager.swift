@@ -42,7 +42,6 @@ class StorageManager {
             do {
                 try managedObjectContext.save()
             } catch {
-                // TODO: Display error message
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
@@ -50,24 +49,34 @@ class StorageManager {
     }
     
     // MARK: - Core Data Helpers
+    func execute<T: NSFetchRequestResult>(fetchRequest: NSFetchRequest<T>, completionHandler: @escaping ([T]) -> Void) {
+        do {
+            let result = try managedObjectContext.fetch(fetchRequest)
+            completionHandler(result)
+        } catch {
+            print("Fetch request failed: \(error)")
+        }
+    }
+    
     private func loadBookshelvesFromStorage() {
         let bookshelvesFetchRequest = Bookshelf.createFetchRequest()
         bookshelvesFetchRequest.entity = Bookshelf.entity()
         let sortDescriptor = NSSortDescriptor(key: "index", ascending: true)
         bookshelvesFetchRequest.sortDescriptors = [sortDescriptor]
         
-        do {
-            bookshelves = try managedObjectContext.fetch(bookshelvesFetchRequest)
+        execute(fetchRequest: bookshelvesFetchRequest) {
+            [weak self] bookshelves in
+            guard let self = self else { return }
+            
+            self.bookshelves = bookshelves
             for bookshelf in bookshelves {
                 bookshelf.syncBooksWithStorage()
                 
                 let books = bookshelf.storedBooks?.allObjects as! [Book]
                 for book in books {
-                    updateBookshelves(for: book.id, with: bookshelf)
+                    self.updateBookshelves(for: book.id, with: bookshelf)
                 }
             }
-        } catch {
-            print("Fetch request failed: \(error)")
         }
     }
     
@@ -91,14 +100,14 @@ class StorageManager {
             bookFetchRequest.predicate = NSPredicate(format: "id == %i", book.id)
         }
         
-        do {
-            let storedBooks = try managedObjectContext.fetch(bookFetchRequest)
+        execute(fetchRequest: bookFetchRequest) {
+            [weak self] storedBooks in
+            guard let self = self else { return }
+            
             for storedBook in storedBooks {
-                managedObjectContext.delete(storedBook)
+                self.managedObjectContext.delete(storedBook)
             }
-            saveContext()
-        } catch {
-            print("Fetch request failed: \(error)")
+            self.saveContext()
         }
     }
     
