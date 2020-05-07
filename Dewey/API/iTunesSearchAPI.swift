@@ -12,17 +12,19 @@ import Moya
 enum iTunesSearchAPI {
     static let provider = MoyaProvider<iTunesSearchAPI>()
     case search(query: String)
+    case lookup(id: Int32)
 }
 
 extension iTunesSearchAPI: TargetType {
     public var baseURL: URL {
-        return URL(string: "https://itunes.apple.com/search")!
-    }
+        return URL(string: "https://itunes.apple.com")!    }
 
     public var path: String {
         switch self {
         case .search:
-            return ""
+            return "/search"
+        case .lookup:
+            return "/lookup"
         }
     }
 
@@ -43,6 +45,12 @@ extension iTunesSearchAPI: TargetType {
                     "country": NSLocale.current.regionCode!,
                     "media": "ebook"],
                 encoding: URLEncoding.default)
+        case .lookup(let id):
+            return .requestParameters(
+            parameters: [
+                "id": id,
+                "media": "ebook"],
+            encoding: URLEncoding.default)
         }
     }
 
