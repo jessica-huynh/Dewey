@@ -65,6 +65,7 @@ extension BookshelfDetailsViewController: BookshelfEditBarViewDelegate {
         let alert = UIAlertController(title: "Delete \(selectedIndexPaths.count) Books",
                                       message: "Are you sure you want to proceed?",
                                       preferredStyle: .alert)
+        alert.view.tintColor = .darkGray
         let deleteAction = UIAlertAction(title: "Yes", style: .default) {
             _ in
             self.deleteBooksAt(indexPaths: selectedIndexPaths)
