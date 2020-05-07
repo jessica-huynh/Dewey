@@ -163,8 +163,8 @@ class StorageManager {
         storedBook.bookDescription = book.bookDescription
         storedBook.artworkUrl100 = book.artworkUrl100
         storedBook.publicationDate = book.publicationDate
-        storedBook.rating = book.averageUserRating ?? 0
-        storedBook.ratingCount = book.userRatingCount ?? 0
+        storedBook.rating = book.rating
+        storedBook.ratingCount = book.ratingCount
         storedBook.dateAddedToShelf = Date()
         storedBook.dominantColour = book.dominantColour
         
@@ -210,7 +210,6 @@ class StorageManager {
 
     // MARK: - Misc Helpers
     private func updateBookshelves(for id: Int32, without bookshelf: Bookshelf) {
-        print("--Updating bookshelves for id without: \(id), bookshelf \(bookshelf.name)")
         var effectedBookshelves = bookshelvesForId[id]!
         
         for i in 0..<effectedBookshelves.count {

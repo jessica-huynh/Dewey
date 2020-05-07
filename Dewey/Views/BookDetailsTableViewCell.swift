@@ -34,7 +34,7 @@ class BookDetailsTableViewCell: UITableViewCell {
         bookDescription.attributedText = book.bookDescription.toAttributedString(with: UIFont.systemFont(ofSize: 13))
         bookDescription.lineBreakMode = .byTruncatingTail
         ratingView.settings.fillMode = .precise
-        ratingView.rating = book.averageUserRating ?? 0
-        ratingView.text = book.userRatingCount != nil ? "\(book.userRatingCount!) ratings" : "No ratings yet"
+        ratingView.rating = book.rating
+        ratingView.text = book.ratingCount != 0 ? "\(book.ratingCount) ratings" : "No ratings yet"
     }
 }
