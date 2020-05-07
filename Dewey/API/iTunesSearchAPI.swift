@@ -17,7 +17,8 @@ enum iTunesSearchAPI {
 
 extension iTunesSearchAPI: TargetType {
     public var baseURL: URL {
-        return URL(string: "https://itunes.apple.com")!    }
+        return URL(string: "https://itunes.apple.com")!
+    }
 
     public var path: String {
         switch self {
