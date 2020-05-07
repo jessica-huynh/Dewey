@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BackgroundTasks
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().backIndicatorImage = backIcon
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = backIcon
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: 0, vertical: -5), for: .default)
+        
+        
+        BGTaskScheduler.shared.register(
+            forTaskWithIdentifier: "fetchBookUpdates",
+            using: nil
+        ) { task in
+            StorageManager.instance.fetchBookUpdates(task as! BGAppRefreshTask)
+        }
+        
         return true
     }
 
@@ -32,7 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
+    
 }
 
