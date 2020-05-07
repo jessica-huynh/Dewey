@@ -42,11 +42,11 @@
                                                     </constraints>
                                                     <attributedString key="attributedText">
                                                         <fragment>
-                                                            <string key="content">What are you 
-reading today, Jessica?</string>
+                                                            <string key="content">What are 
+you reading today?</string>
                                                             <attributes>
                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                <font key="NSFont" size="26" name="Georgia"/>
+                                                                <font key="NSFont" size="28" name="Georgia"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
