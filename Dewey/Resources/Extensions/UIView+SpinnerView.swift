@@ -20,8 +20,13 @@ extension UIView {
         return spinnerView
     }
     
-    func showSpinner(spinnerView: UIView) {
-        self.addSubview(spinnerView)
+    func showSpinner(spinnerView: UIView, below subview: UIView? = nil) {
+        if self.subviews.contains(spinnerView) { return }
+        if let subview = subview {
+            self.insertSubview(spinnerView, belowSubview: subview)
+        } else {
+            self.addSubview(spinnerView)
+        }
     }
     
     func removeSpinner(spinnerView: UIView) {
@@ -36,11 +41,8 @@ extension UIViewController {
     
     func showSpinner(spinnerView: UIView, belowNavBar: Bool = false) {
         if let navigationController = navigationController {
-            if belowNavBar {
-                navigationController.view.insertSubview(spinnerView, belowSubview: navigationController.navigationBar)
-            } else {
-                navigationController.view.addSubview(spinnerView)
-            }
+            navigationController.view.showSpinner(spinnerView: spinnerView,
+                                                  below: belowNavBar ? navigationController.navigationBar : nil)
         } else {
             view.showSpinner(spinnerView: spinnerView)
         }
