@@ -12,7 +12,8 @@ import CoreData
 class StorageManager {
     static let instance = StorageManager()
     private(set) var bookshelves: [Bookshelf] = []
-    private var bookshelvesForId: [Int32: [Bookshelf]] = [:]
+    var bookshelvesForId: [Int32: [Bookshelf]] = [:]
+    var isFetchingUpdates = false
     
     // MARK: - Core Data stack
     private var persistentContainer: NSPersistentContainer = {
@@ -58,10 +59,9 @@ class StorageManager {
         do {
             bookshelves = try managedObjectContext.fetch(bookshelvesFetchRequest)
             for bookshelf in bookshelves {
-                var books = bookshelf.storedBooks?.allObjects as! [Book]
-                books.sort(by: { $0.dateAddedToShelf > $1.dateAddedToShelf })
-                bookshelf.books = books
+                bookshelf.syncBooksWithStorage()
                 
+                let books = bookshelf.storedBooks?.allObjects as! [Book]
                 for book in books {
                     updateBookshelves(for: book.id, with: bookshelf)
                 }
@@ -78,6 +78,7 @@ class StorageManager {
         saveContext()
     }
     
+    /// If `booksehlf` is nil, then delete every instance with that book id
     private func deleteStoredBook(book: Book, from bookshelf: Bookshelf? = nil) {
         // It is not guaranteed that the passed in `book` is an existing book in
         // storage (e.g. when looking at a book from the search results page).
@@ -117,13 +118,14 @@ class StorageManager {
     
     func removeBookshelf(at index: Int) {
         let removedBookshelf = bookshelves.remove(at: index)
-        managedObjectContext.delete(removedBookshelf)
-        saveContext()
         updateBookshelfIndexes()
         
         for book in removedBookshelf.books {
             updateBookshelves(for: book.id, without: removedBookshelf)
         }
+        
+        managedObjectContext.delete(removedBookshelf)
+        saveContext()
     }
     
     func removeAllBookshelves() {
@@ -142,7 +144,6 @@ class StorageManager {
     func moveBookshelf(at sourceIndex: Int, to destinationIndex: Int) {
         let movedBookshelf = bookshelves.remove(at: sourceIndex)
         bookshelves.insert(movedBookshelf, at: destinationIndex)
-        
         updateBookshelfIndexes()
     }
     
@@ -209,6 +210,7 @@ class StorageManager {
 
     // MARK: - Misc Helpers
     private func updateBookshelves(for id: Int32, without bookshelf: Bookshelf) {
+        print("--Updating bookshelves for id without: \(id), bookshelf \(bookshelf.name)")
         var effectedBookshelves = bookshelvesForId[id]!
         
         for i in 0..<effectedBookshelves.count {
