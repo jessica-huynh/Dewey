@@ -131,6 +131,7 @@ class BookshelfDetailsViewController: UIViewController {
         
         if tableView.isEditing { showEditBar() }
         else { hideEditBar() }
+        tableView.reloadData()
     }
     
     func deleteBooksAt(indexPaths: [IndexPath]) {
@@ -156,7 +157,7 @@ extension BookshelfDetailsViewController: UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bookshelf.books.isEmpty ? 1 : bookshelf.books.count
+        return bookshelf.books.isEmpty && !tableView.isEditing ? 1 : bookshelf.books.count
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
@@ -200,6 +201,12 @@ extension BookshelfDetailsViewController: UITableViewDataSource, UITableViewDele
         storageManager.removeBook(at: indexPath.row, from: bookshelf)
         tableView.deleteRows(at: [indexPath], with: .fade)
         didEditBookshelf = true
+    }
+    
+    func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+        if bookshelf.books.isEmpty {
+            tableView.reloadData()
+        }
     }
 }
 
