@@ -27,9 +27,10 @@ public class Book: NSManagedObject, Codable {
     @NSManaged public var ratingCount: Int32
     @NSManaged public var dateAddedToShelf: Date
     @NSManaged public var dominantColour: String?
+    @NSManaged public var bookshelf: Bookshelf
     
-    lazy var coverSmall: String = Book.processCoverUrl(url: artworkUrl100, size: 200)
-    lazy var coverLarge: String = Book.processCoverUrl(url: artworkUrl100, size: 900)
+    var coverSmall: String { return Book.processCoverUrl(url: artworkUrl100, size: 200) }
+    var coverLarge: String { return Book.processCoverUrl(url: artworkUrl100, size: 900) }
     var publicationYear: String { return String(publicationDate.prefix(4)) }
     
     enum CodingKeys: String, CodingKey {
