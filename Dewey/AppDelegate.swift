@@ -20,10 +20,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         BGTaskScheduler.shared.register(
-            forTaskWithIdentifier: "fetchBookUpdates",
+            forTaskWithIdentifier: "startAppRefresh",
             using: nil
         ) { task in
-            StorageManager.instance.fetchBookUpdates(task as! BGAppRefreshTask)
+            StorageManager.instance.startAppRefresh(task as! BGAppRefreshTask)
+        }
+        
+        
+        UserDefaults.standard.register(defaults: ["isFirstLaunch": true])
+        let isFirstLaunch = UserDefaults.standard.bool(forKey: "isFirstLaunch")
+        if isFirstLaunch {
+            UserDefaults.standard.set(Date(), forKey: "lastFetchUpdate")
+            UserDefaults.standard.set(false, forKey: "isFirstLaunch")
         }
         
         return true

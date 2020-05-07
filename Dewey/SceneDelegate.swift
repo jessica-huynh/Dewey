@@ -38,12 +38,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
+        StorageManager.instance.fetchBookUpdatesIfNeeded()
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-        StorageManager.instance.scheduleAppRefresh()
+        if UIApplication.shared.backgroundRefreshStatus == .available {
+            StorageManager.instance.scheduleAppRefresh()
+        }
     }
 
 }

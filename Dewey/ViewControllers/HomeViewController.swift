@@ -11,19 +11,32 @@ import UIKit
 class HomeViewController: UIViewController {
     let storageManager = StorageManager.instance
     var searchBar: UISearchBar!
+    var spinnerView: UIView!
+    var isLoading = false
     
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        spinnerView = createSpinnerView()
         navigationController?.navigationBar.shadowImage = UIImage()
         NotificationCenter.default.addObserver(self, selector: #selector(onUpdatedBookshelves(_:)), name: .updatedBookshelves, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onBeganFetchUpdates), name: .beganFetchUpdates, object: nil)
         
         let bookshelfSectionHeader = UINib(nibName: "BookshelfSectionHeaderView", bundle: nil)
         tableView.register(bookshelfSectionHeader, forHeaderFooterViewReuseIdentifier: "BookshelfSectionHeader")
         
         addTapToResignFirstResponder(with: #selector(resetSearchBarIfNeeded))
+        
+        if storageManager.isFetchingUpdates {
+            isLoading = true
+            showSpinner(spinnerView: spinnerView)
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -48,7 +61,28 @@ class HomeViewController: UIViewController {
     }
     
     @objc func onUpdatedBookshelves(_ notification:Notification) {
+        if isLoading {
+            isLoading = false
+            removeSpinner(spinnerView: spinnerView)
+        }
         tableView.reloadData()
+    }
+    
+    @objc func onBeganFetchUpdates() {
+        isLoading = true
+        showSpinner(spinnerView: spinnerView)
+        
+        // Dismiss all view controllers
+        navigationController?.popToRootViewController(animated: false)
+        
+        for scene in UIApplication.shared.connectedScenes {
+            (scene as! UIWindowScene).windows.forEach {
+                if $0.isKeyWindow {
+                    $0.rootViewController?.dismiss(animated: false, completion: nil)
+                    return
+                }
+            }
+        }
     }
 }
 
