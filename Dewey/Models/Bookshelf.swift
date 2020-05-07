@@ -38,6 +38,12 @@ public class Bookshelf: NSManagedObject {
         books = []
     }
     
+    func syncBooksWithStorage() {
+        var books = self.storedBooks?.allObjects as! [Book]
+        books.sort(by: { $0.dateAddedToShelf > $1.dateAddedToShelf })
+        self.books = books
+    }
+    
     @nonobjc public class func createFetchRequest() -> NSFetchRequest<Bookshelf> {
         return NSFetchRequest<Bookshelf>(entityName: "Bookshelf")
     }
