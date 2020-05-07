@@ -46,6 +46,7 @@ class BookshelvesViewController: UITableViewController {
         let alert = UIAlertController(title: "Delete All Bookshelves",
                                       message: "Are you sure you want to proceed? This will remove all bookshelves and the books inside them.",
                                       preferredStyle: .alert)
+        alert.view.tintColor = .darkGray
         let deleteAction = UIAlertAction(title: "Yes", style: .default) {
             _ in
             self.storageManager.removeAllBookshelves()
@@ -58,7 +59,7 @@ class BookshelvesViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
 
-    func toggleEditMode() {
+    @objc func toggleEditMode() {
         tableView.setEditing(!tableView.isEditing, animated: true)
         inEditMode = tableView.isEditing
         editButton.title = tableView.isEditing ? "Done" : "Edit"
@@ -125,10 +126,8 @@ class BookshelvesViewController: UITableViewController {
         tableView.deleteRows(at: [indexPath], with: .fade)
         
         if storageManager.bookshelves.isEmpty && inEditMode {
-            DispatchQueue.main.async {
-                // Push to main thread due to race condition with `tableView.isEditing`
-                self.toggleEditMode()
-            }
+            // Must call `toggleEditMode` using `perform` due to the use of `tableView.setEditing` within it
+            perform(#selector(toggleEditMode), with: nil, afterDelay: 0)
         } else if storageManager.bookshelves.isEmpty {
             editButton.isEnabled = false
         }
