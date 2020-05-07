@@ -48,8 +48,8 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
         }
         
         spinnerView = createSpinnerView(with: UIColor(hexString: "#EEECE4"))
-        //showSpinner(spinnerView: spinnerView)
-        //setupBackground()
+        showSpinner(spinnerView: spinnerView)
+        setupBackground()
     }
     
     override func viewWillLayoutSubviews() {
@@ -69,6 +69,8 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
         if didEditBookshelves {
             NotificationCenter.default.post(name: .updatedBookshelves, object: self)
         }
+        
+        self.navigationController?.navigationBar.barStyle = .default
     }
     
     // MARK: - Setup Helpers
@@ -119,6 +121,10 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
         navigationController?.navigationBar.barTintColor = backgroundColour
         navigationItem.leftBarButtonItem?.tintColor = barButtonColour
         navigationItem.rightBarButtonItem?.tintColor = barButtonColour
+        
+        if !colour.isLight()! {
+            self.navigationController?.navigationBar.barStyle = .black
+        }
     }
     
     func setupBookCover(completionHandler: @escaping () -> Void) {
@@ -159,6 +165,7 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
     
     @IBAction func showActions(_ sender: Any) {
         let actions = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        actions.view.tintColor = .darkGray
         
         actions.addAction(UIAlertAction(title: "Add To A Bookshelf", style: .default) {
             _ in
@@ -190,6 +197,7 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
         let alert = UIAlertController(title: "Delete Everywhere",
                                       message: "Are you sure you want to remove this book from \(storageManager.numberOfBookshelves(with: book)) bookshelves.",
                                       preferredStyle: .alert)
+        alert.view.tintColor = .darkGray
         let deleteAction = UIAlertAction(title: "Yes", style: .default) {
             _ in
             self.storageManager.removeBookEverywhere(book: self.book)
