@@ -28,6 +28,7 @@ extension BookshelfDetailsViewController: UIPickerViewDelegate, UIPickerViewData
         
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(self.finishedPicking))
+        doneButton.tintColor = .darkGray
         
         toolBar.setItems([flexibleSpace, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
