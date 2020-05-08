@@ -1,7 +1,9 @@
-# Dewy
+# Dewey
 
-An iOS app that lets you search for books and create "bookshelves" to organize the books that you love, the books that you may want to read and so on.
+An iOS app that lets you search for books and create bookshelves to organize the books that you love, the books that you may want to read and so on.
 
+<p align="center"><i>"Reading is a mighty engine, beside which steam and electricity sink into insignificance."</i><br> - Melvil <b>Dewey</b>, creator of the Dewey Decimal System</p>
+<br>
 
 ![Screenshots](/Assets/Screenshots.png)
 
@@ -15,10 +17,10 @@ This app uses the [iTunes Search API](https://affiliate.itunes.apple.com/resourc
 
 2. This app uses [CocoaPods-keys](https://github.com/orta/cocoapods-keys) to store the API keys. Once you have your API keys, open a terminal in the application's folder and run `pod install`. You will be prompted to enter in the API keys.
 
-3. Open `Dewy.xcworkspace` in Xcode.
+3. Open `Dewey.xcworkspace` in Xcode.
 
 6. Build and run the app. 
 
-
-**Note:** This project is made for personal use only. 
+<br>
+<b>Note:</b> This project is made for personal use only. 
 
