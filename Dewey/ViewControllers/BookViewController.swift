@@ -166,7 +166,7 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
     
     // MARK: - Actions
     @IBAction func backTapped(_ sender: Any) {
-        dismiss()
+        dismissSelf()
     }
     
     @IBAction func showActions(_ sender: Any) {
@@ -223,7 +223,7 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
             // coming from the search results page)
             ConfirmationHudView.present(inView: self.navigationController!.view, animated: true)
         } else {
-            dismiss()
+            dismissSelf()
         }
     }
     

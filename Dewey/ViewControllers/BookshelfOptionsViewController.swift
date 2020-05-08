@@ -47,7 +47,7 @@ class BookshelfOptionsViewController: UIViewController, UITableViewDataSource, U
     }
     
     @objc func cancelTapped(_ sender: Any) {
-        dismiss()
+        dismissSelf()
     }
     
     @objc func addBookshelf(_ sender: Any) {

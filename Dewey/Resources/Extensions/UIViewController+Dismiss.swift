@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIViewController {
-    func dismiss() {
+    @objc func dismissSelf() {
         if navigationController?.viewControllers.first == self {
             dismiss(animated: true, completion: nil)
         } else {
