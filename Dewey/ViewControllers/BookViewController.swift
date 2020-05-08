@@ -47,6 +47,10 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
             navigationItem.setLeftBarButton(closeButton, animated: true)
         }
         
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(dismissSelf))
+        swipeRight.direction = .right
+        view.addGestureRecognizer(swipeRight)
+        
         spinnerView = createSpinnerView(with: UIColor(hexString: "#EEECE4"))
         showSpinner(spinnerView: spinnerView)
         setupBackground()
