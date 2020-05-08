@@ -89,24 +89,21 @@ class BookshelfDetailsViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
-        if didSort {
-            // Resort back by most recently added
-            bookshelf.books.sort(by: { $0.dateAddedToShelf > $1.dateAddedToShelf })
-        }
         
-        if didEditBookshelf {
-            if !navBarTitle.text!.isEmpty && bookshelf.name != navBarTitle.text! {
-                storageManager.updateBookshelf(bookshelf: bookshelf, name: navBarTitle.text!)
+        if self.isMovingFromParent {
+            if !didSort && !didEditBookshelf { return }
+            
+            if didSort {
+                // Resort back by most recently added (default in the app)
+                bookshelf.books.sort(by: { $0.dateAddedToShelf > $1.dateAddedToShelf })
             }
             NotificationCenter.default.post(name: .updatedBookshelves, object: self)
         }
     }
     
     @objc func onUpdatedBookshelves(_ notification:Notification) {
-        let selectedIndexPaths = tableView.indexPathsForSelectedRows
+        // This function is not called when editing from the edit bar.
         tableView.reloadData()
-        tableView.selectRow(at: selectedIndexPaths, animated: false, scrollPosition: .none)
     }
     
     // MARK: - Actions
