@@ -89,6 +89,10 @@ class BookshelfOptionsViewController: UIViewController, UITableViewDataSource, U
         }
         return indexPath
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.selectedBackgroundView = UITableViewCell.darkerBackgroundView
+    }
 }
 
 // MARK: - Protocol

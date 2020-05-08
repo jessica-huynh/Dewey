@@ -164,6 +164,10 @@ extension BookshelfDetailsViewController: UITableViewDataSource, UITableViewDele
         return indexPath
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.selectedBackgroundView = UITableViewCell.clearBackgroundView
+    }
+    
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if tableView.isEditing { updateEditBarButtons() }
     }

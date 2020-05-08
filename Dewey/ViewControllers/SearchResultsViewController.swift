@@ -66,6 +66,10 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
         return indexPath
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.selectedBackgroundView = UITableViewCell.darkerBackgroundView
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let bookViewController = self.storyboard?.instantiateViewController(withIdentifier: "BookViewController") as! BookViewController
         bookViewController.book = searchResults[indexPath.row]

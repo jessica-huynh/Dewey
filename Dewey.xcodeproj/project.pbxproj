@@ -23,6 +23,7 @@
 		C816D72B2454FA6200078BFE /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = C816D72A2454FA6200078BFE /* Podfile */; };
 		C816D72D2455092800078BFE /* HomeHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C816D72C2455092800078BFE /* HomeHeaderTableViewCell.swift */; };
 		C8221C1A245A46DA00FE5605 /* BookshelfEditBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8221C19245A46DA00FE5605 /* BookshelfEditBarView.xib */; };
+		C8229C972465999C006757B2 /* UITableViewCell+SelectedBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8229C962465999C006757B2 /* UITableViewCell+SelectedBackgroundView.swift */; };
 		C8386FCE245E070000B86713 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8386FCD245E070000B86713 /* UIColor+Hex.swift */; };
 		C8391A282460D2900066DF10 /* LoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8391A272460D2900066DF10 /* LoadingTableViewCell.xib */; };
 		C8391A2A2460D2CF0066DF10 /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8391A292460D2CF0066DF10 /* LoadingTableViewCell.swift */; };
@@ -84,6 +85,7 @@
 		C816D72A2454FA6200078BFE /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C816D72C2455092800078BFE /* HomeHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		C8221C19245A46DA00FE5605 /* BookshelfEditBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookshelfEditBarView.xib; sourceTree = "<group>"; };
+		C8229C962465999C006757B2 /* UITableViewCell+SelectedBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+SelectedBackgroundView.swift"; sourceTree = "<group>"; };
 		C8386FCD245E070000B86713 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		C8391A272460D2900066DF10 /* LoadingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingTableViewCell.xib; sourceTree = "<group>"; };
 		C8391A292460D2CF0066DF10 /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingTableViewCell.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				C8AF5260245F989D005DEE36 /* UIView+DropShadow.swift */,
 				C8AF5268245FA724005DEE36 /* UIView+SpinnerView.swift */,
 				C8EC3BD62460A9FC00BB0044 /* UIViewController+Dismiss.swift */,
+				C8229C962465999C006757B2 /* UITableViewCell+SelectedBackgroundView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				C8EC3BD72460A9FC00BB0044 /* UIViewController+Dismiss.swift in Sources */,
 				C8AF525B245F7702005DEE36 /* String+AttributedString.swift in Sources */,
 				C85920D9245B3D130033DBD2 /* BookshelfDetailsViewController+Edit.swift in Sources */,
+				C8229C972465999C006757B2 /* UITableViewCell+SelectedBackgroundView.swift in Sources */,
 				C8EC3BD52460913B00BB0044 /* Colour.swift in Sources */,
 				C8E0B78024635A0C00685B65 /* ConfirmationHudView.swift in Sources */,
 				C8EC3BD32460912900BB0044 /* ColourAnalysis.swift in Sources */,

@@ -159,6 +159,7 @@ class StorageManager {
         updateBookshelves(for: book.id, with: bookshelf)
     }
     
+    /// `book.bookshelf` should be equal to   `bookshelf `
     func removeBook(book: Book, from bookshelf: Bookshelf) {
         bookshelf.removeBook(book: book)
         updateBookshelves(for: book.id, without: bookshelf)
