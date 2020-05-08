@@ -121,6 +121,8 @@
 		C8EC3BD22460912900BB0044 /* ColourAnalysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColourAnalysis.swift; sourceTree = "<group>"; };
 		C8EC3BD42460913A00BB0044 /* Colour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colour.swift; sourceTree = "<group>"; };
 		C8EC3BD62460A9FC00BB0044 /* UIViewController+Dismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Dismiss.swift"; sourceTree = "<group>"; };
+		C8FA4ABA2465B5C8003DF8DD /* Screenshots.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screenshots.png; sourceTree = "<group>"; };
+		C8FA4ABB2465B5F0003DF8DD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C8FBBE1724564F8E00CC1B17 /* BookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewController.swift; sourceTree = "<group>"; };
 		C8FFC59E245CEC35001CFE55 /* BookshelfSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookshelfSectionHeaderView.xib; sourceTree = "<group>"; };
 		C8FFC5A0245CEC73001CFE55 /* BookshelfSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookshelfSectionHeaderView.swift; sourceTree = "<group>"; };
@@ -159,10 +161,12 @@
 			isa = PBXGroup;
 			children = (
 				C816D70224547FC000078BFE /* Dewey */,
-				C816D70124547FC000078BFE /* Products */,
+				C8FA4ABB2465B5F0003DF8DD /* README.md */,
 				C816D719245483EB00078BFE /* .gitignore */,
 				C816D72A2454FA6200078BFE /* Podfile */,
+				C8FA4AB92465B59B003DF8DD /* Assets */,
 				0C960C27EC08107628B44F7F /* Pods */,
+				C816D70124547FC000078BFE /* Products */,
 				23E9B0417D9064B417BE31E5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -305,6 +309,14 @@
 				C8AF5264245F9E8E005DEE36 /* AnalyzeImageResponse.swift */,
 			);
 			path = Responses;
+			sourceTree = "<group>";
+		};
+		C8FA4AB92465B59B003DF8DD /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				C8FA4ABA2465B5C8003DF8DD /* Screenshots.png */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
