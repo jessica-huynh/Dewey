@@ -87,30 +87,6 @@ class StorageManager {
         saveContext()
     }
     
-    /// If `booksehlf` is nil, then delete every instance with that book id
-    private func deleteStoredBook(book: Book, from bookshelf: Bookshelf? = nil) {
-        // It is not guaranteed that the passed in `book` is an existing book in
-        // storage (e.g. when looking at a book from the search results page).
-        // Therefore, we need to fetch the correct stored book first.
-        let bookFetchRequest = Book.createFetchRequest()
-        bookFetchRequest.entity = Book.entity()
-        if let bookshelf = bookshelf {
-            bookFetchRequest.predicate = NSPredicate(format: "id == %i AND bookshelf == %@", book.id, bookshelf)
-        } else {
-            bookFetchRequest.predicate = NSPredicate(format: "id == %i", book.id)
-        }
-        
-        execute(fetchRequest: bookFetchRequest) {
-            [weak self] storedBooks in
-            guard let self = self else { return }
-            
-            for storedBook in storedBooks {
-                self.managedObjectContext.delete(storedBook)
-            }
-            self.saveContext()
-        }
-    }
-    
     // MARK: - Modify Bookshelves
     func addBookshelf(with name: String, books: [Book] = []) {
         let bookshelf = Bookshelf(context: managedObjectContext)
@@ -186,13 +162,15 @@ class StorageManager {
     func removeBook(book: Book, from bookshelf: Bookshelf) {
         bookshelf.removeBook(book: book)
         updateBookshelves(for: book.id, without: bookshelf)
-        deleteStoredBook(book: book, from: bookshelf)
+        managedObjectContext.delete(book)
+        saveContext()
     }
     
     func removeBook(at index: Int, from bookshelf: Bookshelf) {
         let removedBook = bookshelf.removeBook(at: index)
         updateBookshelves(for: removedBook.id, without: bookshelf)
-        deleteStoredBook(book: removedBook, from: bookshelf)
+        managedObjectContext.delete(removedBook)
+        saveContext()
     }
     
     func removeBookEverywhere(book: Book) {
@@ -204,7 +182,20 @@ class StorageManager {
             bookshelf.removeBook(book: book)
         }
         bookshelvesForId.removeValue(forKey: book.id)
-        deleteStoredBook(book: book)
+        
+        let bookFetchRequest = Book.createFetchRequest()
+        bookFetchRequest.entity = Book.entity()
+        bookFetchRequest.predicate = NSPredicate(format: "id == %i", book.id)
+        
+        execute(fetchRequest: bookFetchRequest) {
+            [weak self] storedBooks in
+            guard let self = self else { return }
+            
+            for storedBook in storedBooks {
+                self.managedObjectContext.delete(storedBook)
+            }
+            self.saveContext()
+        }
     }
     
     func removeAllBooks(from bookshelf: Bookshelf) {
@@ -214,6 +205,15 @@ class StorageManager {
             managedObjectContext.delete(storedBook)
         }
         bookshelf.removeAllBooks()
+        saveContext()
+    }
+    
+    func updateDominantColour(for book: Book, with dominantColour: String) {
+        guard let effectedBookshelves = bookshelvesForId[book.id] else { return }
+        for bookshelf in effectedBookshelves {
+            let storedBook = bookshelf.books.first(where: {$0.id == book.id })
+            storedBook!.setValue(dominantColour, forKey: "dominantColour")
+        }
         saveContext()
     }
 
