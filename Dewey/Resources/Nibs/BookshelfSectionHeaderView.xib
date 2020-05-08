@@ -18,7 +18,7 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="257" id="3dE-Jr-nNx"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="20"/>
+                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
