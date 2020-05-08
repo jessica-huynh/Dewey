@@ -102,8 +102,10 @@ class BookshelfDetailsViewController: UIViewController {
     }
     
     @objc func onUpdatedBookshelves(_ notification:Notification) {
-        // This function is not called when editing from the edit bar.
+        let selectedIndexPaths = tableView.indexPathsForSelectedRows
         tableView.reloadData()
+        // Re-select the rows that were selected before reloading the table view
+        tableView.selectRow(at: selectedIndexPaths, animated: false, scrollPosition: .none)
     }
     
     // MARK: - Actions
