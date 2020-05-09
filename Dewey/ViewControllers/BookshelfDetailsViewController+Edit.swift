@@ -34,6 +34,9 @@ extension BookshelfDetailsViewController: BookshelfEditBarViewDelegate {
         present(UINavigationController.custom(with: bookshelfOptionsViewController), animated: true, completion: nil)
     }
     
+    /**
+     Updates the selection properties including `atLeastOneRowSelected` and `allRowsSelected`. Also updates `noBooks` if the user deleted any books during editing.
+     */
     func updateEditBarButtons() {
         let numberOfSelectedRows = tableView.indexPathsForSelectedRows?.count
         atLeastOneRowSelected = numberOfSelectedRows ?? 0 > 0

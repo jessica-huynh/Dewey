@@ -26,6 +26,8 @@ extension BookViewController {
                                                       y: view.bounds.height,
                                                       width: view.bounds.width,
                                                       height: cardHeight)
+        // Present card view if it has not been presented already and if the the spinner
+        // view is not in the way due to the background still loading.
         if !isLoading && !wasCardPresented {
             wasCardPresented = true
             presentCard()
@@ -90,6 +92,8 @@ extension BookViewController {
         switch gesture.state {
         case .began:
             if !panAnimationQueue.isEmpty {
+                // If the user interupts the any animations, stop all of them and restart
+                // the pan animation depending on where the user's touch position is.
                 for animation in panAnimationQueue {
                     animation.stopAnimation(true)
                 }
@@ -100,11 +104,15 @@ extension BookViewController {
                 startPanAnimation(state: isCardExpanded ? .collapsed : .expanded)
             }
         case .changed:
+            // Determine the completed percentage for the animations depending on the
+            // user's touch position.
             let panZone = cardCollapsedY - cardExpandedY
             let panPosition = newPosition - cardExpandedY // position relative to the pan zone
             let fractionCompleted = (isCardExpanded ? panPosition : panZone - panPosition ) / panZone
             updatePanAnimation(fractionCompleted: fractionCompleted)
         case .ended:
+            // Make the card expand or colapse depending on where the user ends their touch
+            // on the screen.
             if (inExpandArea && isCardExpanded) || (!inExpandArea && !isCardExpanded) {
                 for animation in panAnimationQueue {
                     // Reverse pan animation if there will be no changes in card state

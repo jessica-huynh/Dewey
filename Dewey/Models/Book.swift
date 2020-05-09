@@ -11,22 +11,31 @@ import CoreData
 
 @objc(Book)
 public class Book: NSManagedObject, Codable {
+    /// The book's iTunes id
     @NSManaged public var id: Int32
     @NSManaged public var url, title, author, bookDescription: String
+    /// A URL for the book cover with size 100x100.
     @NSManaged public var artworkUrl100: String?
     /// A string representing the publication date in ISO 8601 format (i.e. YYYY-MM-DD)
     @NSManaged public var publicationDate: String
     
-    // Do not access the following 2 optionals directly. Instead, use the NSManaged
-    // variables above to get the rating information.
-    var averageUserRating: Double?
-    var userRatingCount: Int32?
+    /** The book's average user rating as returned by the API.  **Do not use this property directly. Instead, use** `rating` **to get the book's rating.**
+     */
+    private var averageUserRating: Double?
+    /** The book's rating count as returned by the API.  **Do not use this property directly. Instead, use** `ratingCount` **to get the book's rating.**
+    */
+    private var userRatingCount: Int32?
     
     // Variables unrelated to iTunes API response:
     @NSManaged public var rating: Double
     @NSManaged public var ratingCount: Int32
     @NSManaged public var dateAddedToShelf: Date
+    /// The dominant colour of the book cover.
     @NSManaged public var dominantColour: String?
+    /**
+    The bookshelf this book belongs to.
+     - Note: This value can be empty (but non-nil) if the book does not belong to any bookshelf (e.g. when the user is searching for books).
+     */
     @NSManaged public var bookshelf: Bookshelf
     
     var coverSmall: String { return Book.processCoverUrl(url: artworkUrl100, size: 200) }
@@ -88,6 +97,7 @@ public class Book: NSManagedObject, Codable {
         return try JSONDecoder().decode(Book.self, from: data)
     }
     
+    /// Returns the book cover URL with a given `size`
     static func processCoverUrl(url: String?, size: Int) -> String {
         guard let url = url else { return "" }
         let endIndex = url.index(url.endIndex, offsetBy: -13)

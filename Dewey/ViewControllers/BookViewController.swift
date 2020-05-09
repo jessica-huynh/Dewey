@@ -12,10 +12,13 @@ import AVFoundation
 class BookViewController: UIViewController, BookshelfOptionsViewControllerDelegate {
     let storageManager = StorageManager.instance
     var book: Book!
+    /// The book's bookshelf (i.e. `book.bookshelf`)
     var originatingBookshelf: Bookshelf?
     
+    /// Boolean representing whether the user modified any bookshelves.
     var didEditBookshelves = false
     var bookDetailsViewController: BookDetailsViewController!
+    /// The frame of the book cover after resizing.
     var finalBookCoverFrame: CGRect!
     var bookCoverDropShadow: UIView!
     
@@ -43,6 +46,8 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         if navigationController?.viewControllers.first == self {
+            // Show a close button rather than a back button if the view controller is
+            // the first view controller in the navigation controller's stack.
             let closeButton = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(backTapped))
             navigationItem.setLeftBarButton(closeButton, animated: true)
         }
@@ -110,6 +115,7 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
         endBackgroundSetup()
     }
     
+    /// Finishes background setup by removing the spinner and presenting the card view if it has not been presented yet.
     func endBackgroundSetup() {
         removeSpinner(spinnerView: spinnerView)
         isLoading = false

@@ -10,6 +10,7 @@ import UIKit
 
 class BookshelvesViewController: UITableViewController {
     let storageManager = StorageManager.instance
+    /// Boolean representing whether the user tapped the edit button.
     var didEditBookshelves = false
     var inEditMode = false
     

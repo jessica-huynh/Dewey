@@ -11,6 +11,7 @@ import CoreData
 
 @objc(Bookshelf)
 public class Bookshelf: NSManagedObject {
+    /// The books in the bookshelf, by default, sorted by most recently added.
     var books: [Book] = []
     
     @NSManaged public var name: String
@@ -21,6 +22,7 @@ public class Bookshelf: NSManagedObject {
         return books.contains(where: { $0 == book })
     }
     
+    /// Add `book` to the front of `books`
     func addBook(book: Book) {
         books = [book] + books // Maintain order by most recently added
     }
@@ -38,6 +40,7 @@ public class Bookshelf: NSManagedObject {
         books = []
     }
     
+    /// Updates its `book` property using`storedBooks`.
     func syncBooksWithStorage() {
         var books = self.storedBooks?.allObjects as! [Book]
         books.sort(by: { $0.dateAddedToShelf > $1.dateAddedToShelf })

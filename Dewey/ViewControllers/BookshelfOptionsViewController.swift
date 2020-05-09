@@ -10,6 +10,7 @@ import UIKit
 
 class BookshelfOptionsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var storageManager = StorageManager.instance
+    /// Bookshelf corresponding to a table view cell to grey out and disable user interaction.
     var bookshelfToDisable: Bookshelf?
     var delegate: BookshelfOptionsViewControllerDelegate?
     var tableView: UITableView!

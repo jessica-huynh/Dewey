@@ -12,18 +12,20 @@ import BackgroundTasks
 
 extension StorageManager {
     // MARK: Periodic Fetch
+    /// Starts fetching for book updates if the last fetch was over 24 hours ago.
     func fetchBookUpdatesIfNeeded() {
         let lastFetchUpdate = UserDefaults.standard.object(forKey: "lastFetchUpdate") as! Date
         let timeDifference = Calendar.current.dateComponents([.hour], from: lastFetchUpdate, to: Date()).hour!
 
         if timeDifference > 24 && !bookshelvesForId.isEmpty {
-            isFetchingUpdates = true
-            NotificationCenter.default.post(name: .beganFetchUpdates, object: nil)
             fetchBookUpdates()
         }
     }
     
     func fetchBookUpdates() {
+        isFetchingUpdates = true
+        NotificationCenter.default.post(name: .beganFetchUpdates, object: nil)
+        
         let dispatch = DispatchGroup()
         let uniqueBookIds: [Int32] = Array(bookshelvesForId.keys)
         for id in uniqueBookIds  {

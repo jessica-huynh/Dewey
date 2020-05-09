@@ -12,6 +12,7 @@ import CoreData
 class StorageManager {
     static let instance = StorageManager()
     private(set) var bookshelves: [Bookshelf] = []
+    /// The bookshelves that have a book with a given id.
     var bookshelvesForId: [Int32: [Bookshelf]] = [:]
     var isFetchingUpdates = false
     
@@ -32,7 +33,7 @@ class StorageManager {
         let applicationDocumentsDirectory =
             FileManager.default.urls(for: .documentDirectory,
                                      in: .userDomainMask)[0]
-        print(applicationDocumentsDirectory)
+        print("Application directory: \(applicationDocumentsDirectory)")
         loadBookshelvesFromStorage()
     }
     
@@ -80,6 +81,7 @@ class StorageManager {
         }
     }
     
+    /// Updates the ordering of bookshelves in storage.
     private func updateBookshelfIndexes() {
         for i in 0..<bookshelves.count {
             bookshelves[i].setValue(i, forKey: "index")
@@ -209,6 +211,7 @@ class StorageManager {
         saveContext()
     }
     
+    /// Updates the dominant colour for all books in storage with with the same `id` as `book`
     func updateDominantColour(for book: Book, with dominantColour: String) {
         guard let effectedBookshelves = bookshelvesForId[book.id] else { return }
         for bookshelf in effectedBookshelves {
@@ -219,6 +222,7 @@ class StorageManager {
     }
 
     // MARK: - Misc Helpers
+    /// Updates the value for key `id` in `bookshelvesForId` without `bookshelf`
     private func updateBookshelves(for id: Int32, without bookshelf: Bookshelf) {
         var effectedBookshelves = bookshelvesForId[id]!
         
@@ -235,6 +239,7 @@ class StorageManager {
         }
     }
     
+    /// Updates the value for key `id` in `bookshelvesForId` to include `bookshelf`
     private func updateBookshelves(for id: Int32, with bookshelf: Bookshelf) {
         let oldValue = bookshelvesForId[id] ?? []
         bookshelvesForId.updateValue(oldValue + [bookshelf], forKey: id)

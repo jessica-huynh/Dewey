@@ -54,6 +54,7 @@ class BookshelfDetailsViewController: UIViewController {
     let editBarWidth: CGFloat = 228
     let editBarBottomPadding: CGFloat = 50
     
+    /// Picker view holding the sorting options.
     let picker: UIPickerView = UIPickerView()
     enum PickerOptions: String, CaseIterable {
         case recent, title, author
