@@ -32,7 +32,7 @@
 		C85920DD245B47770033DBD2 /* BookshelfOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85920DC245B47770033DBD2 /* BookshelfOptionsViewController.swift */; };
 		C85ADE7C245A4D39003CF581 /* BookshelfEditBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85ADE7B245A4D39003CF581 /* BookshelfEditBarView.swift */; };
 		C86F2F372461DFFB001090E9 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C86F2F292461CF7D001090E9 /* DataModel.xcdatamodeld */; };
-		C870BD09246427AA00E0854B /* Storage+Fetching.swift in Sources */ = {isa = PBXBuildFile; fileRef = C870BD08246427AA00E0854B /* Storage+Fetching.swift */; };
+		C870BD09246427AA00E0854B /* StorageManager+Fetching.swift in Sources */ = {isa = PBXBuildFile; fileRef = C870BD08246427AA00E0854B /* StorageManager+Fetching.swift */; };
 		C893DB6A24560912006CE0BB /* BookDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C893DB6924560912006CE0BB /* BookDetailsViewController.swift */; };
 		C8AEDA4F245B200C005B2DFE /* UITableView+SelectRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AEDA4E245B200C005B2DFE /* UITableView+SelectRows.swift */; };
 		C8AF525B245F7702005DEE36 /* String+AttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AF525A245F7702005DEE36 /* String+AttributedString.swift */; };
@@ -94,7 +94,7 @@
 		C85920DC245B47770033DBD2 /* BookshelfOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookshelfOptionsViewController.swift; sourceTree = "<group>"; };
 		C85ADE7B245A4D39003CF581 /* BookshelfEditBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookshelfEditBarView.swift; sourceTree = "<group>"; };
 		C86F2F2A2461CF7D001090E9 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
-		C870BD08246427AA00E0854B /* Storage+Fetching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storage+Fetching.swift"; sourceTree = "<group>"; };
+		C870BD08246427AA00E0854B /* StorageManager+Fetching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StorageManager+Fetching.swift"; sourceTree = "<group>"; };
 		C893DB6924560912006CE0BB /* BookDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsViewController.swift; sourceTree = "<group>"; };
 		C8AEDA4E245B200C005B2DFE /* UITableView+SelectRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+SelectRows.swift"; sourceTree = "<group>"; };
 		C8AF525A245F7702005DEE36 /* String+AttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+AttributedString.swift"; sourceTree = "<group>"; };
@@ -245,7 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				C816D7202454D09900078BFE /* StorageManager.swift */,
-				C870BD08246427AA00E0854B /* Storage+Fetching.swift */,
+				C870BD08246427AA00E0854B /* StorageManager+Fetching.swift */,
 				C86F2F292461CF7D001090E9 /* DataModel.xcdatamodeld */,
 			);
 			path = Storage;
@@ -454,7 +454,7 @@
 				C8CEF9C52458B463008182F0 /* SearchResultsViewController.swift in Sources */,
 				C85ADE7C245A4D39003CF581 /* BookshelfEditBarView.swift in Sources */,
 				C8E17F37245C96A7008C879C /* BookViewController+BookDetails.swift in Sources */,
-				C870BD09246427AA00E0854B /* Storage+Fetching.swift in Sources */,
+				C870BD09246427AA00E0854B /* StorageManager+Fetching.swift in Sources */,
 				C8386FCE245E070000B86713 /* UIColor+Hex.swift in Sources */,
 				C8CEF9C32458AF7C008182F0 /* BookDetailsTableViewCell.swift in Sources */,
 				C816D70824547FC000078BFE /* HomeViewController.swift in Sources */,

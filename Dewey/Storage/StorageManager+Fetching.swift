@@ -1,5 +1,5 @@
 //
-//  Storage+Fetching.swift
+//  StorageManager+Fetching.swift
 //  Dewey
 //
 //  Created by Jessica Huynh on 2020-05-07.
