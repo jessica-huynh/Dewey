@@ -185,7 +185,7 @@ class BookViewController: UIViewController, BookshelfOptionsViewControllerDelega
         if let originatingBookshelf = originatingBookshelf {
             actions.addAction(UIAlertAction(title: "Delete From \(originatingBookshelf.name)", style: .default) {
                 _ in
-                self.storageManager.removeBook(book: self.book, from: originatingBookshelf)
+                self.storageManager.removeBookFromBookshelf(book: self.book)
                 self.didEditBookshelves = true
                 self.dismissAfterBookDeletedIfNeeded()
             })

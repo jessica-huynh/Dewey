@@ -159,8 +159,8 @@ class StorageManager {
         updateBookshelves(for: book.id, with: bookshelf)
     }
     
-    /// `book.bookshelf` should be equal to   `bookshelf `
-    func removeBook(book: Book, from bookshelf: Bookshelf) {
+    func removeBookFromBookshelf(book: Book) {
+        let bookshelf = book.bookshelf
         bookshelf.removeBook(book: book)
         updateBookshelves(for: book.id, without: bookshelf)
         managedObjectContext.delete(book)
