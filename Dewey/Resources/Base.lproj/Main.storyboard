@@ -30,8 +30,7 @@
                                                 <searchBar contentMode="redraw" searchBarStyle="minimal" text="" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="bLL-GP-W60">
                                                     <rect key="frame" x="20" y="126" width="374" height="44"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="384" id="9p1-et-9E7"/>
-                                                        <constraint firstAttribute="height" constant="44" id="Q7W-Yb-ZUP"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="Q7W-Yb-ZUP"/>
                                                     </constraints>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                                                 </searchBar>
@@ -100,7 +99,7 @@ you reading today?</string>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;Title&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VVo-zt-tMm">
                                                                         <rect key="frame" x="8" y="195" width="134" height="17"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="17" id="Pur-y5-hWm"/>
+                                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="Pur-y5-hWm"/>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                                         <nil key="textColor"/>
@@ -109,7 +108,7 @@ you reading today?</string>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;author&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5o-sC-nd4">
                                                                         <rect key="frame" x="8" y="213" width="134" height="17"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="17" id="RxE-L0-aJe"/>
+                                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="RxE-L0-aJe"/>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -508,9 +507,9 @@ you reading today?</string>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yDZ-C4-m7q">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="55.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="55.5" id="FrO-XO-eDq"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="FrO-XO-eDq"/>
                                             </constraints>
                                             <state key="normal" title="Add Bookshelf +"/>
                                             <connections>
@@ -520,9 +519,9 @@ you reading today?</string>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="yDZ-C4-m7q" firstAttribute="leading" secondItem="BDy-MH-d0E" secondAttribute="leading" id="4tu-kn-HlD"/>
-                                        <constraint firstAttribute="bottom" secondItem="yDZ-C4-m7q" secondAttribute="bottom" constant="-0.5" id="HmH-G0-wKX"/>
+                                        <constraint firstItem="yDZ-C4-m7q" firstAttribute="top" secondItem="BDy-MH-d0E" secondAttribute="top" id="FpQ-9f-RKk"/>
                                         <constraint firstAttribute="trailing" secondItem="yDZ-C4-m7q" secondAttribute="trailing" id="Jav-HW-wRI"/>
-                                        <constraint firstItem="yDZ-C4-m7q" firstAttribute="top" secondItem="BDy-MH-d0E" secondAttribute="top" id="VSF-Hw-WFr"/>
+                                        <constraint firstAttribute="bottom" secondItem="yDZ-C4-m7q" secondAttribute="bottom" id="rzN-NG-Ar9"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -535,9 +534,9 @@ you reading today?</string>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTa-9o-Z00">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="55.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="55.5" id="JZJ-i3-NmM"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="JZJ-i3-NmM"/>
                                             </constraints>
                                             <state key="normal" title="DELETE ALL">
                                                 <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -548,7 +547,7 @@ you reading today?</string>
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="LTa-9o-Z00" secondAttribute="bottom" constant="-0.5" id="34h-Sr-wg4"/>
+                                        <constraint firstAttribute="bottom" secondItem="LTa-9o-Z00" secondAttribute="bottom" id="VX9-2A-v3Z"/>
                                         <constraint firstAttribute="trailing" secondItem="LTa-9o-Z00" secondAttribute="trailing" id="f22-jd-03m"/>
                                         <constraint firstItem="LTa-9o-Z00" firstAttribute="top" secondItem="F1J-GX-7Qo" secondAttribute="top" id="nF9-bv-cSf"/>
                                         <constraint firstItem="LTa-9o-Z00" firstAttribute="leading" secondItem="F1J-GX-7Qo" secondAttribute="leading" id="wB2-mK-eSw"/>
