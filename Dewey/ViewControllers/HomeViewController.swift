@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        spinnerView = createSpinnerView()
+        spinnerView = createSpinnerView(with: UIColor(hexString: "#EEECE4"))
         navigationController?.navigationBar.shadowImage = UIImage()
         NotificationCenter.default.addObserver(self, selector: #selector(onUpdatedBookshelves(_:)), name: .updatedBookshelves, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onBeganFetchUpdates), name: .beganFetchUpdates, object: nil)
